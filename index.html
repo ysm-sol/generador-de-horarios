@@ -20,49 +20,32 @@
   --bg1:#1e1e1c;--bg2:#2a2a28;--bg3:#141412;
   --t1:#f0ede6;--t2:#9e9c96;--t3:#6b6963;
   --b1:rgba(255,255,255,0.09);--b2:rgba(255,255,255,0.17);--b3:rgba(255,255,255,0.28);
-  --bluebg:#0C447C;--greenbg:#085041;--redbg:#501313;--amberbg:#412402;
 }}
 body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg3);color:var(--t1);min-height:100vh;font-size:14px}
 .wrap{max-width:1100px;margin:0 auto;padding:1.5rem 1rem}
-
-/* header */
 .hdr{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;flex-wrap:wrap}
-.hdr-logo{background:#8B1A1A;color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:var(--r);letter-spacing:.05em}
+.hdr-logo{background:#8B1A1A;color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:var(--r);letter-spacing:.05em;white-space:nowrap}
 .hdr h1{font-size:20px;font-weight:500;flex:1}
 .hdr p{font-size:12px;color:var(--t2);width:100%}
-
-/* tabs */
-.tabs{display:flex;gap:3px;margin-bottom:1rem;border-bottom:0.5px solid var(--b1);padding-bottom:0}
-.tab{padding:7px 18px;border-radius:var(--r) var(--r) 0 0;border:0.5px solid transparent;font-size:13px;cursor:pointer;background:transparent;color:var(--t2);border-bottom:none}
+.tabs{display:flex;gap:3px;margin-bottom:1rem;border-bottom:0.5px solid var(--b1);flex-wrap:wrap}
+.tab{padding:7px 16px;border-radius:var(--r) var(--r) 0 0;border:0.5px solid transparent;font-size:13px;cursor:pointer;background:transparent;color:var(--t2)}
 .tab.active{background:var(--bg1);color:var(--t1);border-color:var(--b1);font-weight:500}
 .sec{display:none}.sec.active{display:block}
-
-/* panels */
 .panel{background:var(--bg1);border:0.5px solid var(--b1);border-radius:var(--rl);padding:1.25rem 1.5rem;margin-bottom:1rem}
 .ptitle{font-size:10px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
 hr.div{border:none;border-top:0.5px solid var(--b1);margin:12px 0}
-
-/* buttons */
 .btn{height:34px;padding:0 14px;border-radius:var(--r);border:0.5px solid var(--b2);background:transparent;color:var(--t1);font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .btn:hover{background:var(--bg2)}
 .btn-blue{background:var(--blue);color:var(--bluebg);border-color:var(--blue)}.btn-blue:hover{background:var(--bluedk)}
 .btn-green{background:var(--green);color:var(--greenbg);border-color:var(--green)}.btn-green:hover{background:#085041}
 .btn-red{color:var(--red);border-color:transparent}.btn-red:hover{background:var(--redbg)}
-.btn-amber{color:var(--amber);border-color:#EF9F27;background:var(--amberbg)}
 .btn-sm{height:26px;padding:0 10px;font-size:11px}
-
-/* inputs */
 label{font-size:12px;color:var(--t2);display:block;margin-bottom:3px}
-input,select,textarea{width:100%;font-size:13px;padding:7px 10px;border:0.5px solid var(--b2);border-radius:var(--r);background:var(--bg1);color:var(--t1);height:34px}
-textarea{height:auto;resize:vertical}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--b3)}
-
-/* badges */
+input,select{font-size:13px;padding:7px 10px;border:0.5px solid var(--b2);border-radius:var(--r);background:var(--bg1);color:var(--t1);height:34px}
+input:focus,select:focus{outline:none;border-color:var(--b3)}
 .tb{display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;padding:1px 7px;border-radius:9px;flex-shrink:0}
 .tT{background:#B5D4F4;color:#0C447C}.tP{background:#9FE1CB;color:#085041}.tL{background:#FAC775;color:#633806}
-
-/* course picker */
-.picker-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
+.picker-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:8px}
 .course-pick{border:0.5px solid var(--b1);border-radius:var(--r);overflow:hidden;transition:border-color .15s}
 .course-pick.selected{border-color:var(--blue);background:rgba(24,95,165,.05)}
 .cp-head{display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;user-select:none}
@@ -70,72 +53,48 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--b3)}
 .course-pick.selected .cp-check{background:var(--blue);border-color:var(--blue)}
 .cp-name{font-size:13px;font-weight:500;flex:1}
 .cp-code{font-size:10px;color:var(--t2)}
-.cp-body{padding:6px 12px 10px;display:none}
+.cp-body{padding:0 12px 8px;display:none}
 .course-pick.expanded .cp-body{display:block}
-.section-row{display:flex;align-items:center;gap:6px;padding:4px 0;border-bottom:0.5px solid var(--b1);font-size:11px}
-.section-row:last-child{border-bottom:none}
-.sec-info{flex:1;color:var(--t2)}
-.sec-full-btn{font-size:10px;padding:2px 7px;border-radius:8px;cursor:pointer;border:0.5px solid;height:auto}
+.section-row{display:flex;align-items:center;gap:6px;padding:4px 0;border-top:0.5px solid var(--b1);font-size:11px;flex-wrap:wrap}
+.sec-info{flex:1;color:var(--t2);min-width:120px}
+.sec-full-btn{font-size:10px;padding:2px 8px;border-radius:8px;cursor:pointer;border:0.5px solid;height:auto;white-space:nowrap}
 .sec-full-btn.full{background:var(--redbg);color:var(--red);border-color:var(--redbd)}
 .sec-full-btn.open{background:var(--greenbg);color:var(--green);border-color:#97C459}
-
-/* generated schedules */
-.gen-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+.gen-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:12px}
 .sched-card{border:0.5px solid var(--b1);border-radius:var(--rl);overflow:hidden}
-.sched-hdr{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg2);border-bottom:0.5px solid var(--b1)}
+.sched-hdr{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg2);border-bottom:0.5px solid var(--b1);flex-wrap:wrap}
 .sched-num{font-size:11px;font-weight:600;color:var(--t2)}
 .sched-status{font-size:10px;padding:2px 8px;border-radius:8px}
 .sched-ok{background:var(--greenbg);color:var(--green)}
 .sched-conflict{background:var(--redbg);color:var(--red)}
 .sched-body{padding:10px 14px}
 .mini-grid{overflow-x:auto}
-.mini-grid table{width:100%;border-collapse:collapse;font-size:10px;min-width:300px}
-.mini-grid th{padding:4px;text-align:center;font-size:9px;color:var(--t2);border-bottom:0.5px solid var(--b1)}
-.mini-grid td.tc{font-size:9px;color:var(--t3);padding:2px 5px;text-align:right;border-right:0.5px solid var(--b1);white-space:nowrap;width:36px}
-.mini-grid td.sl{height:22px;border:0.5px solid var(--b1);position:relative}
-.mini-blk{position:absolute;border-radius:2px;padding:0 3px;font-size:9px;display:flex;align-items:center;gap:2px;overflow:hidden;white-space:nowrap}
-.sched-footer{display:flex;gap:6px;padding:8px 14px;border-top:0.5px solid var(--b1);background:var(--bg2)}
-
-/* schedule full view */
+.mini-grid table{width:100%;border-collapse:collapse;font-size:10px;min-width:280px}
+.mini-grid th{padding:3px;text-align:center;font-size:9px;color:var(--t2);border-bottom:0.5px solid var(--b1)}
+.mini-grid td.tc{font-size:9px;color:var(--t3);padding:1px 4px;text-align:right;border-right:0.5px solid var(--b1);white-space:nowrap;width:32px}
+.mini-grid td.sl{height:20px;border:0.5px solid var(--b1);position:relative}
+.mini-blk{position:absolute;border-radius:2px;padding:0 3px;font-size:8px;display:flex;align-items:center;gap:2px;overflow:hidden;white-space:nowrap}
 .full-grid{overflow-x:auto}
-.full-grid table{width:100%;border-collapse:collapse;font-size:12px;min-width:600px}
+.full-grid table{width:100%;border-collapse:collapse;font-size:12px;min-width:580px}
 .full-grid th{padding:8px 4px;text-align:center;font-size:11px;color:var(--t2);border-bottom:0.5px solid var(--b1)}
 .full-grid td.tc{font-size:11px;color:var(--t2);padding:3px 8px;text-align:right;border-right:0.5px solid var(--b1);width:50px;vertical-align:top}
 .full-grid td.sl{height:30px;border:0.5px solid var(--b1);position:relative;vertical-align:top}
 .full-blk{position:absolute;border-radius:3px;padding:1px 5px;font-size:10px;display:flex;align-items:center;gap:3px;overflow:hidden}
-
-/* upload area */
-.upload-area{border:1.5px dashed var(--b2);border-radius:var(--rl);padding:2rem;text-align:center;cursor:pointer;transition:border-color .2s}
-.upload-area:hover{border-color:var(--blue)}
-.upload-area.dragging{border-color:var(--blue);background:rgba(24,95,165,.05)}
-
-/* loader */
-.loader{display:flex;align-items:center;gap:10px;padding:1rem;font-size:13px;color:var(--t2)}
-.spinner{width:18px;height:18px;border:2px solid var(--b1);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* toast */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#2C2C2A;color:#f0ede6;font-size:13px;padding:9px 18px;border-radius:var(--r);opacity:0;transition:opacity .25s;pointer-events:none;z-index:9999;white-space:nowrap}
-.toast.show{opacity:1}
-
-/* empty */
-.empty{text-align:center;padding:3rem;color:var(--t2);font-size:13px}
-.empty strong{display:block;font-size:15px;margin-bottom:6px;color:var(--t1)}
-
-/* conflict chips */
-.chip-list{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
-.chip{font-size:10px;padding:2px 8px;border-radius:9px}
-
-/* section filter bar */
-.filter-bar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.filter-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
 .filter-bar input[type=search]{max-width:220px;height:30px;font-size:12px}
-
-/* favorites */
 .fav-card{border:0.5px solid var(--b1);border-radius:var(--r);padding:10px 14px;margin-bottom:8px}
 .fav-hdr{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
 .fav-name{font-size:13px;font-weight:500;flex:1}
 .fav-chips{display:flex;gap:5px;flex-wrap:wrap}
 .fav-chip{font-size:10px;padding:2px 8px;border-radius:9px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#2C2C2A;color:#f0ede6;font-size:13px;padding:9px 18px;border-radius:var(--r);opacity:0;transition:opacity .25s;pointer-events:none;z-index:9999;white-space:nowrap}
+.toast.show{opacity:1}
+.empty{text-align:center;padding:3rem;color:var(--t2);font-size:13px}
+.empty strong{display:block;font-size:15px;margin-bottom:6px;color:var(--t1)}
+.school-tag{font-size:10px;padding:1px 7px;border-radius:8px;background:var(--bg2);color:var(--t2);margin-right:4px}
+.spinner{width:18px;height:18px;border:2px solid var(--b1);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader{display:flex;align-items:center;gap:10px;padding:1rem;font-size:13px;color:var(--t2)}
 </style>
 </head>
 <body>
@@ -143,51 +102,37 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--b3)}
   <div class="hdr">
     <span class="hdr-logo">FC · UNI</span>
     <h1>Generador de Horarios 2026-1</h1>
-    <p>Carga el PDF del horario, selecciona tus cursos y genera combinaciones sin cruces automáticamente</p>
+    <p>Selecciona tus cursos, marca secciones llenas y genera todas las combinaciones posibles sin cruces</p>
   </div>
 
   <div class="tabs">
-    <button class="tab active" onclick="switchTab('carga')">Cargar PDF</button>
-    <button class="tab" onclick="switchTab('cursos')">Cursos</button>
+    <button class="tab active" onclick="switchTab('cursos')">Cursos</button>
     <button class="tab" onclick="switchTab('generar')">Generar horarios</button>
     <button class="tab" onclick="switchTab('favoritos')">Favoritos</button>
   </div>
 
-  <!-- TAB: CARGA -->
-  <div id="tab-carga" class="sec active">
+  <div id="tab-cursos" class="sec active">
     <div class="panel">
-      <div class="ptitle">Cargar horario desde PDF</div>
-      <div class="upload-area" id="uploadArea" onclick="document.getElementById('pdfInput').click()" ondragover="dragOver(event)" ondrop="dropFile(event)" ondragleave="dragLeave(event)">
-        <div style="font-size:28px;margin-bottom:8px">📄</div>
-        <div style="font-size:14px;font-weight:500;margin-bottom:4px">Arrastra el PDF aquí o haz clic para seleccionar</div>
-        <div style="font-size:12px;color:var(--t2)">Se leerá automáticamente con IA y se extraerán todos los cursos</div>
-        <input type="file" id="pdfInput" accept=".pdf" style="display:none" onchange="handlePDF(event)"/>
-      </div>
-      <div id="loadStatus"></div>
-    </div>
-    <div class="panel" id="loadedSummary" style="display:none">
-      <div class="ptitle">Cursos cargados</div>
-      <div id="summaryContent"></div>
-    </div>
-  </div>
-
-  <!-- TAB: CURSOS -->
-  <div id="tab-cursos" class="sec">
-    <div class="panel">
-      <div class="ptitle">Selecciona los cursos que quieres llevar</div>
+      <div class="ptitle">Selecciona los cursos que vas a llevar</div>
       <div class="filter-bar">
-        <input type="search" id="courseSearch" placeholder="Buscar curso..." oninput="filterCourses()"/>
+        <input type="search" id="courseSearch" placeholder="Buscar curso o código..." oninput="renderPicker()" style="width:220px"/>
+        <select id="schoolFilter" onchange="renderPicker()" style="height:30px;font-size:12px;width:180px">
+          <option value="">Todas las escuelas</option>
+          <option value="Física">Física</option>
+          <option value="Matemática">Matemática</option>
+          <option value="Química">Química</option>
+          <option value="Ing. Física">Ing. Física</option>
+          <option value="Computación">Computación</option>
+          <option value="Humanidades">Humanidades</option>
+        </select>
         <button class="btn btn-sm btn-blue" onclick="selectAll()">Marcar todos</button>
         <button class="btn btn-sm" onclick="deselectAll()">Desmarcar todos</button>
-        <span id="selectedCount" style="font-size:12px;color:var(--t2);margin-left:4px"></span>
+        <span id="selectedCount" style="font-size:12px;color:var(--t2)"></span>
       </div>
-      <div class="picker-grid" id="pickerGrid">
-        <div class="empty"><strong>Sin cursos cargados</strong>Primero carga el PDF en la pestaña anterior</div>
-      </div>
+      <div class="picker-grid" id="pickerGrid"></div>
     </div>
   </div>
 
-  <!-- TAB: GENERAR -->
   <div id="tab-generar" class="sec">
     <div class="panel">
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
@@ -195,24 +140,23 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--b3)}
           <div style="font-size:13px;font-weight:500;margin-bottom:2px">Generar combinaciones de horario</div>
           <div style="font-size:12px;color:var(--t2)" id="genDesc">Selecciona cursos primero</div>
         </div>
-        <button class="btn btn-green" onclick="generateSchedules()" id="genBtn">Generar horarios</button>
+        <button class="btn btn-green" onclick="generateSchedules()">Generar horarios</button>
       </div>
       <hr class="div">
-      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-        <label style="margin:0;display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer"><input type="checkbox" id="onlyValid" checked> Solo mostrar sin cruces</label>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <label style="margin:0;display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer"><input type="checkbox" id="onlyValid" checked> Solo sin cruces</label>
         <label style="margin:0;display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer"><input type="checkbox" id="skipFull" checked> Ignorar secciones llenas</label>
-        <label style="margin:0;font-size:12px">Máx. horarios: <input type="number" id="maxResults" value="20" min="1" max="100" style="width:60px;height:26px;display:inline-block;padding:3px 6px"/></label>
+        <label style="margin:0;font-size:12px;display:flex;align-items:center;gap:6px">Máx. resultados: <input type="number" id="maxResults" value="30" min="1" max="200" style="width:65px;height:28px;padding:3px 8px;display:inline-block"/></label>
       </div>
     </div>
-    <div id="genLoader" style="display:none" class="loader"><div class="spinner"></div><span id="genLoaderMsg">Generando combinaciones...</span></div>
+    <div id="genLoader" style="display:none" class="loader"><div class="spinner"></div><span id="genLoaderMsg">Calculando combinaciones...</span></div>
     <div id="scheduleResults"></div>
   </div>
 
-  <!-- TAB: FAVORITOS -->
   <div id="tab-favoritos" class="sec">
     <div class="panel">
       <div class="ptitle">Horarios favoritos guardados</div>
-      <div id="favsList"><div class="empty"><strong>Sin favoritos</strong>Genera horarios y guarda los que te gusten</div></div>
+      <div id="favsList"><div class="empty"><strong>Sin favoritos aún</strong>Genera horarios y guarda los que más te gusten</div></div>
     </div>
   </div>
 </div>
@@ -220,131 +164,20 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--b3)}
 <div class="toast" id="toast"></div>
 
 <script>
-const COLORS=['#185FA5','#0F6E56','#993C1D','#993556','#3B6D11','#854F0B','#534AB7','#3C3489','#0F5B5B','#6B3A8A'];
-const BGS   =['#B5D4F4','#9FE1CB','#F5C4B3','#F4C0D1','#C0DD97','#FAC775','#CECBF6','#D3D1C7','#A8E6D9','#E2C4F0'];
+const COLORS=['#185FA5','#0F6E56','#993C1D','#993556','#3B6D11','#854F0B','#534AB7','#3C3489','#0F5B5B','#6B3A8A','#1A5276','#196F3D'];
+const BGS   =['#B5D4F4','#9FE1CB','#F5C4B3','#F4C0D1','#C0DD97','#FAC775','#CECBF6','#D3D1C7','#A8E6D9','#E2C4F0','#AED6F1','#A9DFBF'];
 const DAYS=['Lun','Mar','Mié','Jue','Vie','Sáb'];
-const TL={T:'Teórico',P:'Práctico',L:'Laboratorio'};
 
-let allCourses=[]; // [{name, code, sections:[{id,label,teacher,sessions:[{type,day,start,end,room}],full:false}]}]
+const COURSES_DATA=[{"name":"FÍSICA I","code":"BFI01","sections":[{"label":"A","teacher":"J. TELLO","full":false,"sessions":[{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"J3-162B"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"J3-162A"},{"type":"P","day":"Lun","start":"14:00","end":"16:00","room":"J3-182A"},{"type":"L","day":"Mar","start":"16:00","end":"18:00","room":"LAB F"}]},{"label":"B","teacher":"C. RIVERA","full":false,"sessions":[{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"J3-182B"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"J3-182A"},{"type":"P","day":"Lun","start":"14:00","end":"16:00","room":"J3-182B"},{"type":"L","day":"Mar","start":"14:00","end":"16:00","room":"LAB F"}]},{"label":"C","teacher":"M. ZEVALLOS","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"J3-242"},{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"J3-242"},{"type":"P","day":"Lun","start":"14:00","end":"16:00","room":"J3-252"},{"type":"L","day":"Jue","start":"16:00","end":"18:00","room":"LAB F"}]},{"label":"D","teacher":"J. AMORETTI","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"16:00","room":"J3-242"},{"type":"T","day":"Jue","start":"16:00","end":"18:00","room":"J3-232"},{"type":"P","day":"Lun","start":"14:00","end":"16:00","room":"J3-222"},{"type":"L","day":"Jue","start":"10:00","end":"12:00","room":"LAB F"}]},{"label":"E","teacher":"A. ORCCOHUARANCCA","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"J3-162B"},{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"J3-222"},{"type":"P","day":"Lun","start":"14:00","end":"16:00","room":"J3-162B"},{"type":"L","day":"Vie","start":"08:00","end":"10:00","room":"LAB F"}]},{"label":"F","teacher":"A. PAREDES","full":false,"sessions":[{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"J3-182B"},{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"J3-182B"},{"type":"P","day":"Lun","start":"14:00","end":"16:00","room":"J3-232"},{"type":"L","day":"Mar","start":"10:00","end":"12:00","room":"LAB F"}]}]},{"name":"FÍSICA II","code":"CF1B2","sections":[{"label":"A","teacher":"M. BROCCA","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R1-421"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R1-421"},{"type":"P","day":"Vie","start":"08:00","end":"10:00","room":"R1-440"},{"type":"L","day":"Vie","start":"14:00","end":"17:00","room":"LAB2 F"}]},{"label":"B","teacher":"E. VIDALÓN","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"R1-430"},{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"R1-421"},{"type":"P","day":"Vie","start":"08:00","end":"10:00","room":"R1-401"},{"type":"L","day":"Mar","start":"13:00","end":"16:00","room":"LAB2 F"}]}]},{"name":"FISICA III","code":"CF2B1","sections":[{"label":"A","teacher":"M. BROCCA","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"R1-125A"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"R1-125A"},{"type":"P","day":"Vie","start":"10:00","end":"12:00","room":"J3-162A"},{"type":"L","day":"Jue","start":"16:00","end":"19:00","room":"LAB3 F"}]},{"label":"B","teacher":"S. CUSTODIO","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R1-125A"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R1-125A"},{"type":"P","day":"Vie","start":"10:00","end":"12:00","room":"J3-162B"},{"type":"L","day":"Mar","start":"16:00","end":"19:00","room":"LAB3 F"}]}]},{"name":"LAB. FISICA INTERMEDIA","code":"CF4E1","sections":[{"label":"A","teacher":"B. PUJADA","full":false,"sessions":[{"type":"L","day":"Mar","start":"08:00","end":"12:00","room":"LAB FI"},{"type":"L","day":"Jue","start":"08:00","end":"12:00","room":"LAB FI"}]},{"label":"B","teacher":"C. EYZAGUIRRE","full":false,"sessions":[{"type":"L","day":"Mié","start":"08:00","end":"12:00","room":"LAB FI"},{"type":"L","day":"Vie","start":"08:00","end":"12:00","room":"LAB FI"}]}]},{"name":"LAB. FISICA AVANZADA","code":"CF4E2","sections":[{"label":"A","teacher":"A. VALERA","full":false,"sessions":[{"type":"L","day":"Lun","start":"08:00","end":"12:00","room":"LAB FA"},{"type":"L","day":"Mié","start":"08:00","end":"12:00","room":"LAB FA"}]},{"label":"B","teacher":"R. PUGA","full":false,"sessions":[{"type":"L","day":"Lun","start":"08:00","end":"12:00","room":"LAB FA"},{"type":"L","day":"Mié","start":"10:00","end":"14:00","room":"LAB FA"}]}]},{"name":"OPTICA CLASICA","code":"CF2B2","sections":[{"label":"A","teacher":"C. EYZAGUIRRE","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"16:00","room":"R1-450"},{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"R1-430"},{"type":"P","day":"Vie","start":"10:00","end":"12:00","room":"J3-242"},{"type":"L","day":"Mar","start":"10:00","end":"13:00","room":"LAB F"}]},{"label":"B","teacher":"C. CASTROMONTE","full":false,"sessions":[{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"R1-411"},{"type":"T","day":"Vie","start":"14:00","end":"16:00","room":"R1-440"},{"type":"P","day":"Vie","start":"10:00","end":"12:00","room":"J3-222"},{"type":"L","day":"Lun","start":"13:00","end":"16:00","room":"LAB F"}]}]},{"name":"ÁLGEBRA LINEAL PARA FÍSICOS I","code":"CF1C2","sections":[{"label":"A","teacher":"A. PAREDES","full":false,"sessions":[{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"J3-222"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"J3-222"},{"type":"P","day":"Mié","start":"07:00","end":"10:00","room":"J3-182A"}]}]},{"name":"ALGEBRA LINEAL PARA FISICOS II","code":"CF2C1","sections":[{"label":"A","teacher":"A. D. PAREDES","full":false,"sessions":[{"type":"T","day":"Mar","start":"16:00","end":"18:00","room":"R1-125A"},{"type":"T","day":"Vie","start":"16:00","end":"18:00","room":"R1-421"},{"type":"P","day":"Lun","start":"16:00","end":"19:00","room":"J3-232"}]}]},{"name":"METODOS MATEMATICOS FÍSICOS I","code":"CF2C2","sections":[{"label":"A","teacher":"H. DÍAZ","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"J3-222"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"J3-232"},{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"R1-421"},{"type":"P","day":"Mar","start":"14:00","end":"17:00","room":"J3-222"}]}]},{"name":"MECÁNICA CLÁSICA","code":"CF3F1","sections":[{"label":"A","teacher":"J. TELLO","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"J3-252"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"J3-252"},{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"J3-242"},{"type":"P","day":"Mar","start":"13:00","end":"16:00","room":"J3-232"}]}]},{"name":"MECÁNICA CUÁNTICA I","code":"CF3F2","sections":[{"label":"A","teacher":"O. PEREYRA","full":false,"sessions":[{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"R1-411"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"R1-421"},{"type":"P","day":"Mié","start":"16:00","end":"20:00","room":"R1-411"}]}]},{"name":"FISICA MODERNA","code":"CF3F3","sections":[{"label":"A","teacher":"G. RIVERA","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"16:00","room":"R1-430"},{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"R1-421"},{"type":"P","day":"Vie","start":"15:00","end":"18:00","room":"J3-242"}]}]},{"name":"CIRCUITOS ELECTRONICOS ANALOGICOS","code":"CF3E1","sections":[{"label":"A","teacher":"R. PUGA","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"12:00","room":"R2-305"},{"type":"T","day":"Jue","start":"08:00","end":"12:00","room":"R2-323"}]},{"label":"B","teacher":"C. RIVERA","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"18:00","room":"R2-323"},{"type":"T","day":"Vie","start":"14:00","end":"18:00","room":"R2-323"}]}]},{"name":"METODOS MATEMATICOS FISICOS II","code":"CF3C1","sections":[{"label":"A","teacher":"H. LORO","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R1-460"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R3-123C"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"R3-123C"},{"type":"P","day":"Jue","start":"16:00","end":"19:00","room":"R1-440"}]}]},{"name":"ELECTROMAGNETISMO I","code":"CF3F4","sections":[{"label":"A","teacher":"R. OCHOA","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"R1-215"},{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"R1-450"},{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"R1-440"},{"type":"P","day":"Lun","start":"14:00","end":"18:00","room":"R1-460"}]}]},{"name":"TERMODINÁMICA Y MEC. ESTADÍSTICA","code":"CF4F1","sections":[{"label":"A","teacher":"D. SOTO","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"R3-123C"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"R3-123C"},{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"R3-123C"},{"type":"P","day":"Mar","start":"14:00","end":"18:00","room":"R3-209"}]}]},{"name":"MECÁNICA CUÁNTICA II","code":"CF4F3","sections":[{"label":"A","teacher":"O. CASTILLO","full":false,"sessions":[{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R1-450"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"R1-460"},{"type":"P","day":"Vie","start":"14:00","end":"18:00","room":"J3-162B"}]}]},{"name":"FISICA ATÓMICA Y MOLECULAR","code":"CF4F2","sections":[{"label":"A","teacher":"J. BELTRÁN","full":false,"sessions":[{"type":"T","day":"Lun","start":"16:00","end":"18:00","room":"J3-162A"},{"type":"T","day":"Jue","start":"16:00","end":"18:00","room":"R3-123B"},{"type":"P","day":"Vie","start":"14:00","end":"17:00","room":"J3-152"}]}]},{"name":"FISICA DEL ESTADO SOLIDO I","code":"CF5F1","sections":[{"label":"A","teacher":"M. LEÓN","full":false,"sessions":[{"type":"T","day":"Lun","start":"16:00","end":"18:00","room":"R1-421"},{"type":"T","day":"Mié","start":"16:00","end":"18:00","room":"R1-401"},{"type":"P","day":"Vie","start":"16:00","end":"20:00","room":"R1-411"}]}]},{"name":"FISICA NUCLEAR Y DE PARTICULAS","code":"CF5F3","sections":[{"label":"A","teacher":"J. AMORETTI","full":false,"sessions":[{"type":"T","day":"Lun","start":"18:00","end":"20:00","room":"R1-430"},{"type":"T","day":"Mar","start":"18:00","end":"20:00","room":"R3-123B"},{"type":"T","day":"Jue","start":"18:00","end":"20:00","room":"R3-123C"},{"type":"P","day":"Mié","start":"18:00","end":"21:00","room":"R3-123C"}]}]},{"name":"INTRODUCCION A LA ASTRONOMIA","code":"CF046","sections":[{"label":"A","teacher":"M. ZEVALLOS","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"16:00","room":"R1-401"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"R1-401"},{"type":"P","day":"Lun","start":"14:00","end":"18:00","room":"J3-142"}]}]},{"name":"RELATIVIDAD GENERAL","code":"CF050","sections":[{"label":"A","teacher":"D. SOTO","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"16:00","room":"R3-209"},{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"R1-401"},{"type":"T","day":"Jue","start":"14:00","end":"16:00","room":"R1-411"},{"type":"P","day":"Mié","start":"16:00","end":"18:00","room":"R3-123C"}]}]},{"name":"TOPICOS DE OPTICA","code":"CF057","sections":[{"label":"A","teacher":"A. VALERA","full":false,"sessions":[{"type":"L","day":"Mar","start":"08:00","end":"12:00","room":"LAB FA"},{"type":"L","day":"Jue","start":"08:00","end":"12:00","room":"LAB FA"}]}]},{"name":"INTRODUCCION TEORIA ELECTRODEBIL","code":"CF077","sections":[{"label":"A","teacher":"H. DÍAZ","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R1-411"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R1-460"},{"type":"P","day":"Vie","start":"14:00","end":"16:00","room":"R3-209"}]}]},{"name":"CÁLCULO DIFERENCIAL","code":"BMA01","sections":[{"label":"A","teacher":"L. PAREDES","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"J3-162B"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"J3-162B"},{"type":"P","day":"Mié","start":"16:00","end":"18:00","room":"J3-242"}]},{"label":"B","teacher":"L. LA ROSA","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R1-430"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R1-401"},{"type":"P","day":"Mié","start":"16:00","end":"18:00","room":"J3-252"}]},{"label":"C","teacher":"A. RAMIREZ","full":false,"sessions":[{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"R1-430"},{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"J3-252"},{"type":"P","day":"Mié","start":"16:00","end":"18:00","room":"J3-232"}]},{"label":"D","teacher":"J. CRIBILLERO","full":false,"sessions":[{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"J3-182B"},{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"R1-240A"},{"type":"P","day":"Mié","start":"16:00","end":"18:00","room":"J3-162A"}]},{"label":"E","teacher":"J. SULCA","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"J3-252"},{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"J3-162B"},{"type":"P","day":"Mié","start":"16:00","end":"18:00","room":"J3-162B"}]},{"label":"F","teacher":"M. QUIÑONES","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"J3-162B"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"J3-162A"},{"type":"P","day":"Mié","start":"16:00","end":"18:00","room":"J3-182A"}]}]},{"name":"ÁLGEBRA LINEAL","code":"BMA03","sections":[{"label":"A","teacher":"J. TAMARA","full":false,"sessions":[{"type":"T","day":"Vie","start":"07:00","end":"10:00","room":"J3-182A"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"R1-430"}]},{"label":"B","teacher":"B. OSTOS","full":false,"sessions":[{"type":"T","day":"Vie","start":"07:00","end":"10:00","room":"J3-222"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"R1-440"}]},{"label":"C","teacher":"R. ACUÑA","full":false,"sessions":[{"type":"T","day":"Mar","start":"07:00","end":"10:00","room":"R1-460"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"J3-182B"}]},{"label":"D","teacher":"J. MUNGUIA","full":false,"sessions":[{"type":"T","day":"Lun","start":"07:00","end":"10:00","room":"J3-182A"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"R1-401"}]},{"label":"E","teacher":"C. SALINAS","full":false,"sessions":[{"type":"T","day":"Jue","start":"07:00","end":"10:00","room":"J3-182A"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"J3-252"}]},{"label":"F","teacher":"R. PAUCAR","full":false,"sessions":[{"type":"T","day":"Mar","start":"07:00","end":"10:00","room":"J3-182A"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"SALA 2"}]}]},{"name":"CÁLCULO INTEGRAL","code":"BMA02","sections":[{"label":"A","teacher":"L. PAREDES","full":false,"sessions":[{"type":"T","day":"Lun","start":"16:00","end":"18:00","room":"J3-222"},{"type":"T","day":"Vie","start":"16:00","end":"18:00","room":"J3-182A"},{"type":"P","day":"Jue","start":"14:00","end":"16:00","room":"J3-182A"}]},{"label":"B","teacher":"F. VILLANUEVA","full":false,"sessions":[{"type":"T","day":"Lun","start":"18:00","end":"20:00","room":"R1-421"},{"type":"T","day":"Mié","start":"18:00","end":"20:00","room":"R1-440"},{"type":"P","day":"Jue","start":"14:00","end":"16:00","room":"J3-182B"}]},{"label":"C","teacher":"L. LA ROSA","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"R1-430"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"R1-401"},{"type":"P","day":"Jue","start":"14:00","end":"16:00","room":"J3-232"}]},{"label":"D","teacher":"D. ABANTO","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"R1-401"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"R1-460"},{"type":"P","day":"Jue","start":"14:00","end":"16:00","room":"J3-222"}]}]},{"name":"QUÍMICA I","code":"BQU01","sections":[{"label":"A","teacher":"R. SAYÁN","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"J3-252"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"J3-232"},{"type":"L","day":"Mié","start":"14:00","end":"16:00","room":"LAB 33C"}]},{"label":"B","teacher":"R. SAYÁN","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"J3-252"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"J3-232"},{"type":"L","day":"Jue","start":"16:00","end":"18:00","room":"LAB 33C"}]},{"label":"C","teacher":"K. DURAND","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"J3-182B"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"J3-222"},{"type":"L","day":"Mar","start":"08:00","end":"10:00","room":"LAB 12"}]},{"label":"D","teacher":"K. DURAND","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"J3-182B"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"J3-222"},{"type":"L","day":"Mar","start":"10:00","end":"12:00","room":"LAB 12"}]},{"label":"E","teacher":"K. DURAND","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"16:00","room":"J3-182A"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"J3-252"},{"type":"L","day":"Lun","start":"08:00","end":"10:00","room":"LAB 12"}]},{"label":"F","teacher":"K. DURAND","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"16:00","room":"J3-182A"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"J3-252"},{"type":"L","day":"Vie","start":"10:00","end":"12:00","room":"LAB 12"}]},{"label":"G","teacher":"R. LÓPEZ","full":false,"sessions":[{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"R1-440"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"R1-440"},{"type":"L","day":"Mar","start":"14:00","end":"16:00","room":"LAB 33C"}]},{"label":"H","teacher":"R. LÓPEZ","full":false,"sessions":[{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"R1-440"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"R1-440"},{"type":"L","day":"Mar","start":"14:00","end":"16:00","room":"LAB 12"}]},{"label":"I","teacher":"G. MUEDAS","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"J3-242"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"J3-182A"},{"type":"L","day":"Mar","start":"10:00","end":"12:00","room":"LAB 33C"}]},{"label":"J","teacher":"G. MUEDAS","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"J3-242"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"J3-182A"},{"type":"L","day":"Vie","start":"14:00","end":"16:00","room":"LAB 33C"}]}]},{"name":"ÉTICA Y FILOSOFÍA POLÍTICA","code":"BEF01","sections":[{"label":"A","teacher":"J. ROMERO","full":false,"sessions":[{"type":"T","day":"Vie","start":"10:00","end":"13:00","room":"R1-450"}]},{"label":"B","teacher":"J. ROMERO","full":false,"sessions":[{"type":"T","day":"Mié","start":"16:00","end":"19:00","room":"R1-460"}]},{"label":"C","teacher":"J. ROMERO","full":false,"sessions":[{"type":"T","day":"Vie","start":"19:00","end":"22:00","room":"zoom24"}]}]},{"name":"ECONOMÍA GENERAL","code":"BEG01","sections":[{"label":"A","teacher":"C. VERA","full":false,"sessions":[{"type":"T","day":"Lun","start":"16:00","end":"18:00","room":"R3-123C"},{"type":"T","day":"Mar","start":"17:00","end":"19:00","room":"R3-123C"}]},{"label":"B","teacher":"C. VERA","full":false,"sessions":[{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"R1-411"},{"type":"T","day":"Lun","start":"17:00","end":"19:00","room":"R1-401"}]},{"label":"C","teacher":"C. BARRIOS","full":false,"sessions":[{"type":"T","day":"Lun","start":"16:00","end":"18:00","room":"R1-411"},{"type":"T","day":"Mar","start":"16:00","end":"18:00","room":"R1-430"}]},{"label":"D","teacher":"J. SOLORZANO","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R3-123C"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R1-411"}]}]},{"name":"REDACCIÓN Y COMUNICACIÓN","code":"BRC01","sections":[{"label":"A","teacher":"E. EVANGELISTA","full":false,"sessions":[{"type":"T","day":"Mar","start":"07:00","end":"10:00","room":"J3-162A"}]},{"label":"B","teacher":"E. EVANGELISTA","full":false,"sessions":[{"type":"T","day":"Mar","start":"13:00","end":"16:00","room":"J3-252"}]},{"label":"C","teacher":"E. EVANGELISTA","full":false,"sessions":[{"type":"T","day":"Lun","start":"13:00","end":"16:00","room":"J3-162A"}]}]},{"name":"INGLÉS I","code":"CL002","sections":[{"label":"A","teacher":"C. CCAHUANCAMA","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"16:00","room":"SALA 3"},{"type":"T","day":"Mié","start":"12:00","end":"14:00","room":"SALA 1"}]},{"label":"B","teacher":"C. CCAHUANCAMA","full":false,"sessions":[{"type":"T","day":"Jue","start":"14:00","end":"16:00","room":"SALA 3"},{"type":"T","day":"Lun","start":"12:00","end":"14:00","room":"SALA 3"}]},{"label":"C","teacher":"C. CCAHUANCAMA","full":false,"sessions":[{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"R1-460"},{"type":"T","day":"Jue","start":"12:00","end":"14:00","room":"SALA 3"}]}]},{"name":"INTRODUCCIÓN A LA COMPUTACIÓN","code":"BIC01","sections":[{"label":"A","teacher":"J. SEGOVIA","full":false,"sessions":[{"type":"T","day":"Jue","start":"07:00","end":"10:00","room":"SALA 5"}]},{"label":"B","teacher":"M. QUISPE","full":false,"sessions":[{"type":"T","day":"Jue","start":"07:00","end":"10:00","room":"SALA 4"}]},{"label":"C","teacher":"C. DIAZ","full":false,"sessions":[{"type":"T","day":"Jue","start":"07:00","end":"10:00","room":"SALA 3"}]},{"label":"D","teacher":"A. CHULLUNCUY","full":false,"sessions":[{"type":"T","day":"Jue","start":"07:00","end":"10:00","room":"SALA 2"}]},{"label":"E","teacher":"E. YAURI","full":false,"sessions":[{"type":"T","day":"Mié","start":"07:00","end":"10:00","room":"SALA 5"}]},{"label":"F","teacher":"P. MONTALVO","full":false,"sessions":[{"type":"T","day":"Mié","start":"07:00","end":"10:00","room":"SALA 4"}]},{"label":"G","teacher":"J. SEGOVIA","full":false,"sessions":[{"type":"T","day":"Mié","start":"07:00","end":"10:00","room":"SALA 3"}]},{"label":"H","teacher":"A. CHULLUNCUY","full":false,"sessions":[{"type":"T","day":"Mié","start":"07:00","end":"10:00","room":"SALA 2"}]}]},{"name":"ÁLGEBRA LINEAL I (MAT)","code":"CM1B2","sections":[{"label":"A","teacher":"F. NAVARRO","full":false,"sessions":[{"type":"T","day":"Mar","start":"16:00","end":"18:00","room":"J3-242"},{"type":"T","day":"Jue","start":"14:00","end":"16:00","room":"R1-401"},{"type":"P","day":"Vie","start":"14:00","end":"16:00","room":"J3-162A"}]},{"label":"B","teacher":"R. PEREZ","full":false,"sessions":[{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R1-430"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"R1-460"},{"type":"P","day":"Vie","start":"14:00","end":"16:00","room":"J3-222"}]},{"label":"C","teacher":"J. TAMARA","full":false,"sessions":[{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"J3-232"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"J3-252"},{"type":"P","day":"Vie","start":"14:00","end":"16:00","room":"J3-252"}]}]},{"name":"MECÁNICA CUÁNTICA (IF)","code":"IF411","sections":[{"label":"A","teacher":"R. PEREZ","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"13:00","room":"J3-222"},{"type":"T","day":"Vie","start":"12:00","end":"15:00","room":"R1-411"},{"type":"P","day":"Jue","start":"16:00","end":"19:00","room":"J3-152"}]}]},{"name":"ELECTROMAGNETISMO PARA ING.","code":"IF372","sections":[{"label":"A","teacher":"R. PEREZ","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"J3-162A"},{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"J3-162A"},{"type":"P","day":"Mar","start":"16:00","end":"18:00","room":"J3-232"}]}]},{"name":"FISICA TERMICA I","code":"IF352","sections":[{"label":"A","teacher":"A. HUAMÁN","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R3-209"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"R3-209"},{"type":"P","day":"Vie","start":"14:00","end":"16:00","room":"R3-123B"}]}]},{"name":"FISICA TERMICA II","code":"IF326","sections":[{"label":"A","teacher":"M. QUINTANA","full":false,"sessions":[{"type":"T","day":"Mar","start":"12:00","end":"14:00","room":"R3-209"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"R3-123C"},{"type":"P","day":"Mar","start":"16:00","end":"18:00","room":"R1-450"}]}]},{"name":"BIOLOGÍA","code":"CH061","sections":[{"label":"A","teacher":"L. PÉREZ","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"R3-123C"},{"type":"L","day":"Mar","start":"10:00","end":"12:00","room":"LAB 33R1"}]},{"label":"B","teacher":"L. PÉREZ","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"R3-123C"},{"type":"L","day":"Mar","start":"14:00","end":"16:00","room":"LAB 33R1"}]}]}];
+
+let allCourses=[];
 let selectedCourses=new Set();
 let generatedSchedules=[];
 let favorites=[];
 let colorMap={};
 let colorIdx=0;
 
-function getColor(name){if(!colorMap[name]){colorMap[name]=[COLORS[colorIdx%COLORS.length],BGS[colorIdx%BGS.length]];colorIdx++;}return colorMap[name];}
-
-function save(){localStorage.setItem('uni_courses',JSON.stringify(allCourses));localStorage.setItem('uni_selected',JSON.stringify([...selectedCourses]));localStorage.setItem('uni_favs',JSON.stringify(favorites));}
-function loadStorage(){
-  try{allCourses=JSON.parse(localStorage.getItem('uni_courses'))||[];}catch(e){allCourses=[];}
-  try{const s=JSON.parse(localStorage.getItem('uni_selected'))||[];selectedCourses=new Set(s);}catch(e){selectedCourses=new Set();}
-  try{favorites=JSON.parse(localStorage.getItem('uni_favs'))||[];}catch(e){favorites=[];}
-}
-
-function toast(m,dur=2400){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),dur);}
-
-function switchTab(tab){
-  const ts=['carga','cursos','generar','favoritos'];
-  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',ts[i]===tab));
-  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
-  document.getElementById('tab-'+tab).classList.add('active');
-  if(tab==='cursos')renderPicker();
-  if(tab==='generar')updateGenDesc();
-  if(tab==='favoritos')renderFavs();
-}
-
-/* ============ PDF UPLOAD & PARSE ============ */
-function dragOver(e){e.preventDefault();document.getElementById('uploadArea').classList.add('dragging');}
-function dragLeave(){document.getElementById('uploadArea').classList.remove('dragging');}
-function dropFile(e){e.preventDefault();dragLeave();const f=e.dataTransfer.files[0];if(f&&f.type==='application/pdf')processPDF(f);else toast('Solo se aceptan archivos PDF');}
-function handlePDF(e){const f=e.target.files[0];if(f)processPDF(f);}
-
-async function processPDF(file){
-  const status=document.getElementById('loadStatus');
-  status.innerHTML='<div class="loader"><div class="spinner"></div><span>Leyendo PDF y extrayendo cursos con IA...</span></div>';
-  try{
-    const base64=await fileToBase64(file);
-    const prompt=`Eres un extractor de datos de horarios universitarios. Del PDF de la Facultad de Ciencias UNI, extrae TODOS los cursos con sus secciones y horarios.
-
-FORMATO DE SALIDA: responde ÚNICAMENTE con un JSON válido, sin texto adicional, sin markdown, sin backticks. Estructura:
-{
-  "courses": [
-    {
-      "name": "NOMBRE DEL CURSO",
-      "code": "CÓDIGO",
-      "sections": [
-        {
-          "label": "A",
-          "teacher": "APELLIDO DOCENTE PRINCIPAL",
-          "sessions": [
-            {"type": "T", "day": "Lun", "start": "08:00", "end": "10:00", "room": "J3-162B"},
-            {"type": "P", "day": "Mié", "start": "14:00", "end": "16:00", "room": "J3-182A"},
-            {"type": "L", "day": "Jue", "start": "14:00", "end": "17:00", "room": "LAB F"}
-          ]
-        }
-      ]
-    }
-  ]
-}
-
-Reglas:
-- type: "T" para teórico, "P" para práctico, "L" para laboratorio
-- day: "Lun","Mar","Mié","Jue","Vie","Sáb"
-- Horarios en formato HH:MM. "08-10" => start:"08:00" end:"10:00"
-- Incluye TODOS los cursos de TODAS las escuelas (Física, Matemática, Química, Ing. Física, Computación, Humanidades)
-- Si un curso tiene múltiples secciones (A, B, C...) inclúyelas todas como elementos del array "sections"
-- teacher: solo el apellido principal (el de la primera fila/negrita)`;
-
-    const resp=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:8000,
-        messages:[{role:'user',content:[
-          {type:'document',source:{type:'base64',media_type:'application/pdf',data:base64}},
-          {type:'text',text:prompt}
-        ]}]
-      })
-    });
-    const data=await resp.json();
-    if(data.error)throw new Error(data.error.message);
-    let raw=data.content.map(c=>c.text||'').join('');
-    raw=raw.replace(/```json|```/g,'').trim();
-    const parsed=JSON.parse(raw);
-    allCourses=parsed.courses.map(c=>({...c,sections:c.sections.map(s=>({...s,full:false}))}));
-    colorMap={};colorIdx=0;
-    save();
-    status.innerHTML='';
-    showSummary();
-    renderPicker();
-    toast(`${allCourses.length} cursos cargados correctamente`);
-  }catch(err){
-    console.error(err);
-    status.innerHTML=`<div style="background:var(--redbg);border:0.5px solid var(--redbd);border-radius:var(--r);padding:10px 14px;font-size:12px;color:var(--red);margin-top:10px">Error al procesar el PDF: ${err.message}. Intenta de nuevo.</div>`;
-  }
-}
-
-function fileToBase64(file){return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=()=>rej(new Error('Error leyendo archivo'));r.readAsDataURL(file);});}
-
-function showSummary(){
-  const el=document.getElementById('loadedSummary');
-  const cnt=document.getElementById('summaryContent');
-  el.style.display='block';
-  const bySchool={};
-  allCourses.forEach(c=>{
-    const school=getSchool(c.code);
-    if(!bySchool[school])bySchool[school]=[];
-    bySchool[school].push(c);
-  });
-  cnt.innerHTML=Object.entries(bySchool).map(([s,cs])=>`
-    <div style="margin-bottom:10px">
-      <div style="font-size:11px;font-weight:600;color:var(--t2);margin-bottom:5px">${s} (${cs.length} cursos)</div>
-      <div style="display:flex;gap:5px;flex-wrap:wrap">${cs.map(c=>`<span style="font-size:10px;background:var(--bg2);border-radius:6px;padding:2px 8px">${c.name}</span>`).join('')}</div>
-    </div>`).join('');
-  cnt.innerHTML+=`<div style="margin-top:10px"><button class="btn btn-blue" onclick="switchTab('cursos')">Ir a seleccionar cursos →</button></div>`;
-}
-
+function getColor(key){if(!colorMap[key]){colorMap[key]=[COLORS[colorIdx%COLORS.length],BGS[colorIdx%BGS.length]];colorIdx++;}return colorMap[key];}
 function getSchool(code){
   if(!code)return'Otros';
   if(code.startsWith('BFI')||code.startsWith('CF'))return'Física';
@@ -352,43 +185,73 @@ function getSchool(code){
   if(code.startsWith('BQU')||code.startsWith('CQ'))return'Química';
   if(code.startsWith('IF'))return'Ing. Física';
   if(code.startsWith('CC')||code.startsWith('BIC'))return'Computación';
-  if(code.startsWith('B')||code.startsWith('CH')||code.startsWith('CL'))return'Humanidades';
-  return'Otros';
+  return'Humanidades';
 }
 
-/* ============ COURSE PICKER ============ */
+function save(){
+  localStorage.setItem('uni26_courses',JSON.stringify(allCourses));
+  localStorage.setItem('uni26_sel',JSON.stringify([...selectedCourses]));
+  localStorage.setItem('uni26_favs',JSON.stringify(favorites));
+}
+function loadStorage(){
+  try{
+    const saved=JSON.parse(localStorage.getItem('uni26_courses'));
+    if(saved&&saved.length)allCourses=saved;
+    else allCourses=JSON.parse(JSON.stringify(COURSES_DATA));
+  }catch(e){allCourses=JSON.parse(JSON.stringify(COURSES_DATA));}
+  try{const s=JSON.parse(localStorage.getItem('uni26_sel'))||[];selectedCourses=new Set(s);}catch(e){selectedCourses=new Set();}
+  try{favorites=JSON.parse(localStorage.getItem('uni26_favs'))||[];}catch(e){favorites=[];}
+}
+
+function toast(m,dur=2400){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),dur);}
+
+function switchTab(tab){
+  const ts=['cursos','generar','favoritos'];
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',ts[i]===tab));
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  if(tab==='generar')updateGenDesc();
+  if(tab==='favoritos')renderFavs();
+}
+
+function safeid(s){return(s||'').replace(/[^a-zA-Z0-9]/g,'_')}
+
 function renderPicker(){
   const el=document.getElementById('pickerGrid');
-  if(!allCourses.length){el.innerHTML='<div class="empty"><strong>Sin cursos cargados</strong>Primero carga el PDF</div>';return;}
-  const q=(document.getElementById('courseSearch')||{value:''}).value.toLowerCase();
-  const filtered=allCourses.filter(c=>!q||c.name.toLowerCase().includes(q)||c.code.toLowerCase().includes(q));
+  const q=(document.getElementById('courseSearch').value||'').toLowerCase();
+  const school=document.getElementById('schoolFilter').value;
+  const filtered=allCourses.filter(c=>{
+    if(school&&getSchool(c.code)!==school)return false;
+    if(q&&!c.name.toLowerCase().includes(q)&&!(c.code||'').toLowerCase().includes(q))return false;
+    return true;
+  });
+  if(!filtered.length){el.innerHTML='<div style="color:var(--t2);font-size:13px;padding:1rem">No hay cursos que coincidan.</div>';return;}
   el.innerHTML=filtered.map(c=>{
-    const sel=selectedCourses.has(c.code||c.name);
+    const key=c.code||c.name;
+    const sel=selectedCourses.has(key);
     const openSecs=c.sections.filter(s=>!s.full).length;
-    return`<div class="course-pick${sel?' selected':''}" id="cp-${safeid(c.code||c.name)}">
-      <div class="cp-head" onclick="toggleCourse('${safeid(c.code||c.name)}','${esc(c.code||c.name)}')">
+    const school=getSchool(c.code);
+    return`<div class="course-pick${sel?' selected':''}" id="cp-${safeid(key)}">
+      <div class="cp-head" onclick="toggleCourse('${safeid(key)}','${key.replace(/'/g,"\\'")}')">
         <div class="cp-check">${sel?'✓':''}</div>
-        <div style="flex:1">
-          <div class="cp-name">${c.name}</div>
-          <div class="cp-code">${c.code||''} · ${c.sections.length} secc. · ${openSecs} disponibles</div>
+        <div style="flex:1;min-width:0">
+          <div class="cp-name" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${c.name}</div>
+          <div class="cp-code"><span class="school-tag">${school}</span>${c.code||''} · ${c.sections.length} secc. · ${openSecs} disp.</div>
         </div>
-        <button class="btn btn-sm" style="height:22px;padding:0 8px;font-size:10px" onclick="event.stopPropagation();toggleExpand('${safeid(c.code||c.name)}')">▾</button>
+        <button class="btn btn-sm" style="height:22px;padding:0 7px;font-size:10px;flex-shrink:0" onclick="event.stopPropagation();toggleExpand('${safeid(key)}')">▾</button>
       </div>
       <div class="cp-body">
         ${c.sections.map((s,si)=>`
           <div class="section-row">
-            <span style="font-weight:500;min-width:20px">${s.label}</span>
-            <span class="sec-info">${s.teacher||''} · ${s.sessions.map(ss=>ss.day+' '+ss.start+'–'+ss.end).join(', ')}</span>
-            <button class="sec-full-btn ${s.full?'full':'open'}" onclick="toggleFull('${esc(c.code||c.name)}',${si})">${s.full?'Llena':'Disponible'}</button>
+            <span style="font-weight:600;min-width:18px;color:var(--t1)">${s.label}</span>
+            <span class="sec-info">${s.teacher||'—'} · ${s.sessions.slice(0,2).map(ss=>ss.day+' '+ss.start.slice(0,5)+'–'+ss.end.slice(0,5)).join(', ')}${s.sessions.length>2?' +más':''}</span>
+            <button class="sec-full-btn ${s.full?'full':'open'}" onclick="toggleFull('${key.replace(/'/g,"\\'")}',${si})">${s.full?'Llena':'Disponible'}</button>
           </div>`).join('')}
       </div>
     </div>`;
   }).join('');
   updateSelectedCount();
 }
-
-function safeid(s){return(s||'').replace(/[^a-zA-Z0-9]/g,'_')}
-function esc(s){return(s||'').replace(/'/g,"\\'")}
 
 function toggleCourse(elid,key){
   const el=document.getElementById('cp-'+elid);
@@ -397,36 +260,22 @@ function toggleCourse(elid,key){
   else{selectedCourses.add(key);el.classList.add('selected');el.querySelector('.cp-check').textContent='✓';}
   save();updateSelectedCount();
 }
-function toggleExpand(elid){
-  const el=document.getElementById('cp-'+elid);
-  if(el)el.classList.toggle('expanded');
-}
+function toggleExpand(elid){const el=document.getElementById('cp-'+elid);if(el)el.classList.toggle('expanded');}
 function toggleFull(key,si){
   const c=allCourses.find(c=>(c.code||c.name)===key);
   if(!c)return;
   c.sections[si].full=!c.sections[si].full;
   save();renderPicker();
-  toast(c.sections[si].full?`Sección ${c.sections[si].label} marcada como llena`:`Sección ${c.sections[si].label} disponible`);
+  toast(c.sections[si].full?`Sección ${c.sections[si].label} marcada como llena`:`Sección ${c.sections[si].label} marcada disponible`);
 }
-function filterCourses(){renderPicker();}
 function selectAll(){allCourses.forEach(c=>selectedCourses.add(c.code||c.name));save();renderPicker();}
 function deselectAll(){selectedCourses.clear();save();renderPicker();}
 function updateSelectedCount(){
   const el=document.getElementById('selectedCount');
-  if(el)el.textContent=selectedCourses.size+' curso'+(selectedCourses.size!==1?'s':'')+' seleccionado'+(selectedCourses.size!==1?'s':'');
+  if(el)el.textContent=selectedCourses.size+' seleccionado'+(selectedCourses.size!==1?'s':'');
 }
 
-/* ============ SCHEDULE GENERATION ============ */
 function toMin(t){const[h,m]=t.split(':').map(Number);return h*60+m;}
-function hasConflict(sessions){
-  for(let i=0;i<sessions.length;i++)
-    for(let j=i+1;j<sessions.length;j++){
-      const[a,b]=[sessions[i],sessions[j]];
-      if(a.day!==b.day)continue;
-      if(toMin(a.start)<toMin(b.end)&&toMin(b.start)<toMin(a.end))return true;
-    }
-  return false;
-}
 function getConflicts(sessions){
   const out=[];
   for(let i=0;i<sessions.length;i++)
@@ -444,11 +293,8 @@ function updateGenDesc(){
   if(!sel.length){if(desc)desc.textContent='Selecciona cursos primero';return;}
   const skipFull=(document.getElementById('skipFull')||{checked:true}).checked;
   let combos=1;
-  sel.forEach(c=>{
-    const avail=skipFull?c.sections.filter(s=>!s.full):c.sections;
-    combos*=Math.max(avail.length,1);
-  });
-  if(desc)desc.textContent=`${sel.length} cursos seleccionados · ~${combos.toLocaleString()} combinaciones posibles`;
+  sel.forEach(c=>{const avail=skipFull?c.sections.filter(s=>!s.full):c.sections;combos*=Math.max(avail.length,1);});
+  if(desc)desc.textContent=`${sel.length} cursos · ~${combos.toLocaleString()} combinaciones posibles`;
 }
 
 function generateSchedules(){
@@ -456,36 +302,27 @@ function generateSchedules(){
   if(!sel.length){toast('Selecciona al menos un curso');return;}
   const skipFull=document.getElementById('skipFull').checked;
   const onlyValid=document.getElementById('onlyValid').checked;
-  const maxR=parseInt(document.getElementById('maxResults').value)||20;
-
+  const maxR=parseInt(document.getElementById('maxResults').value)||30;
   document.getElementById('genLoader').style.display='flex';
-  document.getElementById('genLoaderMsg').textContent='Generando combinaciones...';
   document.getElementById('scheduleResults').innerHTML='';
-
   setTimeout(()=>{
     const results=[];
-    const pools=sel.map(c=>({
-      course:c,
-      sections:skipFull?c.sections.filter(s=>!s.full):c.sections
-    })).filter(p=>p.sections.length>0);
-
+    const pools=sel.map(c=>({course:c,sections:skipFull?c.sections.filter(s=>!s.full):c.sections})).filter(p=>p.sections.length>0);
     function combine(idx,current){
-      if(results.length>=maxR*3)return;
+      if(results.length>=maxR*5)return;
       if(idx===pools.length){
-        const allSessions=[];
+        const all=[];
         current.forEach(({course,section})=>{
-          section.sessions.forEach(sess=>{
-            allSessions.push({...sess,courseName:course.name,courseKey:course.code||course.name,sectionLabel:section.label,teacher:section.teacher});
-          });
+          section.sessions.forEach(sess=>all.push({...sess,courseName:course.name,courseKey:course.code||course.name,sectionLabel:section.label,teacher:section.teacher}));
         });
-        const conflicts=getConflicts(allSessions);
+        const conflicts=getConflicts(all);
         if(onlyValid&&conflicts.length>0)return;
-        results.push({selections:[...current],allSessions,conflicts});
+        results.push({selections:[...current],allSessions:all,conflicts});
         return;
       }
       for(const section of pools[idx].sections){
         combine(idx+1,[...current,{course:pools[idx].course,section}]);
-        if(results.length>=maxR*3)break;
+        if(results.length>=maxR*5)break;
       }
     }
     combine(0,[]);
@@ -493,139 +330,96 @@ function generateSchedules(){
     generatedSchedules=results.slice(0,maxR);
     document.getElementById('genLoader').style.display='none';
     renderGeneratedSchedules();
-    toast(`${generatedSchedules.length} horarios generados`);
+    toast(`${generatedSchedules.length} horario(s) generado(s)`);
   },50);
 }
 
 function renderGeneratedSchedules(){
   const el=document.getElementById('scheduleResults');
-  if(!generatedSchedules.length){el.innerHTML='<div class="empty"><strong>Sin resultados</strong>Prueba desactivando "Solo mostrar sin cruces" o revisa las secciones disponibles</div>';return;}
-  el.innerHTML=`<div style="font-size:12px;color:var(--t2);margin-bottom:10px">${generatedSchedules.length} horario(s) encontrado(s)</div><div class="gen-grid">`
-    +generatedSchedules.map((s,i)=>renderSchedCard(s,i)).join('')
-    +'</div>';
+  if(!generatedSchedules.length){el.innerHTML='<div class="empty"><strong>Sin resultados</strong>Prueba desactivar "Solo sin cruces" o revisa las secciones disponibles</div>';return;}
+  el.innerHTML=`<div style="font-size:12px;color:var(--t2);margin-bottom:10px;padding:0 2px">${generatedSchedules.length} combinación(es) encontrada(s) — ordenadas de menor a mayor cruces</div><div class="gen-grid">`+generatedSchedules.map((s,i)=>renderSchedCard(s,i)).join('')+'</div>';
 }
 
 function renderSchedCard(sched,idx){
-  const noConflict=sched.conflicts.length===0;
-  const usedDays=DAYS.filter(d=>sched.allSessions.some(s=>s.day===d));
+  const noC=sched.conflicts.length===0;
+  const ud=DAYS.filter(d=>sched.allSessions.some(s=>s.day===d));
   const mins=sched.allSessions.flatMap(s=>[toMin(s.start),toMin(s.end)]);
-  const minM=Math.floor(Math.min(...mins)/60)*60;
-  const maxM=Math.ceil(Math.max(...mins)/60)*60;
+  const minM=Math.floor(Math.min(...mins)/60)*60,maxM=Math.ceil(Math.max(...mins)/60)*60;
   const slots=[];for(let m=minM;m<maxM;m+=60)slots.push(m);
-
-  let tbl=`<table><thead><tr><th></th>${usedDays.map(d=>`<th>${d}</th>`).join('')}</tr></thead><tbody>`;
+  let tbl=`<table><thead><tr><th></th>${ud.map(d=>`<th>${d}</th>`).join('')}</tr></thead><tbody>`;
   slots.forEach(m=>{
-    const h=String(Math.floor(m/60)).padStart(2,'0');
-    tbl+=`<tr><td class="tc">${h}h</td>`;
-    usedDays.forEach(day=>{
+    tbl+=`<tr><td class="tc">${String(Math.floor(m/60)).padStart(2,'0')}h</td>`;
+    ud.forEach(day=>{
       const segs=sched.allSessions.filter(s=>s.day===day&&toMin(s.start)<m+60&&toMin(s.end)>m);
       tbl+=`<td class="sl">`;
-      if(segs.length){
-        const w=Math.floor(100/segs.length);
-        segs.forEach((s,i)=>{
-          const[color,bg]=getColor(s.courseKey);
-          const top=Math.max(0,((toMin(s.start)-m)/60)*100);
-          const bot=Math.max(0,((m+60-toMin(s.end))/60)*100);
-          tbl+=`<div class="mini-blk" style="background:${bg};color:${color};border-left:2px solid ${color};width:${w}%;left:${i*w}%;top:${top}%;bottom:${bot}%">
-            <span style="font-size:8px;font-weight:600">${s.type}</span>
-            <span>${s.courseName.split(' ').slice(0,2).join(' ')}</span>
-          </div>`;
-        });
-      }
+      if(segs.length){const w=Math.floor(100/segs.length);segs.forEach((s,i)=>{const[color,bg]=getColor(s.courseKey);const top=Math.max(0,((toMin(s.start)-m)/60)*100);const bot=Math.max(0,((m+60-toMin(s.end))/60)*100);tbl+=`<div class="mini-blk" style="background:${bg};color:${color};border-left:2px solid ${color};width:${w}%;left:${i*w}%;top:${top}%;bottom:${bot}%"><span style="font-size:8px;font-weight:700">${s.type}</span><span>${s.courseName.split(' ')[0]}</span></div>`;});}
       tbl+=`</td>`;
     });
     tbl+=`</tr>`;
   });
   tbl+=`</tbody></table>`;
-
-  const selList=sched.selections.map(({course,section})=>{
-    const[color,bg]=getColor(course.code||course.name);
-    return`<span class="fav-chip" style="background:${bg};color:${color}">${course.name} ${section.label}${section.teacher?' · '+section.teacher:''}</span>`;
-  }).join('');
-
+  const chips=sched.selections.map(({course,section})=>{const[c,bg]=getColor(course.code||course.name);return`<span class="fav-chip" style="background:${bg};color:${c}">${course.name} ${section.label}${section.teacher?' · '+section.teacher:''}</span>`;}).join('');
   return`<div class="sched-card">
     <div class="sched-hdr">
-      <span class="sched-num">Horario #${idx+1}</span>
-      <span class="sched-status ${noConflict?'sched-ok':'sched-conflict'}">${noConflict?'Sin cruces':sched.conflicts.length+' cruce(s)'}</span>
+      <span class="sched-num">#${idx+1}</span>
+      <span class="sched-status ${noC?'sched-ok':'sched-conflict'}">${noC?'Sin cruces':sched.conflicts.length+' cruce(s)'}</span>
       <div style="flex:1"></div>
       <button class="btn btn-sm" onclick="viewSchedule(${idx})">Ver completo</button>
       <button class="btn btn-sm btn-blue" onclick="saveSchedule(${idx})">Guardar</button>
     </div>
     <div class="sched-body">
       <div class="mini-grid">${tbl}</div>
-      <div class="fav-chips" style="margin-top:8px">${selList}</div>
+      <div class="fav-chips" style="margin-top:8px">${chips}</div>
     </div>
   </div>`;
 }
 
 function viewSchedule(idx){
-  const sched=generatedSchedules[idx];
-  if(!sched)return;
-  const usedDays=DAYS.filter(d=>sched.allSessions.some(s=>s.day===d));
+  const sched=generatedSchedules[idx];if(!sched)return;
+  const ud=DAYS.filter(d=>sched.allSessions.some(s=>s.day===d));
   const mins=sched.allSessions.flatMap(s=>[toMin(s.start),toMin(s.end)]);
-  const minM=Math.floor(Math.min(...mins)/60)*60;
-  const maxM=Math.ceil(Math.max(...mins)/60)*60;
+  const minM=Math.floor(Math.min(...mins)/60)*60,maxM=Math.ceil(Math.max(...mins)/60)*60;
   const slots=[];for(let m=minM;m<maxM;m+=60)slots.push(m);
   const cset=new Set();getConflicts(sched.allSessions).forEach(([a,b])=>{cset.add(a);cset.add(b);});
-
-  let tbl=`<table><thead><tr><th style="width:50px"></th>${usedDays.map(d=>`<th>${d}</th>`).join('')}</tr></thead><tbody>`;
+  let tbl=`<table><thead><tr><th style="width:50px"></th>${ud.map(d=>`<th>${d}</th>`).join('')}</tr></thead><tbody>`;
   slots.forEach(m=>{
-    const h=String(Math.floor(m/60)).padStart(2,'0');
-    tbl+=`<tr><td class="tc">${h}:00</td>`;
-    usedDays.forEach(day=>{
+    tbl+=`<tr><td class="tc">${String(Math.floor(m/60)).padStart(2,'0')}:00</td>`;
+    ud.forEach(day=>{
       const segs=sched.allSessions.filter(s=>s.day===day&&toMin(s.start)<m+60&&toMin(s.end)>m);
       const isc=segs.some(s=>cset.has(s));
       tbl+=`<td class="sl" style="${isc?'background:rgba(226,75,74,0.1)':''}">`;
-      if(segs.length){
-        const w=Math.floor(100/segs.length);
-        segs.forEach((s,i)=>{
-          const[color,bg]=getColor(s.courseKey);
-          const top=Math.max(0,((toMin(s.start)-m)/60)*100);
-          const bot=Math.max(0,((m+60-toMin(s.end))/60)*100);
-          const c=cset.has(s);
-          tbl+=`<div class="full-blk" style="background:${bg};color:${color};border-left:2px solid ${color};width:${w}%;left:${i*w}%;top:${top}%;bottom:${bot}%;${c?'outline:1.5px solid #E24B4A;':''}">`
-            +`<span class="tb t${s.type}">${s.type}</span>`
-            +`<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px">${s.courseName} ${s.sectionLabel}${s.teacher?' · '+s.teacher:''}${s.room?' · '+s.room:''}</span>`
-            +`</div>`;
-        });
-      }
+      if(segs.length){const w=Math.floor(100/segs.length);segs.forEach((s,i)=>{const[color,bg]=getColor(s.courseKey);const top=Math.max(0,((toMin(s.start)-m)/60)*100);const bot=Math.max(0,((m+60-toMin(s.end))/60)*100);const c=cset.has(s);tbl+=`<div class="full-blk" style="background:${bg};color:${color};border-left:2px solid ${color};width:${w}%;left:${i*w}%;top:${top}%;bottom:${bot}%;${c?'outline:1.5px solid #E24B4A;':''}">`+`<span class="tb t${s.type}">${s.type}</span>`+`<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px">${s.courseName} ${s.sectionLabel}${s.teacher?' · '+s.teacher:''}${s.room?' · '+s.room:''}</span>`+`</div>`;});}
       tbl+=`</td>`;
     });
     tbl+=`</tr>`;
   });
   tbl+=`</tbody></table>`;
-
   const overlay=document.createElement('div');
-  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:10000;overflow:auto;padding:1rem';
-  overlay.innerHTML=`<div style="max-width:900px;margin:0 auto;background:var(--bg1);border-radius:var(--rl);overflow:hidden">
+  overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:10000;overflow:auto;padding:1rem';
+  overlay.innerHTML=`<div style="max-width:950px;margin:0 auto;background:var(--bg1);border-radius:var(--rl);overflow:hidden">
     <div style="display:flex;align-items:center;gap:10px;padding:14px 18px;background:var(--bg2);border-bottom:0.5px solid var(--b1)">
       <span style="font-size:15px;font-weight:500;flex:1">Horario #${idx+1}</span>
-      <button class="btn btn-blue btn-sm" onclick="saveSchedule(${idx})">Guardar como favorito</button>
+      <button class="btn btn-blue btn-sm" onclick="saveSchedule(${idx});this.closest('[style*=fixed]').remove()">Guardar como favorito</button>
       <button class="btn btn-sm" onclick="this.closest('[style*=fixed]').remove()">Cerrar ×</button>
     </div>
     <div style="padding:1rem;overflow-x:auto"><div class="full-grid">${tbl}</div></div>
-    ${sched.conflicts.length?`<div style="margin:0 1rem 1rem"><div class="cpanel" style="background:var(--redbg);border:0.5px solid var(--redbd);border-radius:var(--r);padding:10px 14px">
-      <div style="font-size:12px;font-weight:500;color:var(--red);margin-bottom:4px">Cruces detectados</div>
-      ${sched.conflicts.map(([a,b])=>`<div style="font-size:12px;color:var(--red)">• ${a.courseName} y ${b.courseName} — ${a.day} ${a.start}–${a.end}</div>`).join('')}
-    </div></div>`:''}
+    ${sched.conflicts.length?`<div style="margin:0 1rem 1rem"><div style="background:var(--redbg);border:0.5px solid var(--redbd);border-radius:var(--r);padding:10px 14px"><div style="font-size:12px;font-weight:500;color:var(--red);margin-bottom:4px">Cruces detectados</div>${sched.conflicts.map(([a,b])=>`<div style="font-size:12px;color:var(--red)">• ${a.courseName} (${a.type}) y ${b.courseName} (${b.type}) — ${a.day} ${a.start}–${a.end}</div>`).join('')}</div></div>`:''}
   </div>`;
   overlay.onclick=e=>{if(e.target===overlay)overlay.remove();};
   document.body.appendChild(overlay);
 }
 
 function saveSchedule(idx){
-  const sched=generatedSchedules[idx];
-  if(!sched)return;
+  const sched=generatedSchedules[idx];if(!sched)return;
   const name=prompt('Nombre para este horario:',`Horario #${idx+1}`);
   if(!name)return;
   favorites.push({id:Date.now(),name,sched:JSON.parse(JSON.stringify(sched)),hasConflict:sched.conflicts.length>0});
-  save();
-  toast('Favorito guardado: '+name);
+  save();toast('Favorito guardado: '+name);
 }
 
 function renderFavs(){
   const el=document.getElementById('favsList');
-  if(!favorites.length){el.innerHTML='<div class="empty"><strong>Sin favoritos</strong>Genera horarios y guarda los que te gusten</div>';return;}
+  if(!favorites.length){el.innerHTML='<div class="empty"><strong>Sin favoritos aún</strong>Genera horarios y guarda los que más te gusten</div>';return;}
   el.innerHTML=favorites.map(f=>`
     <div class="fav-card">
       <div class="fav-hdr">
@@ -635,34 +429,22 @@ function renderFavs(){
         <button class="btn btn-sm btn-blue" onclick="viewFav(${f.id})">Ver</button>
         <button class="btn btn-sm btn-red" onclick="removeFav(${f.id})">×</button>
       </div>
-      <div class="fav-chips">
-        ${f.sched.selections.map(({course,section})=>{
-          const[color,bg]=getColor(course.code||course.name);
-          return`<span class="fav-chip" style="background:${bg};color:${color}">${course.name} ${section.label}${section.teacher?' · '+section.teacher:''}</span>`;
-        }).join('')}
-      </div>
+      <div class="fav-chips">${f.sched.selections.map(({course,section})=>{const[c,bg]=getColor(course.code||course.name);return`<span class="fav-chip" style="background:${bg};color:${c}">${course.name} ${section.label}${section.teacher?' · '+section.teacher:''}</span>`;}).join('')}</div>
     </div>`).join('');
 }
 
 function viewFav(id){
-  const f=favorites.find(x=>x.id===id);
-  if(!f)return;
-  const idx=generatedSchedules.findIndex(s=>JSON.stringify(s.selections)===JSON.stringify(f.sched.selections));
-  if(idx>=0){viewSchedule(idx);return;}
+  const f=favorites.find(x=>x.id===id);if(!f)return;
   generatedSchedules.push(f.sched);
   viewSchedule(generatedSchedules.length-1);
 }
-
 function removeFav(id){
   if(!confirm('¿Eliminar este favorito?'))return;
-  favorites=favorites.filter(f=>f.id!==id);
-  save();renderFavs();toast('Favorito eliminado');
+  favorites=favorites.filter(f=>f.id!==id);save();renderFavs();toast('Favorito eliminado');
 }
 
-/* ============ INIT ============ */
 loadStorage();
-if(allCourses.length){showSummary();}
-updateSelectedCount();
+renderPicker();
 </script>
 </body>
 </html>
