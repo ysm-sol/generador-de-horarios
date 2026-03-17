@@ -9,20 +9,20 @@
 :root{
   --bg1:#ffffff;--bg2:#f7f6f3;--bg3:#eeecea;
   --t1:#1a1918;--t2:#6b6963;--t3:#9e9c96;
-  --b1:rgba(0,0,0,0.1);--b2:rgba(0,0,0,0.2);--b3:rgba(0,0,0,0.35);
+  --b1:rgba(0,0,0,0.09);--b2:rgba(0,0,0,0.18);--b3:rgba(0,0,0,0.32);
   --blue:#185FA5;--bluebg:#E6F1FB;--bluedk:#0C447C;
-  --green:#0F6E56;--greenbg:#E1F5EE;
+  --green:#0F6E56;--greenbg:#E1F5EE;--greenbd:#5DCAA5;
   --red:#A32D2D;--redbg:#FCEBEB;--redbd:#F09595;
-  --amber:#854F0B;--amberbg:#FAEEDA;
+  --amber:#854F0B;--amberbg:#FAEEDA;--amberbd:#EF9F27;
   --r:8px;--rl:12px;
 }
 @media(prefers-color-scheme:dark){:root{
   --bg1:#1e1e1c;--bg2:#2a2a28;--bg3:#141412;
   --t1:#f0ede6;--t2:#9e9c96;--t3:#6b6963;
-  --b1:rgba(255,255,255,0.09);--b2:rgba(255,255,255,0.17);--b3:rgba(255,255,255,0.28);
+  --b1:rgba(255,255,255,0.08);--b2:rgba(255,255,255,0.16);--b3:rgba(255,255,255,0.28);
 }}
 body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg3);color:var(--t1);min-height:100vh;font-size:14px}
-.wrap{max-width:1100px;margin:0 auto;padding:1.5rem 1rem}
+.wrap{max-width:1140px;margin:0 auto;padding:1.5rem 1rem}
 .hdr{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;flex-wrap:wrap}
 .hdr-logo{background:#8B1A1A;color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:var(--r);letter-spacing:.05em;white-space:nowrap}
 .hdr h1{font-size:20px;font-weight:500;flex:1}
@@ -34,7 +34,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg3);color:
 .panel{background:var(--bg1);border:0.5px solid var(--b1);border-radius:var(--rl);padding:1.25rem 1.5rem;margin-bottom:1rem}
 .ptitle{font-size:10px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
 hr.div{border:none;border-top:0.5px solid var(--b1);margin:12px 0}
-.btn{height:34px;padding:0 14px;border-radius:var(--r);border:0.5px solid var(--b2);background:transparent;color:var(--t1);font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn{height:34px;padding:0 14px;border-radius:var(--r);border:0.5px solid var(--b2);background:transparent;color:var(--t1);font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
 .btn:hover{background:var(--bg2)}
 .btn-blue{background:var(--blue);color:var(--bluebg);border-color:var(--blue)}.btn-blue:hover{background:var(--bluedk)}
 .btn-green{background:var(--green);color:var(--greenbg);border-color:var(--green)}.btn-green:hover{background:#085041}
@@ -43,58 +43,86 @@ hr.div{border:none;border-top:0.5px solid var(--b1);margin:12px 0}
 label{font-size:12px;color:var(--t2);display:block;margin-bottom:3px}
 input,select{font-size:13px;padding:7px 10px;border:0.5px solid var(--b2);border-radius:var(--r);background:var(--bg1);color:var(--t1);height:34px}
 input:focus,select:focus{outline:none;border-color:var(--b3)}
-.tb{display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;padding:1px 7px;border-radius:9px;flex-shrink:0}
+/* type badges */
+.tb{display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;padding:1px 6px;border-radius:8px;flex-shrink:0;letter-spacing:.03em}
 .tT{background:#B5D4F4;color:#0C447C}.tP{background:#9FE1CB;color:#085041}.tL{background:#FAC775;color:#633806}
-.picker-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:8px}
-.course-pick{border:0.5px solid var(--b1);border-radius:var(--r);overflow:hidden;transition:border-color .15s}
-.course-pick.selected{border-color:var(--blue);background:rgba(24,95,165,.05)}
-.cp-head{display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;user-select:none}
-.cp-check{width:16px;height:16px;border:1.5px solid var(--b2);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:#fff}
-.course-pick.selected .cp-check{background:var(--blue);border-color:var(--blue)}
-.cp-name{font-size:13px;font-weight:500;flex:1}
-.cp-code{font-size:10px;color:var(--t2)}
-.cp-body{padding:0 12px 8px;display:none}
-.course-pick.expanded .cp-body{display:block}
-.section-row{display:flex;align-items:center;gap:6px;padding:4px 0;border-top:0.5px solid var(--b1);font-size:11px;flex-wrap:wrap}
-.sec-info{flex:1;color:var(--t2);min-width:120px}
-.sec-full-btn{font-size:10px;padding:2px 8px;border-radius:8px;cursor:pointer;border:0.5px solid;height:auto;white-space:nowrap}
-.sec-full-btn.full{background:var(--redbg);color:var(--red);border-color:var(--redbd)}
-.sec-full-btn.open{background:var(--greenbg);color:var(--green);border-color:#97C459}
-.gen-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:12px}
-.sched-card{border:0.5px solid var(--b1);border-radius:var(--rl);overflow:hidden}
-.sched-hdr{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg2);border-bottom:0.5px solid var(--b1);flex-wrap:wrap}
-.sched-num{font-size:11px;font-weight:600;color:var(--t2)}
-.sched-status{font-size:10px;padding:2px 8px;border-radius:8px}
-.sched-ok{background:var(--greenbg);color:var(--green)}
-.sched-conflict{background:var(--redbg);color:var(--red)}
-.sched-body{padding:10px 14px}
+/* COURSE PICKER */
+.picker-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px}
+.cpick{border:0.5px solid var(--b1);border-radius:var(--rl);overflow:hidden;transition:border-color .15s,box-shadow .15s}
+.cpick.selected{border-color:var(--blue)}
+.cpick.partial{border-color:var(--amberbd)}
+.cp-head{display:flex;align-items:center;gap:8px;padding:9px 12px;cursor:pointer;user-select:none;background:var(--bg2)}
+.cp-check{width:16px;height:16px;border:1.5px solid var(--b2);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;color:#fff;transition:all .12s}
+.cpick.selected .cp-check{background:var(--blue);border-color:var(--blue)}
+.cpick.partial .cp-check{background:var(--amberbd);border-color:var(--amberbd)}
+.cp-info{flex:1;min-width:0}
+.cp-name{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cp-sub{font-size:10px;color:var(--t2);margin-top:1px;display:flex;gap:6px;flex-wrap:wrap}
+.cp-tag{font-size:9px;padding:1px 6px;border-radius:6px;background:var(--bg1);color:var(--t2);border:0.5px solid var(--b1)}
+.expand-btn{width:24px;height:24px;border-radius:6px;border:0.5px solid var(--b1);background:var(--bg1);color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;transition:transform .15s}
+.cpick.expanded .expand-btn{transform:rotate(180deg)}
+/* SECTIONS LIST */
+.sections-list{display:none;border-top:0.5px solid var(--b1)}
+.cpick.expanded .sections-list{display:block}
+.sec-row{display:flex;align-items:stretch;border-bottom:0.5px solid var(--b1);transition:background .1s}
+.sec-row:last-child{border-bottom:none}
+.sec-row.sec-disabled{opacity:.45}
+.sec-sel-btn{width:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-right:0.5px solid var(--b1);flex-shrink:0;background:transparent;border-left:none;border-top:none;border-bottom:none;transition:background .1s}
+.sec-sel-btn:hover{background:var(--bg2)}
+.sec-check{width:14px;height:14px;border:1.5px solid var(--b2);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;transition:all .12s}
+.sec-row.sec-on .sec-check{background:var(--blue);border-color:var(--blue)}
+.sec-row.sec-full .sec-check{background:var(--redbd);border-color:var(--redbd)}
+.sec-body{flex:1;padding:7px 10px;min-width:0}
+.sec-top{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.sec-label{font-size:12px;font-weight:700;min-width:18px;color:var(--t1)}
+.sec-teacher{font-size:12px;font-weight:500;color:var(--t1)}
+.sec-schedules{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+.sched-pill{font-size:10px;padding:2px 7px;border-radius:6px;display:inline-flex;align-items:center;gap:3px;background:var(--bg2)}
+.sec-actions{display:flex;align-items:center;padding:6px 10px;gap:4px;flex-shrink:0}
+.full-toggle{font-size:10px;padding:2px 8px;border-radius:8px;cursor:pointer;border:0.5px solid;height:auto;white-space:nowrap;background:transparent}
+.full-toggle.is-full{background:var(--redbg);color:var(--red);border-color:var(--redbd)}
+.full-toggle.not-full{background:var(--greenbg);color:var(--green);border-color:var(--greenbd)}
+/* filter bar */
+.fbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.fbar input[type=search]{max-width:200px;height:30px;font-size:12px}
+.fbar select{height:30px;font-size:12px;padding:0 8px}
+/* gen section */
+.gen-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:12px}
+.scard{border:0.5px solid var(--b1);border-radius:var(--rl);overflow:hidden}
+.shdr{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg2);border-bottom:0.5px solid var(--b1);flex-wrap:wrap}
+.snum{font-size:11px;font-weight:600;color:var(--t2)}
+.sstatus{font-size:10px;padding:2px 8px;border-radius:8px}
+.sok{background:var(--greenbg);color:var(--green)}.serr{background:var(--redbg);color:var(--red)}
+.sbody{padding:10px 14px}
 .mini-grid{overflow-x:auto}
-.mini-grid table{width:100%;border-collapse:collapse;font-size:10px;min-width:280px}
+.mini-grid table{width:100%;border-collapse:collapse;font-size:10px;min-width:260px}
 .mini-grid th{padding:3px;text-align:center;font-size:9px;color:var(--t2);border-bottom:0.5px solid var(--b1)}
-.mini-grid td.tc{font-size:9px;color:var(--t3);padding:1px 4px;text-align:right;border-right:0.5px solid var(--b1);white-space:nowrap;width:32px}
+.mini-grid td.tc{font-size:9px;color:var(--t3);padding:1px 4px;text-align:right;border-right:0.5px solid var(--b1);white-space:nowrap;width:30px}
 .mini-grid td.sl{height:20px;border:0.5px solid var(--b1);position:relative}
 .mini-blk{position:absolute;border-radius:2px;padding:0 3px;font-size:8px;display:flex;align-items:center;gap:2px;overflow:hidden;white-space:nowrap}
 .full-grid{overflow-x:auto}
-.full-grid table{width:100%;border-collapse:collapse;font-size:12px;min-width:580px}
+.full-grid table{width:100%;border-collapse:collapse;font-size:12px;min-width:560px}
 .full-grid th{padding:8px 4px;text-align:center;font-size:11px;color:var(--t2);border-bottom:0.5px solid var(--b1)}
 .full-grid td.tc{font-size:11px;color:var(--t2);padding:3px 8px;text-align:right;border-right:0.5px solid var(--b1);width:50px;vertical-align:top}
 .full-grid td.sl{height:30px;border:0.5px solid var(--b1);position:relative;vertical-align:top}
 .full-blk{position:absolute;border-radius:3px;padding:1px 5px;font-size:10px;display:flex;align-items:center;gap:3px;overflow:hidden}
-.filter-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
-.filter-bar input[type=search]{max-width:220px;height:30px;font-size:12px}
+/* fav */
 .fav-card{border:0.5px solid var(--b1);border-radius:var(--r);padding:10px 14px;margin-bottom:8px}
 .fav-hdr{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
 .fav-name{font-size:13px;font-weight:500;flex:1}
 .fav-chips{display:flex;gap:5px;flex-wrap:wrap}
 .fav-chip{font-size:10px;padding:2px 8px;border-radius:9px}
+/* misc */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#2C2C2A;color:#f0ede6;font-size:13px;padding:9px 18px;border-radius:var(--r);opacity:0;transition:opacity .25s;pointer-events:none;z-index:9999;white-space:nowrap}
 .toast.show{opacity:1}
 .empty{text-align:center;padding:3rem;color:var(--t2);font-size:13px}
 .empty strong{display:block;font-size:15px;margin-bottom:6px;color:var(--t1)}
-.school-tag{font-size:10px;padding:1px 7px;border-radius:8px;background:var(--bg2);color:var(--t2);margin-right:4px}
 .spinner{width:18px;height:18px;border:2px solid var(--b1);border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
 .loader{display:flex;align-items:center;gap:10px;padding:1rem;font-size:13px;color:var(--t2)}
+.stat-bar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.stat{font-size:12px;color:var(--t2)}
+.stat span{font-weight:500;color:var(--t1)}
 </style>
 </head>
 <body>
@@ -102,21 +130,22 @@ input:focus,select:focus{outline:none;border-color:var(--b3)}
   <div class="hdr">
     <span class="hdr-logo">FC · UNI</span>
     <h1>Generador de Horarios 2026-1</h1>
-    <p>Selecciona tus cursos, marca secciones llenas y genera todas las combinaciones posibles sin cruces</p>
+    <p>Selecciona cursos y secciones específicas, luego genera todas las combinaciones posibles sin cruces</p>
   </div>
-
   <div class="tabs">
     <button class="tab active" onclick="switchTab('cursos')">Cursos</button>
     <button class="tab" onclick="switchTab('generar')">Generar horarios</button>
     <button class="tab" onclick="switchTab('favoritos')">Favoritos</button>
   </div>
 
+  <!-- CURSOS -->
   <div id="tab-cursos" class="sec active">
     <div class="panel">
-      <div class="ptitle">Selecciona los cursos que vas a llevar</div>
-      <div class="filter-bar">
-        <input type="search" id="courseSearch" placeholder="Buscar curso o código..." oninput="renderPicker()" style="width:220px"/>
-        <select id="schoolFilter" onchange="renderPicker()" style="height:30px;font-size:12px;width:180px">
+      <div class="ptitle">Selecciona cursos y controla qué secciones usar</div>
+      <div class="fbar">
+        <input type="search" id="qSearch" placeholder="Buscar curso o código..." oninput="renderPicker()" style="width:200px"/>
+        <input type="search" id="qProf" placeholder="Filtrar por profesor..." oninput="renderPicker()" style="width:180px"/>
+        <select id="qSchool" onchange="renderPicker()" style="width:170px">
           <option value="">Todas las escuelas</option>
           <option value="Física">Física</option>
           <option value="Matemática">Matemática</option>
@@ -125,14 +154,15 @@ input:focus,select:focus{outline:none;border-color:var(--b3)}
           <option value="Computación">Computación</option>
           <option value="Humanidades">Humanidades</option>
         </select>
-        <button class="btn btn-sm btn-blue" onclick="selectAll()">Marcar todos</button>
-        <button class="btn btn-sm" onclick="deselectAll()">Desmarcar todos</button>
-        <span id="selectedCount" style="font-size:12px;color:var(--t2)"></span>
+        <button class="btn btn-sm btn-blue" onclick="selectAll()">Selec. todos</button>
+        <button class="btn btn-sm" onclick="deselectAll()">Deselec. todos</button>
       </div>
+      <div class="stat-bar" id="statBar"></div>
       <div class="picker-grid" id="pickerGrid"></div>
     </div>
   </div>
 
+  <!-- GENERAR -->
   <div id="tab-generar" class="sec">
     <div class="panel">
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
@@ -145,39 +175,39 @@ input:focus,select:focus{outline:none;border-color:var(--b3)}
       <hr class="div">
       <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
         <label style="margin:0;display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer"><input type="checkbox" id="onlyValid" checked> Solo sin cruces</label>
-        <label style="margin:0;display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer"><input type="checkbox" id="skipFull" checked> Ignorar secciones llenas</label>
         <label style="margin:0;font-size:12px;display:flex;align-items:center;gap:6px">Máx. resultados: <input type="number" id="maxResults" value="30" min="1" max="200" style="width:65px;height:28px;padding:3px 8px;display:inline-block"/></label>
       </div>
     </div>
-    <div id="genLoader" style="display:none" class="loader"><div class="spinner"></div><span id="genLoaderMsg">Calculando combinaciones...</span></div>
+    <div id="genLoader" style="display:none" class="loader"><div class="spinner"></div><span>Calculando combinaciones...</span></div>
     <div id="scheduleResults"></div>
   </div>
 
+  <!-- FAVORITOS -->
   <div id="tab-favoritos" class="sec">
     <div class="panel">
       <div class="ptitle">Horarios favoritos guardados</div>
-      <div id="favsList"><div class="empty"><strong>Sin favoritos aún</strong>Genera horarios y guarda los que más te gusten</div></div>
+      <div id="favsList"><div class="empty"><strong>Sin favoritos aún</strong>Genera horarios y guarda los que te gusten</div></div>
     </div>
   </div>
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script>
-const COLORS=['#185FA5','#0F6E56','#993C1D','#993556','#3B6D11','#854F0B','#534AB7','#3C3489','#0F5B5B','#6B3A8A','#1A5276','#196F3D'];
-const BGS   =['#B5D4F4','#9FE1CB','#F5C4B3','#F4C0D1','#C0DD97','#FAC775','#CECBF6','#D3D1C7','#A8E6D9','#E2C4F0','#AED6F1','#A9DFBF'];
+const COLORS=['#185FA5','#0F6E56','#993C1D','#993556','#3B6D11','#854F0B','#534AB7','#3C3489','#0F5B5B','#6B3A8A','#1A5276','#196F3D','#7D6608','#1B4F72','#4A235A'];
+const BGS   =['#B5D4F4','#9FE1CB','#F5C4B3','#F4C0D1','#C0DD97','#FAC775','#CECBF6','#D3D1C7','#A8E6D9','#E2C4F0','#AED6F1','#A9DFBF','#FAD7A0','#85C1E9','#D2B4DE'];
 const DAYS=['Lun','Mar','Mié','Jue','Vie','Sáb'];
+const TL={T:'Teórico',P:'Práctico',L:'Laboratorio'};
 
 const COURSES_DATA=[{"name":"FÍSICA I","code":"BFI01","sections":[{"label":"A","teacher":"J. TELLO","full":false,"sessions":[{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"J3-162B"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"J3-162A"},{"type":"P","day":"Lun","start":"14:00","end":"16:00","room":"J3-182A"},{"type":"L","day":"Mar","start":"16:00","end":"18:00","room":"LAB F"}]},{"label":"B","teacher":"C. RIVERA","full":false,"sessions":[{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"J3-182B"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"J3-182A"},{"type":"P","day":"Lun","start":"14:00","end":"16:00","room":"J3-182B"},{"type":"L","day":"Mar","start":"14:00","end":"16:00","room":"LAB F"}]},{"label":"C","teacher":"M. ZEVALLOS","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"J3-242"},{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"J3-242"},{"type":"P","day":"Lun","start":"14:00","end":"16:00","room":"J3-252"},{"type":"L","day":"Jue","start":"16:00","end":"18:00","room":"LAB F"}]},{"label":"D","teacher":"J. AMORETTI","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"16:00","room":"J3-242"},{"type":"T","day":"Jue","start":"16:00","end":"18:00","room":"J3-232"},{"type":"P","day":"Lun","start":"14:00","end":"16:00","room":"J3-222"},{"type":"L","day":"Jue","start":"10:00","end":"12:00","room":"LAB F"}]},{"label":"E","teacher":"A. ORCCOHUARANCCA","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"J3-162B"},{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"J3-222"},{"type":"P","day":"Lun","start":"14:00","end":"16:00","room":"J3-162B"},{"type":"L","day":"Vie","start":"08:00","end":"10:00","room":"LAB F"}]},{"label":"F","teacher":"A. PAREDES","full":false,"sessions":[{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"J3-182B"},{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"J3-182B"},{"type":"P","day":"Lun","start":"14:00","end":"16:00","room":"J3-232"},{"type":"L","day":"Mar","start":"10:00","end":"12:00","room":"LAB F"}]}]},{"name":"FÍSICA II","code":"CF1B2","sections":[{"label":"A","teacher":"M. BROCCA","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R1-421"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R1-421"},{"type":"P","day":"Vie","start":"08:00","end":"10:00","room":"R1-440"},{"type":"L","day":"Vie","start":"14:00","end":"17:00","room":"LAB2 F"}]},{"label":"B","teacher":"E. VIDALÓN","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"R1-430"},{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"R1-421"},{"type":"P","day":"Vie","start":"08:00","end":"10:00","room":"R1-401"},{"type":"L","day":"Mar","start":"13:00","end":"16:00","room":"LAB2 F"}]}]},{"name":"FISICA III","code":"CF2B1","sections":[{"label":"A","teacher":"M. BROCCA","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"R1-125A"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"R1-125A"},{"type":"P","day":"Vie","start":"10:00","end":"12:00","room":"J3-162A"},{"type":"L","day":"Jue","start":"16:00","end":"19:00","room":"LAB3 F"}]},{"label":"B","teacher":"S. CUSTODIO","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R1-125A"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R1-125A"},{"type":"P","day":"Vie","start":"10:00","end":"12:00","room":"J3-162B"},{"type":"L","day":"Mar","start":"16:00","end":"19:00","room":"LAB3 F"}]}]},{"name":"LAB. FISICA INTERMEDIA","code":"CF4E1","sections":[{"label":"A","teacher":"B. PUJADA","full":false,"sessions":[{"type":"L","day":"Mar","start":"08:00","end":"12:00","room":"LAB FI"},{"type":"L","day":"Jue","start":"08:00","end":"12:00","room":"LAB FI"}]},{"label":"B","teacher":"C. EYZAGUIRRE","full":false,"sessions":[{"type":"L","day":"Mié","start":"08:00","end":"12:00","room":"LAB FI"},{"type":"L","day":"Vie","start":"08:00","end":"12:00","room":"LAB FI"}]}]},{"name":"LAB. FISICA AVANZADA","code":"CF4E2","sections":[{"label":"A","teacher":"A. VALERA","full":false,"sessions":[{"type":"L","day":"Lun","start":"08:00","end":"12:00","room":"LAB FA"},{"type":"L","day":"Mié","start":"08:00","end":"12:00","room":"LAB FA"}]},{"label":"B","teacher":"R. PUGA","full":false,"sessions":[{"type":"L","day":"Lun","start":"08:00","end":"12:00","room":"LAB FA"},{"type":"L","day":"Mié","start":"10:00","end":"14:00","room":"LAB FA"}]}]},{"name":"OPTICA CLASICA","code":"CF2B2","sections":[{"label":"A","teacher":"C. EYZAGUIRRE","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"16:00","room":"R1-450"},{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"R1-430"},{"type":"P","day":"Vie","start":"10:00","end":"12:00","room":"J3-242"},{"type":"L","day":"Mar","start":"10:00","end":"13:00","room":"LAB F"}]},{"label":"B","teacher":"C. CASTROMONTE","full":false,"sessions":[{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"R1-411"},{"type":"T","day":"Vie","start":"14:00","end":"16:00","room":"R1-440"},{"type":"P","day":"Vie","start":"10:00","end":"12:00","room":"J3-222"},{"type":"L","day":"Lun","start":"13:00","end":"16:00","room":"LAB F"}]}]},{"name":"ÁLGEBRA LINEAL PARA FÍSICOS I","code":"CF1C2","sections":[{"label":"A","teacher":"A. PAREDES","full":false,"sessions":[{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"J3-222"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"J3-222"},{"type":"P","day":"Mié","start":"07:00","end":"10:00","room":"J3-182A"}]}]},{"name":"ALGEBRA LINEAL PARA FISICOS II","code":"CF2C1","sections":[{"label":"A","teacher":"A. D. PAREDES","full":false,"sessions":[{"type":"T","day":"Mar","start":"16:00","end":"18:00","room":"R1-125A"},{"type":"T","day":"Vie","start":"16:00","end":"18:00","room":"R1-421"},{"type":"P","day":"Lun","start":"16:00","end":"19:00","room":"J3-232"}]}]},{"name":"METODOS MATEMATICOS FÍSICOS I","code":"CF2C2","sections":[{"label":"A","teacher":"H. DÍAZ","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"J3-222"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"J3-232"},{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"R1-421"},{"type":"P","day":"Mar","start":"14:00","end":"17:00","room":"J3-222"}]}]},{"name":"MECÁNICA CLÁSICA","code":"CF3F1","sections":[{"label":"A","teacher":"J. TELLO","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"J3-252"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"J3-252"},{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"J3-242"},{"type":"P","day":"Mar","start":"13:00","end":"16:00","room":"J3-232"}]}]},{"name":"MECÁNICA CUÁNTICA I","code":"CF3F2","sections":[{"label":"A","teacher":"O. PEREYRA","full":false,"sessions":[{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"R1-411"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"R1-421"},{"type":"P","day":"Mié","start":"16:00","end":"20:00","room":"R1-411"}]}]},{"name":"FISICA MODERNA","code":"CF3F3","sections":[{"label":"A","teacher":"G. RIVERA","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"16:00","room":"R1-430"},{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"R1-421"},{"type":"P","day":"Vie","start":"15:00","end":"18:00","room":"J3-242"}]}]},{"name":"CIRCUITOS ELECTRONICOS ANALOGICOS","code":"CF3E1","sections":[{"label":"A","teacher":"R. PUGA","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"12:00","room":"R2-305"},{"type":"T","day":"Jue","start":"08:00","end":"12:00","room":"R2-323"}]},{"label":"B","teacher":"C. RIVERA","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"18:00","room":"R2-323"},{"type":"T","day":"Vie","start":"14:00","end":"18:00","room":"R2-323"}]}]},{"name":"METODOS MATEMATICOS FISICOS II","code":"CF3C1","sections":[{"label":"A","teacher":"H. LORO","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R1-460"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R3-123C"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"R3-123C"},{"type":"P","day":"Jue","start":"16:00","end":"19:00","room":"R1-440"}]}]},{"name":"ELECTROMAGNETISMO I","code":"CF3F4","sections":[{"label":"A","teacher":"R. OCHOA","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"R1-215"},{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"R1-450"},{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"R1-440"},{"type":"P","day":"Lun","start":"14:00","end":"18:00","room":"R1-460"}]}]},{"name":"TERMODINÁMICA Y MEC. ESTADÍSTICA","code":"CF4F1","sections":[{"label":"A","teacher":"D. SOTO","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"R3-123C"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"R3-123C"},{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"R3-123C"},{"type":"P","day":"Mar","start":"14:00","end":"18:00","room":"R3-209"}]}]},{"name":"MECÁNICA CUÁNTICA II","code":"CF4F3","sections":[{"label":"A","teacher":"O. CASTILLO","full":false,"sessions":[{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R1-450"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"R1-460"},{"type":"P","day":"Vie","start":"14:00","end":"18:00","room":"J3-162B"}]}]},{"name":"FISICA ATÓMICA Y MOLECULAR","code":"CF4F2","sections":[{"label":"A","teacher":"J. BELTRÁN","full":false,"sessions":[{"type":"T","day":"Lun","start":"16:00","end":"18:00","room":"J3-162A"},{"type":"T","day":"Jue","start":"16:00","end":"18:00","room":"R3-123B"},{"type":"P","day":"Vie","start":"14:00","end":"17:00","room":"J3-152"}]}]},{"name":"FISICA DEL ESTADO SOLIDO I","code":"CF5F1","sections":[{"label":"A","teacher":"M. LEÓN","full":false,"sessions":[{"type":"T","day":"Lun","start":"16:00","end":"18:00","room":"R1-421"},{"type":"T","day":"Mié","start":"16:00","end":"18:00","room":"R1-401"},{"type":"P","day":"Vie","start":"16:00","end":"20:00","room":"R1-411"}]}]},{"name":"FISICA NUCLEAR Y DE PARTICULAS","code":"CF5F3","sections":[{"label":"A","teacher":"J. AMORETTI","full":false,"sessions":[{"type":"T","day":"Lun","start":"18:00","end":"20:00","room":"R1-430"},{"type":"T","day":"Mar","start":"18:00","end":"20:00","room":"R3-123B"},{"type":"T","day":"Jue","start":"18:00","end":"20:00","room":"R3-123C"},{"type":"P","day":"Mié","start":"18:00","end":"21:00","room":"R3-123C"}]}]},{"name":"INTRODUCCION A LA ASTRONOMIA","code":"CF046","sections":[{"label":"A","teacher":"M. ZEVALLOS","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"16:00","room":"R1-401"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"R1-401"},{"type":"P","day":"Lun","start":"14:00","end":"18:00","room":"J3-142"}]}]},{"name":"RELATIVIDAD GENERAL","code":"CF050","sections":[{"label":"A","teacher":"D. SOTO","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"16:00","room":"R3-209"},{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"R1-401"},{"type":"T","day":"Jue","start":"14:00","end":"16:00","room":"R1-411"},{"type":"P","day":"Mié","start":"16:00","end":"18:00","room":"R3-123C"}]}]},{"name":"TOPICOS DE OPTICA","code":"CF057","sections":[{"label":"A","teacher":"A. VALERA","full":false,"sessions":[{"type":"L","day":"Mar","start":"08:00","end":"12:00","room":"LAB FA"},{"type":"L","day":"Jue","start":"08:00","end":"12:00","room":"LAB FA"}]}]},{"name":"INTRODUCCION TEORIA ELECTRODEBIL","code":"CF077","sections":[{"label":"A","teacher":"H. DÍAZ","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R1-411"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R1-460"},{"type":"P","day":"Vie","start":"14:00","end":"16:00","room":"R3-209"}]}]},{"name":"CÁLCULO DIFERENCIAL","code":"BMA01","sections":[{"label":"A","teacher":"L. PAREDES","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"J3-162B"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"J3-162B"},{"type":"P","day":"Mié","start":"16:00","end":"18:00","room":"J3-242"}]},{"label":"B","teacher":"L. LA ROSA","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R1-430"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R1-401"},{"type":"P","day":"Mié","start":"16:00","end":"18:00","room":"J3-252"}]},{"label":"C","teacher":"A. RAMIREZ","full":false,"sessions":[{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"R1-430"},{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"J3-252"},{"type":"P","day":"Mié","start":"16:00","end":"18:00","room":"J3-232"}]},{"label":"D","teacher":"J. CRIBILLERO","full":false,"sessions":[{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"J3-182B"},{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"R1-240A"},{"type":"P","day":"Mié","start":"16:00","end":"18:00","room":"J3-162A"}]},{"label":"E","teacher":"J. SULCA","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"J3-252"},{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"J3-162B"},{"type":"P","day":"Mié","start":"16:00","end":"18:00","room":"J3-162B"}]},{"label":"F","teacher":"M. QUIÑONES","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"J3-162B"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"J3-162A"},{"type":"P","day":"Mié","start":"16:00","end":"18:00","room":"J3-182A"}]}]},{"name":"ÁLGEBRA LINEAL","code":"BMA03","sections":[{"label":"A","teacher":"J. TAMARA","full":false,"sessions":[{"type":"T","day":"Vie","start":"07:00","end":"10:00","room":"J3-182A"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"R1-430"}]},{"label":"B","teacher":"B. OSTOS","full":false,"sessions":[{"type":"T","day":"Vie","start":"07:00","end":"10:00","room":"J3-222"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"R1-440"}]},{"label":"C","teacher":"R. ACUÑA","full":false,"sessions":[{"type":"T","day":"Mar","start":"07:00","end":"10:00","room":"R1-460"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"J3-182B"}]},{"label":"D","teacher":"J. MUNGUIA","full":false,"sessions":[{"type":"T","day":"Lun","start":"07:00","end":"10:00","room":"J3-182A"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"R1-401"}]},{"label":"E","teacher":"C. SALINAS","full":false,"sessions":[{"type":"T","day":"Jue","start":"07:00","end":"10:00","room":"J3-182A"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"J3-252"}]},{"label":"F","teacher":"R. PAUCAR","full":false,"sessions":[{"type":"T","day":"Mar","start":"07:00","end":"10:00","room":"J3-182A"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"SALA 2"}]}]},{"name":"CÁLCULO INTEGRAL","code":"BMA02","sections":[{"label":"A","teacher":"L. PAREDES","full":false,"sessions":[{"type":"T","day":"Lun","start":"16:00","end":"18:00","room":"J3-222"},{"type":"T","day":"Vie","start":"16:00","end":"18:00","room":"J3-182A"},{"type":"P","day":"Jue","start":"14:00","end":"16:00","room":"J3-182A"}]},{"label":"B","teacher":"F. VILLANUEVA","full":false,"sessions":[{"type":"T","day":"Lun","start":"18:00","end":"20:00","room":"R1-421"},{"type":"T","day":"Mié","start":"18:00","end":"20:00","room":"R1-440"},{"type":"P","day":"Jue","start":"14:00","end":"16:00","room":"J3-182B"}]},{"label":"C","teacher":"L. LA ROSA","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"R1-430"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"R1-401"},{"type":"P","day":"Jue","start":"14:00","end":"16:00","room":"J3-232"}]},{"label":"D","teacher":"D. ABANTO","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"R1-401"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"R1-460"},{"type":"P","day":"Jue","start":"14:00","end":"16:00","room":"J3-222"}]}]},{"name":"ÁLGEBRA LINEAL I (MAT)","code":"CM1B2","sections":[{"label":"A","teacher":"F. NAVARRO","full":false,"sessions":[{"type":"T","day":"Mar","start":"16:00","end":"18:00","room":"J3-242"},{"type":"T","day":"Jue","start":"14:00","end":"16:00","room":"R1-401"},{"type":"P","day":"Vie","start":"14:00","end":"16:00","room":"J3-162A"}]},{"label":"B","teacher":"R. PEREZ","full":false,"sessions":[{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R1-430"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"R1-460"},{"type":"P","day":"Vie","start":"14:00","end":"16:00","room":"J3-222"}]},{"label":"C","teacher":"J. TAMARA","full":false,"sessions":[{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"J3-232"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"J3-252"},{"type":"P","day":"Vie","start":"14:00","end":"16:00","room":"J3-252"}]}]},{"name":"LÓGICA Y TEORÍA DE CONJUNTOS","code":"CM1A2","sections":[{"label":"A","teacher":"H. CASTILLO","full":false,"sessions":[{"type":"T","day":"Sáb","start":"09:00","end":"12:00","room":"R1-440"},{"type":"P","day":"Lun","start":"16:00","end":"18:00","room":"J3-252"}]}]},{"name":"CÁLCULO DE PROBABILIDADES","code":"CM1H2","sections":[{"label":"A","teacher":"J. UGARTE","full":false,"sessions":[{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"R1-401"},{"type":"P","day":"Mar","start":"10:00","end":"12:00","room":"SALA 2"}]},{"label":"B","teacher":"L. FLORES","full":false,"sessions":[{"type":"T","day":"Jue","start":"16:00","end":"18:00","room":"R1-460"},{"type":"P","day":"Mar","start":"10:00","end":"12:00","room":"SALA 3"}]},{"label":"C","teacher":"J. PÉREZ","full":false,"sessions":[{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"J3-232"},{"type":"P","day":"Mar","start":"10:00","end":"12:00","room":"SALA 4"}]}]},{"name":"MATEMÁTICA DISCRETA","code":"CM2H1","sections":[{"label":"A","teacher":"R. MAS","full":false,"sessions":[{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"J3-242"},{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"R1-440"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"J3-232"}]},{"label":"B","teacher":"C. SALINAS","full":false,"sessions":[{"type":"T","day":"Mié","start":"18:00","end":"20:00","room":"R1-430"},{"type":"T","day":"Lun","start":"18:00","end":"20:00","room":"R1-450"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"J3-232"}]}]},{"name":"PROGRAMACIÓN ESTRUCTURADA","code":"CM2F1","sections":[{"label":"A","teacher":"R. PEREZ","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"R3-209"},{"type":"P","day":"Lun","start":"10:00","end":"12:00","room":"SALA 4"},{"type":"P","day":"Vie","start":"08:00","end":"10:00","room":"SALA 1"}]}]},{"name":"CÁLCULO DIFERENCIAL E INTEGRAL AVANZADO","code":"CM2A1","sections":[{"label":"A","teacher":"J. VALVERDE","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"16:00","room":"R1-411"},{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"R1-440"},{"type":"T","day":"Vie","start":"14:00","end":"16:00","room":"R1-460"},{"type":"P","day":"Sáb","start":"14:00","end":"16:00","room":"J3-222"}]},{"label":"B","teacher":"J. SULCA","full":false,"sessions":[{"type":"T","day":"Mar","start":"13:00","end":"15:00","room":"J3-182B"},{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"J3-182B"},{"type":"T","day":"Vie","start":"14:00","end":"16:00","room":"J3-182A"},{"type":"P","day":"Sáb","start":"14:00","end":"16:00","room":"J3-242"}]},{"label":"C","teacher":"H. GUIMARAY","full":false,"sessions":[{"type":"T","day":"Sáb","start":"08:00","end":"10:00","room":"J3-252"},{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"R1-421"},{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"R1-411"},{"type":"P","day":"Sáb","start":"14:00","end":"16:00","room":"J3-232"}]},{"label":"D","teacher":"A. NUÑEZ","full":false,"sessions":[{"type":"T","day":"Sáb","start":"08:00","end":"10:00","room":"J3-232"},{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"J3-232"},{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"J3-232"},{"type":"P","day":"Sáb","start":"14:00","end":"16:00","room":"J3-182B"}]}]},{"name":"ÁLGEBRA LINEAL II","code":"CM2B1","sections":[{"label":"A","teacher":"B. OSTOS","full":false,"sessions":[{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"J3-182A"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"J3-182B"},{"type":"P","day":"Jue","start":"14:00","end":"16:00","room":"R1-440"}]}]},{"name":"ESTADÍSTICA INFERENCIAL","code":"CM2H2","sections":[{"label":"A","teacher":"G. PANIZO","full":false,"sessions":[{"type":"T","day":"Mar","start":"16:00","end":"18:00","room":"R1-421"},{"type":"P","day":"Jue","start":"16:00","end":"18:00","room":"SALA 2"}]},{"label":"B","teacher":"E. SALAZAR","full":false,"sessions":[{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"R1-450"},{"type":"P","day":"Jue","start":"16:00","end":"18:00","room":"SALA 3"}]}]},{"name":"ANÁLISIS REAL","code":"CM2A2","sections":[{"label":"A","teacher":"F. ESCALANTE","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"J3-182B"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"J3-162B"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"J3-232"},{"type":"P","day":"Sáb","start":"08:00","end":"11:00","room":"J3-162A"}]},{"label":"B","teacher":"A. CHULLUNCUY","full":false,"sessions":[{"type":"T","day":"Lun","start":"16:00","end":"18:00","room":"R1-430"},{"type":"T","day":"Mié","start":"16:00","end":"18:00","room":"R1-430"},{"type":"T","day":"Vie","start":"16:00","end":"18:00","room":"R1-460"},{"type":"P","day":"Sáb","start":"08:00","end":"11:00","room":"J3-162B"}]}]},{"name":"PROCESADOR DE TEXTO Y PROGRAMACION","code":"CM2F2","sections":[{"label":"A","teacher":"J. CRIBILLERO","full":false,"sessions":[{"type":"T","day":"Lun","start":"18:00","end":"21:00","room":"SALA 1"},{"type":"T","day":"Vie","start":"18:00","end":"21:00","room":"SALA 1"}]}]},{"name":"INTRO. ECUACIONES DIFERENCIALES ORDINARIAS","code":"CM2G2","sections":[{"label":"A","teacher":"F. VILLANUEVA","full":false,"sessions":[{"type":"T","day":"Jue","start":"14:00","end":"16:00","room":"R3-123B"},{"type":"T","day":"Jue","start":"18:00","end":"20:00","room":"R3-123B"},{"type":"P","day":"Mar","start":"18:00","end":"20:00","room":"R3-209"}]}]},{"name":"ESTRUCTURAS ALGEBRAICAS","code":"CM2I2","sections":[{"label":"A","teacher":"R. MAS","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"J3-142"},{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"J3-162A"},{"type":"P","day":"Lun","start":"08:00","end":"10:00","room":"J3-152"}]}]},{"name":"ANÁLISIS COMPLEJO","code":"CM3A1","sections":[{"label":"A","teacher":"M. TORIBIO","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R1-440"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R1-440"},{"type":"P","day":"Vie","start":"10:00","end":"12:00","room":"R1-411"}]}]},{"name":"ANALISIS EN RN","code":"CM3C1","sections":[{"label":"A","teacher":"R. METZGER","full":false,"sessions":[{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"J3-222"},{"type":"T","day":"Lun","start":"14:00","end":"16:00","room":"J3-152"},{"type":"P","day":"Vie","start":"14:00","end":"16:00","room":"J3-232"}]}]},{"name":"TEORÍA LOCAL DE SUPERFICIES","code":"CM3I1","sections":[{"label":"A","teacher":"M. QUIÑONES","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"R1-421"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"R1-421"},{"type":"P","day":"Vie","start":"08:00","end":"10:00","room":"J3-152"}]}]},{"name":"TEORIA DE LA MEDIDA","code":"CM3C2","sections":[{"label":"A","teacher":"J. MAYTA","full":false,"sessions":[{"type":"T","day":"Mar","start":"16:00","end":"18:00","room":"J3-252"},{"type":"T","day":"Jue","start":"16:00","end":"18:00","room":"R1-411"},{"type":"P","day":"Vie","start":"18:00","end":"20:00","room":"R1-421"}]}]},{"name":"ANÁLISIS CONVEXO","code":"CM3E2","sections":[{"label":"A","teacher":"F. NAVARRO","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"R1-440"},{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"J3-162B"},{"type":"P","day":"Lun","start":"10:00","end":"12:00","room":"R1-450"}]}]},{"name":"ECUACIONES DIFERENCIALES ORDINARIAS I","code":"CM3G2","sections":[{"label":"A","teacher":"F. ESCALANTE","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"16:00","room":"R1-401"},{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"J3-162B"},{"type":"P","day":"Vie","start":"14:00","end":"16:00","room":"J3-182B"}]}]},{"name":"TOPOLOGÍA","code":"CM3I2","sections":[{"label":"A","teacher":"H. VILLAVICENCIO","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"16:00","room":"R1-421"},{"type":"T","day":"Jue","start":"14:00","end":"16:00","room":"R1-421"},{"type":"P","day":"Lun","start":"16:00","end":"18:00","room":"R1-450"}]}]},{"name":"ANÁLISIS FUNCIONAL I","code":"CM4C1","sections":[{"label":"A","teacher":"E. OCAÑA","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"R1-440"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"R1-440"},{"type":"P","day":"Vie","start":"08:00","end":"10:00","room":"R3-209"}]}]},{"name":"TEORIA DE LA PROBABILIDAD","code":"CM4H1","sections":[{"label":"A","teacher":"J. UGARTE","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"16:00","room":"R1-421"},{"type":"T","day":"Mié","start":"16:00","end":"18:00","room":"R1-240B"},{"type":"P","day":"Jue","start":"10:00","end":"12:00","room":"R1-430"}]}]},{"name":"PROGRAMACIÓN LINEAL Y FLUJO EN REDES","code":"CM4E1","sections":[{"label":"A","teacher":"L. FLORES","full":false,"sessions":[{"type":"T","day":"Mar","start":"18:00","end":"20:00","room":"SALA 1"},{"type":"T","day":"Jue","start":"18:00","end":"20:00","room":"SALA 1"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"SALA 1"}]}]},{"name":"ANÁLISIS Y MODELAMIENTO NUMÉRICO I","code":"CM4F1","sections":[{"label":"A","teacher":"L. ROCA","full":false,"sessions":[{"type":"T","day":"Mar","start":"16:00","end":"18:00","room":"J3-162A"},{"type":"T","day":"Jue","start":"16:00","end":"18:00","room":"R3-209"},{"type":"P","day":"Mié","start":"10:00","end":"12:00","room":"J3-242"}]},{"label":"B","teacher":"J. MUNGUIA","full":false,"sessions":[{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"R1-430"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"SALA 1"},{"type":"P","day":"Mié","start":"10:00","end":"12:00","room":"J3-242"}]}]},{"name":"ECUACIONES DIFERENCIALES PARCIALES I","code":"CM4G2","sections":[{"label":"A","teacher":"P. CANALES","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"R3-123B"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"R3-209"},{"type":"P","day":"Vie","start":"10:00","end":"12:00","room":"J3-142"}]}]},{"name":"ANÁLISIS FUNCIONAL II","code":"CM4C2","sections":[{"label":"A","teacher":"H. GUIMARAY","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"16:00","room":"R3-123C"},{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"R3-209"},{"type":"P","day":"Vie","start":"14:00","end":"16:00","room":"R1-430"}]}]},{"name":"PROGRAMACIÓN NO LINEAL","code":"CM4E2","sections":[{"label":"A","teacher":"E. ORE","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R3-123B"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R1-215"},{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"R1-401"},{"type":"P","day":"Jue","start":"10:00","end":"12:00","room":"R3-123B"}]}]},{"name":"INTRO. PROCESOS ESTOCÁSTICOS","code":"CM5H1","sections":[{"label":"A","teacher":"G. PANIZO","full":false,"sessions":[{"type":"T","day":"Mar","start":"18:00","end":"20:00","room":"R1-421"},{"type":"T","day":"Jue","start":"18:00","end":"20:00","room":"R3-209"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"R3-209"}]}]},{"name":"ANÁLISIS Y MODELAMIENTO NUMÉRICO II","code":"CM5F1","sections":[{"label":"A","teacher":"I. MANTILLA","full":false,"sessions":[{"type":"T","day":"Lun","start":"16:00","end":"18:00","room":"R3-123B"},{"type":"T","day":"Mié","start":"16:00","end":"18:00","room":"R1-460"},{"type":"P","day":"Jue","start":"14:00","end":"16:00","room":"SALA 1"}]}]},{"name":"MÉTODOS NUMÉRICOS PARA EDP","code":"CM032","sections":[{"label":"A","teacher":"F. JARA","full":false,"sessions":[{"type":"T","day":"Lun","start":"16:00","end":"18:00","room":"R1-250A"},{"type":"T","day":"Mié","start":"17:00","end":"19:00","room":"SALA 2"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"R3-123B"}]}]},{"name":"TEORÍA ANALÍTICA DE NÚMEROS","code":"CM0D8","sections":[{"label":"A","teacher":"O. VELÁSQUEZ","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"16:00","room":"R1-240A"},{"type":"T","day":"Jue","start":"14:00","end":"16:00","room":"R1-240B"},{"type":"P","day":"Jue","start":"18:00","end":"20:00","room":"R1-411"}]}]},{"name":"TÓPICOS DE LA INVESTIGACIÓN II","code":"CM073","sections":[{"label":"A","teacher":"H. CASTILLO","full":false,"sessions":[{"type":"T","day":"Lun","start":"12:00","end":"14:00","room":"R1-401"},{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"R1-460"},{"type":"P","day":"Jue","start":"12:00","end":"14:00","room":"R1-401"}]}]},{"name":"GEOMETRÍA DIFERENCIAL","code":"CM008","sections":[{"label":"A","teacher":"D. ABANTO","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"J3-162A"},{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"J3-152"},{"type":"P","day":"Vie","start":"14:00","end":"16:00","room":"R1-250B"}]}]},{"name":"ECUACIONES DIFERENCIALES ESTOCÁSTICAS","code":"CM0A2","sections":[{"label":"A","teacher":"W. ECHEGARAY","full":false,"sessions":[{"type":"T","day":"Lun","start":"18:00","end":"20:00","room":"R1-460"},{"type":"T","day":"Mar","start":"18:00","end":"20:00","room":"R1-430"},{"type":"P","day":"Jue","start":"18:00","end":"20:00","room":"R1-430"}]}]},{"name":"INTRODUCCIÓN A LOS ELEMENTOS FINITOS","code":"CM090","sections":[{"label":"A","teacher":"I. MANTILLA","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"16:00","room":"R1-215"},{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"R1-215"},{"type":"P","day":"Vie","start":"10:00","end":"12:00","room":"J3-152"}]}]},{"name":"QUÍMICA I","code":"BQU01","sections":[{"label":"A","teacher":"R. SAYÁN","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"J3-252"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"J3-232"},{"type":"L","day":"Mié","start":"14:00","end":"16:00","room":"LAB 33C"}]},{"label":"B","teacher":"R. SAYÁN","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"J3-252"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"J3-232"},{"type":"L","day":"Jue","start":"16:00","end":"18:00","room":"LAB 33C"}]},{"label":"C","teacher":"K. DURAND","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"J3-182B"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"J3-222"},{"type":"L","day":"Mar","start":"08:00","end":"10:00","room":"LAB 12"}]},{"label":"D","teacher":"K. DURAND","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"J3-182B"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"J3-222"},{"type":"L","day":"Mar","start":"10:00","end":"12:00","room":"LAB 12"}]},{"label":"E","teacher":"K. DURAND","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"16:00","room":"J3-182A"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"J3-252"},{"type":"L","day":"Lun","start":"08:00","end":"10:00","room":"LAB 12"}]},{"label":"F","teacher":"K. DURAND","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"16:00","room":"J3-182A"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"J3-252"},{"type":"L","day":"Vie","start":"10:00","end":"12:00","room":"LAB 12"}]},{"label":"G","teacher":"R. LÓPEZ","full":false,"sessions":[{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"R1-440"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"R1-440"},{"type":"L","day":"Mar","start":"14:00","end":"16:00","room":"LAB 33C"}]},{"label":"H","teacher":"R. LÓPEZ","full":false,"sessions":[{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"R1-440"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"R1-440"},{"type":"L","day":"Mar","start":"14:00","end":"16:00","room":"LAB 12"}]},{"label":"I","teacher":"G. MUEDAS","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"J3-242"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"J3-182A"},{"type":"L","day":"Mar","start":"10:00","end":"12:00","room":"LAB 33C"}]},{"label":"J","teacher":"G. MUEDAS","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"J3-242"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"J3-182A"},{"type":"L","day":"Vie","start":"14:00","end":"16:00","room":"LAB 33C"}]}]},{"name":"QUÍMICA CIENCIA Y TECNOLOGÍA","code":"CQ132","sections":[{"label":"A","teacher":"A. LA ROSA TORO","full":false,"sessions":[{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"M8-501"}]}]},{"name":"QUÍMICA EXPERIMENTAL","code":"CQ102","sections":[{"label":"A","teacher":"G. BERETTA","full":false,"sessions":[{"type":"L","day":"Jue","start":"16:00","end":"20:00","room":"LAB 12"}]}]},{"name":"INTRO. ELECTRICIDAD Y MAGNETISMO","code":"CQ221","sections":[{"label":"A","teacher":"C. SOLANO","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"16:00","room":"R3-123C"},{"type":"T","day":"Sáb","start":"08:00","end":"10:00","room":"zoom21"},{"type":"P","day":"Mié","start":"15:00","end":"17:00","room":"J3-142"}]},{"label":"B","teacher":"C. SOLANO","full":false,"sessions":[{"type":"T","day":"Jue","start":"16:00","end":"18:00","room":"R3-123C"},{"type":"T","day":"Sáb","start":"10:00","end":"12:00","room":"zoom21"},{"type":"P","day":"Mié","start":"13:00","end":"15:00","room":"J3-142"}]},{"label":"C","teacher":"C. SOLANO","full":false,"sessions":[{"type":"T","day":"Jue","start":"16:00","end":"18:00","room":"R3-123C"},{"type":"T","day":"Sáb","start":"10:00","end":"12:00","room":"zoom21"},{"type":"P","day":"Vie","start":"17:00","end":"19:00","room":"J3-142"}]}]},{"name":"ELEMENTOS QUÍMICOS Y PROPIEDADES","code":"CQ241","sections":[{"label":"A","teacher":"G. BERETTA","full":false,"sessions":[{"type":"T","day":"Mar","start":"16:00","end":"18:00","room":"R1-460"},{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"R1-460"},{"type":"L","day":"Mié","start":"08:00","end":"12:00","room":"LAB 12"}]}]},{"name":"HIDROCARBUROS ALIFÁTICOS Y DERIVADOS","code":"CQ261","sections":[{"label":"A","teacher":"E. GARAMBEL","full":false,"sessions":[{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"R3-123B"},{"type":"T","day":"Vie","start":"11:00","end":"13:00","room":"R1-430"},{"type":"L","day":"Lun","start":"14:00","end":"18:00","room":"LAB 12"}]}]},{"name":"PRINCIPIOS DE FISICOQUÍMICA","code":"CQ271","sections":[{"label":"A","teacher":"M. FERNÁNDEZ","full":false,"sessions":[{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"R1-215"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"R1-250A"},{"type":"L","day":"Vie","start":"14:00","end":"18:00","room":"LAB 33R2"}]}]},{"name":"ESTRUCTURA QUÍMICA Y REACTIVIDAD","code":"CQ242","sections":[{"label":"A","teacher":"H. GONTARUK","full":false,"sessions":[{"type":"T","day":"Lun","start":"16:00","end":"18:00","room":"R3-209"},{"type":"T","day":"Mar","start":"16:00","end":"18:00","room":"R1-215"},{"type":"L","day":"Vie","start":"14:00","end":"18:00","room":"LAB 12"}]}]},{"name":"COMPUESTOS CARBONÍLICOS Y AROMÁTICOS","code":"CQ262","sections":[{"label":"A","teacher":"E. CÓNDOR","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"AULA 33C"},{"type":"T","day":"Mar","start":"14:00","end":"16:00","room":"AULA 33C"},{"type":"L","day":"Jue","start":"08:00","end":"12:00","room":"LAB 12"}]}]},{"name":"FUNDAMENTOS DE ELECTROQUÍMICA","code":"CQ272","sections":[{"label":"A","teacher":"J. RUIZ","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"16:00","room":"R1-125A"},{"type":"T","day":"Jue","start":"16:00","end":"18:00","room":"R1-250B"},{"type":"L","day":"Mié","start":"15:00","end":"19:00","room":"LAB 33R1"}]}]},{"name":"MÉTODOS NUMÉRICOS APLICADOS A QUÍMICA","code":"CQ300","sections":[{"label":"A","teacher":"R. ACUÑA","full":false,"sessions":[{"type":"T","day":"Mié","start":"10:00","end":"13:00","room":"R3-209"},{"type":"P","day":"Mar","start":"16:00","end":"18:00","room":"J3-182B"}]}]},{"name":"TRATAMIENTO ESTADÍSTICO EN QUÍMICA ANALÍTICA","code":"CQ381","sections":[{"label":"A","teacher":"J. CCONISLLA","full":false,"sessions":[{"type":"T","day":"Mar","start":"16:00","end":"18:00","room":"R1-440"},{"type":"P","day":"Vie","start":"16:00","end":"18:00","room":"R1-125A"}]}]},{"name":"QUÍMICA DE COORDINACIÓN","code":"CQ301","sections":[{"label":"A","teacher":"A. VALDERRAMA","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"16:00","room":"R1-430"},{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"R1-125A"},{"type":"L","day":"Mié","start":"08:00","end":"12:00","room":"LAB 33C"}]}]},{"name":"CINÉTICA QUÍMICA Y FENÓMENOS DE SUPERFICIE","code":"CQ371","sections":[{"label":"A","teacher":"R. LÓPEZ","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"R3-123B"},{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"R3-123C"},{"type":"L","day":"Jue","start":"16:00","end":"20:00","room":"LAB 33R1"}]}]},{"name":"QUÍMICA DE COLOIDES Y NANOPARTÍCULAS","code":"CQ372","sections":[{"label":"A","teacher":"A. DAMIAN","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"R1-250A"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"R1-411"},{"type":"P","day":"Mié","start":"14:00","end":"17:00","room":"R1-250A"},{"type":"L","day":"Mié","start":"14:00","end":"17:00","room":"LAB 33R2"}]}]},{"name":"QUÍMICA ANALÍTICA","code":"CQ2E2","sections":[{"label":"A","teacher":"P. LÓPEZ","full":false,"sessions":[{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"R1-421"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"M8-501"},{"type":"L","day":"Mié","start":"08:00","end":"12:00","room":"LAB 33R1"}]}]},{"name":"QUÍMICA INORGÁNICA APLICADA","code":"CQ302","sections":[{"label":"A","teacher":"M. CARLOS","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"16:00","room":"R1-440"},{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"R1-450"},{"type":"L","day":"Lun","start":"08:00","end":"12:00","room":"LAB 33C"}]}]},{"name":"QUÍMICA CUÁNTICA","code":"CQ4E1","sections":[{"label":"A","teacher":"A. CORZO","full":false,"sessions":[{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"R1-450"},{"type":"T","day":"Jue","start":"16:00","end":"18:00","room":"R1-250A"},{"type":"P","day":"Jue","start":"18:00","end":"20:00","room":"R1-250A"}]}]},{"name":"TÉCNICAS ESPECTROSCÓPICAS EN QUÍMICA ANALÍTICA","code":"CQ382","sections":[{"label":"A","teacher":"C. JACINTO","full":false,"sessions":[{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"R3-209"},{"type":"T","day":"Vie","start":"14:00","end":"16:00","room":"R3-123C"},{"type":"L","day":"Lun","start":"14:00","end":"18:00","room":"LAB 33R2"}]}]},{"name":"CARBOHIDRATOS, AMINOÁCIDOS Y HETEROCÍCLICOS","code":"CQ361","sections":[{"label":"A","teacher":"V. TORPOCO","full":false,"sessions":[{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"R1-250B"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"R1-125A"},{"type":"L","day":"Mié","start":"14:00","end":"18:00","room":"LAB 12"}]}]},{"name":"MICROBIOLOGÍA","code":"CQ401","sections":[{"label":"A","teacher":"J. PRIETO","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"R1-411"},{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"R3-123B"}]}]},{"name":"TÉCNICAS ELECTROQUÍMICAS Y CROMATOGRÁFICAS","code":"CQ491","sections":[{"label":"A","teacher":"U. QUIROZ","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"16:00","room":"R1-411"},{"type":"T","day":"Vie","start":"14:00","end":"16:00","room":"R1-401"},{"type":"L","day":"Lun","start":"08:00","end":"12:00","room":"LAB 33R2"}]}]},{"name":"IDENTIFICACIÓN ESPECTROSCÓPICA COMPUESTOS ORGÁNICOS","code":"CQ392","sections":[{"label":"A","teacher":"V. TORPOCO","full":false,"sessions":[{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"R1-250A"},{"type":"T","day":"Vie","start":"14:00","end":"16:00","room":"AULA 33C"},{"type":"P","day":"Jue","start":"16:00","end":"19:00","room":"AULA 33C"}]}]},{"name":"TÉCNICAS DE CARACTERIZACIÓN DE MATERIALES","code":"CQ402","sections":[{"label":"A","teacher":"G. PICASSO","full":false,"sessions":[{"type":"T","day":"Mié","start":"16:00","end":"18:00","room":"R3-209"},{"type":"T","day":"Vie","start":"16:00","end":"18:00","room":"R1-450"}]}]},{"name":"QUÍMICA Y GESTIÓN AMBIENTAL","code":"CQ431","sections":[{"label":"A","teacher":"P. LÓPEZ","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"16:00","room":"R1-215"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"R3-209"},{"type":"P","day":"Vie","start":"09:00","end":"13:00","room":"R3-123B"},{"type":"L","day":"Vie","start":"09:00","end":"13:00","room":"LAB 33R1"}]}]},{"name":"QUÍMICA DE MATERIALES","code":"CQ472","sections":[{"label":"A","teacher":"H. ALARCÓN","full":false,"sessions":[{"type":"T","day":"Mar","start":"16:00","end":"18:00","room":"R1-401"},{"type":"T","day":"Jue","start":"16:00","end":"18:00","room":"R1-430"},{"type":"L","day":"Lun","start":"08:00","end":"12:00","room":"LAB 33R1"}]}]},{"name":"PROCESOS QUÍMICOS INDUSTRIALES","code":"CQ501","sections":[{"label":"A","teacher":"M. DÁVILA","full":false,"sessions":[{"type":"T","day":"Lun","start":"18:00","end":"20:00","room":"R1-411"},{"type":"T","day":"Mar","start":"18:00","end":"20:00","room":"R1-411"},{"type":"P","day":"Vie","start":"18:00","end":"20:00","room":"R1-430"}]}]},{"name":"GESTIÓN DE LA CALIDAD DE LABORATORIOS","code":"CQ482","sections":[{"label":"A","teacher":"K. CHANGANAQUI","full":false,"sessions":[{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"R1-401"},{"type":"P","day":"Vie","start":"10:00","end":"12:00","room":"R1-421"}]}]},{"name":"SÍNTESIS ORGÁNICA","code":"CQ047","sections":[{"label":"A","teacher":"G. MUEDAS","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"15:00","room":"R1-450"},{"type":"T","day":"Jue","start":"16:00","end":"18:00","room":"R1-125B"},{"type":"L","day":"Mar","start":"16:00","end":"20:00","room":"LAB 12"}]}]},{"name":"DISEÑO Y OPTIMIZACIÓN DE EXPERIMENTOS","code":"CQ081","sections":[{"label":"A","teacher":"C. JACINTO","full":false,"sessions":[{"type":"T","day":"Lun","start":"16:00","end":"19:00","room":"R1-440"},{"type":"T","day":"Mié","start":"16:00","end":"19:00","room":"R1-450"}]}]},{"name":"INTRODUCCIÓN A LA METROLOGÍA","code":"IF242","sections":[{"label":"A","teacher":"C. LUYO","full":false,"sessions":[{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"R1-125B"},{"type":"P","day":"Mié","start":"16:00","end":"19:00","room":"R1-125B"}]}]},{"name":"DIBUJO Y DISEÑO PARA INGENIERIA","code":"IF281","sections":[{"label":"A","teacher":"D. HUAMANÍ","full":false,"sessions":[{"type":"T","day":"Lun","start":"18:00","end":"20:00","room":"SALA 2"},{"type":"T","day":"Vie","start":"16:00","end":"20:00","room":"SALA 3"}]},{"label":"B","teacher":"E. CARPIO","full":false,"sessions":[{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"SALA 1"},{"type":"T","day":"Sáb","start":"07:00","end":"11:00","room":"SALA 1"}]}]},{"name":"MÉTODOS MATEMÁTICOS PARA INGENIERÍA","code":"IF252","sections":[{"label":"A","teacher":"J. DÍAZ","full":false,"sessions":[{"type":"T","day":"Lun","start":"18:00","end":"20:00","room":"R3-209"},{"type":"T","day":"Mié","start":"18:00","end":"20:00","room":"R3-209"},{"type":"T","day":"Vie","start":"18:00","end":"20:00","room":"R3-209"},{"type":"P","day":"Jue","start":"16:00","end":"20:00","room":"R1-450"}]}]},{"name":"INGENIERÍA DE PROCESOS MECÁNICOS","code":"IF292","sections":[{"label":"A","teacher":"E. CARPIO","full":false,"sessions":[{"type":"T","day":"Mié","start":"08:00","end":"09:00","room":"R2-152"},{"type":"T","day":"Mié","start":"10:00","end":"13:00","room":"R2-152"}]}]},{"name":"INGENIERÍA DE INSTALACIONES INDUSTRIALES","code":"IF294","sections":[{"label":"A","teacher":"O. ROJAS","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"R1-192"},{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R1-192"}]}]},{"name":"ELEMENTOS DEL DISEÑO Y FORMULACIÓN DE PROYECTOS","code":"IF283","sections":[{"label":"A","teacher":"M. GOMEZ","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"11:00","room":"R1-125B"}]}]},{"name":"CÁLCULO NUMÉRICO I","code":"IF321","sections":[{"label":"A","teacher":"D. LAURA","full":false,"sessions":[{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"SALA 1"},{"type":"T","day":"Vie","start":"14:00","end":"16:00","room":"SALA 2"},{"type":"P","day":"Lun","start":"12:00","end":"16:00","room":"R1-440"}]}]},{"name":"FISICA TERMICA II","code":"IF326","sections":[{"label":"A","teacher":"M. QUINTANA","full":false,"sessions":[{"type":"T","day":"Mar","start":"12:00","end":"14:00","room":"R3-209"},{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"R3-123C"},{"type":"P","day":"Mar","start":"16:00","end":"18:00","room":"R1-450"}]}]},{"name":"FISICA TERMICA I","code":"IF352","sections":[{"label":"A","teacher":"A. HUAMÁN","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R3-209"},{"type":"T","day":"Vie","start":"10:00","end":"12:00","room":"R3-209"},{"type":"P","day":"Vie","start":"14:00","end":"16:00","room":"R3-123B"}]}]},{"name":"PROCESAMIENTO DE SEÑALES Y DATOS","code":"IF3B2","sections":[{"label":"A","teacher":"G. COMINA","full":false,"sessions":[{"type":"T","day":"Lun","start":"16:00","end":"18:00","room":"R1-125B"},{"type":"P","day":"Mié","start":"17:00","end":"20:00","room":"SALA 1"}]}]},{"name":"INTRODUCCIÓN A PYTHON PARA INGENIERIA FÍSICA","code":"IF3B3","sections":[{"label":"A","teacher":"G. COMINA","full":false,"sessions":[{"type":"T","day":"Mié","start":"10:00","end":"13:00","room":"SALA 3"}]}]},{"name":"ELECTROMAGNETISMO PARA INGENIERÍA","code":"IF372","sections":[{"label":"A","teacher":"R. PEREZ","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"J3-162A"},{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"J3-162A"},{"type":"P","day":"Mar","start":"16:00","end":"18:00","room":"J3-232"}]}]},{"name":"CÁLCULO NUMÉRICO II","code":"IF392","sections":[{"label":"A","teacher":"P. RAMOS","full":false,"sessions":[{"type":"T","day":"Jue","start":"08:00","end":"11:00","room":"R1-125A"},{"type":"P","day":"Jue","start":"12:00","end":"15:00","room":"SALA 2"}]}]},{"name":"INGENIERÍA ECONÓMICA","code":"IF3A2","sections":[{"label":"A","teacher":"C. CERVANTES","full":false,"sessions":[{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"SALA 1"}]}]},{"name":"MECÁNICA CUÁNTICA (IF)","code":"IF411","sections":[{"label":"A","teacher":"R. PEREZ","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"13:00","room":"J3-222"},{"type":"T","day":"Vie","start":"12:00","end":"15:00","room":"R1-411"},{"type":"P","day":"Jue","start":"16:00","end":"19:00","room":"J3-152"}]}]},{"name":"TEORÍA DE CONTROL","code":"IF462","sections":[{"label":"A","teacher":"L. SÁNCHEZ","full":false,"sessions":[{"type":"T","day":"Lun","start":"16:00","end":"18:00","room":"R1-125A"},{"type":"T","day":"Jue","start":"16:00","end":"18:00","room":"R1-125A"},{"type":"P","day":"Mar","start":"14:00","end":"16:00","room":"R1-125B"}]}]},{"name":"SISTEMAS DIGITALES","code":"IF471","sections":[{"label":"A","teacher":"G. CASTILLO","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"18:00","room":"R2-323"},{"type":"T","day":"Mié","start":"14:00","end":"18:00","room":"R2-323"}]},{"label":"B","teacher":"G. CASTILLO","full":false,"sessions":[{"type":"T","day":"Mié","start":"08:00","end":"12:00","room":"R2-323"},{"type":"T","day":"Vie","start":"08:00","end":"12:00","room":"R2-323"}]}]},{"name":"INTRO. CIENCIA E ING. DE MATERIALES","code":"IF482","sections":[{"label":"A","teacher":"J. SOLIS","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"R1-125A"},{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"R3-123B"},{"type":"P","day":"Vie","start":"14:00","end":"16:00","room":"R1-450"}]}]},{"name":"INGENIERÍA SOLAR","code":"IF492","sections":[{"label":"A","teacher":"J. MOLINA","full":false,"sessions":[{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"R1-125A"},{"type":"T","day":"Mar","start":"16:00","end":"18:00","room":"R3-123B"},{"type":"P","day":"Lun","start":"14:00","end":"16:00","room":"R3-123B"}]}]},{"name":"TALLER DE PROYECTO DE INVESTIGACIÓN I","code":"IF4A2","sections":[{"label":"A","teacher":"J. RODRÍGUEZ","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"R1-250B"},{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R1-240B"}]}]},{"name":"INTRODUCCIÓN A LA INGENIERÍA FÍSICA","code":"IF4B2","sections":[{"label":"A","teacher":"A. GUTARRA","full":false,"sessions":[{"type":"T","day":"Jue","start":"16:00","end":"18:00","room":"R1-192"}]}]},{"name":"MECÁNICA DE FLUIDOS Y TRANSFERENCIA DE CALOR","code":"IF4C1","sections":[{"label":"A","teacher":"C. PAUCARCHUCO","full":false,"sessions":[{"type":"T","day":"Vie","start":"16:00","end":"18:00","room":"R1-125B"},{"type":"T","day":"Lun","start":"08:00","end":"10:00","room":"R1-125B"},{"type":"P","day":"Jue","start":"14:00","end":"16:00","room":"R1-125B"}]}]},{"name":"TÉCNICAS FÍSICAS PARA LA INDUSTRIA","code":"IF5A2","sections":[{"label":"A","teacher":"A. GUTARRA","full":false,"sessions":[{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"R1-192"},{"type":"T","day":"Mar","start":"08:00","end":"12:00","room":"R1-192"}]}]},{"name":"CIENCIA DE LOS MATERIALES","code":"IFE15","sections":[{"label":"A","teacher":"J. RODRÍGUEZ","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R1-401"},{"type":"T","day":"Mar","start":"10:00","end":"12:00","room":"R1-430"},{"type":"P","day":"Vie","start":"14:00","end":"16:00","room":"R1-421"}]}]},{"name":"TOPICOS ESPECIALES ING. FISICA II","code":"IFE23","sections":[{"label":"A","teacher":"M. MONTOYA","full":false,"sessions":[{"type":"T","day":"Jue","start":"12:00","end":"16:00","room":"R3-209"},{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"R1-240B"}]}]},{"name":"TOPICOS ESPECIALES ING. FISICA V","code":"IFE26","sections":[{"label":"A","teacher":"C. LUYO","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"17:00","room":"SALA 1"},{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"R3-123B"}]}]},{"name":"TOPICOS ESPECIALES ING. FISICA VIII","code":"IFE29","sections":[{"label":"A","teacher":"D. LAURA","full":false,"sessions":[{"type":"T","day":"Mar","start":"11:00","end":"13:00","room":"R1-125B"},{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"R1-125B"}]}]},{"name":"TOPICOS ESPECIALES ING. FISICA III (Fotovoltaico)","code":"IFE24","sections":[{"label":"A","teacher":"O. ROJAS","full":false,"sessions":[{"type":"T","day":"Mar","start":"14:00","end":"16:00","room":"R1-192"},{"type":"T","day":"Mar","start":"16:00","end":"19:00","room":"R1-125B"}]}]},{"name":"TOPICOS ESPECIALES ING. FISICA IV","code":"IFE25","sections":[{"label":"A","teacher":"J. DÍAZ","full":false,"sessions":[{"type":"T","day":"Sáb","start":"10:00","end":"11:00","room":"R3-123B"},{"type":"T","day":"Sáb","start":"11:00","end":"14:00","room":"R3-123B"}]}]},{"name":"INTRODUCCIÓN A LA COMPUTACIÓN","code":"BIC01","sections":[{"label":"A","teacher":"J. SEGOVIA","full":false,"sessions":[{"type":"T","day":"Jue","start":"07:00","end":"10:00","room":"SALA 5"}]},{"label":"B","teacher":"M. QUISPE","full":false,"sessions":[{"type":"T","day":"Jue","start":"07:00","end":"10:00","room":"SALA 4"}]},{"label":"C","teacher":"C. DIAZ","full":false,"sessions":[{"type":"T","day":"Jue","start":"07:00","end":"10:00","room":"SALA 3"}]},{"label":"D","teacher":"A. CHULLUNCUY","full":false,"sessions":[{"type":"T","day":"Jue","start":"07:00","end":"10:00","room":"SALA 2"}]},{"label":"E","teacher":"E. YAURI","full":false,"sessions":[{"type":"T","day":"Mié","start":"07:00","end":"10:00","room":"SALA 5"}]},{"label":"F","teacher":"P. MONTALVO","full":false,"sessions":[{"type":"T","day":"Mié","start":"07:00","end":"10:00","room":"SALA 4"}]},{"label":"G","teacher":"J. SEGOVIA","full":false,"sessions":[{"type":"T","day":"Mié","start":"07:00","end":"10:00","room":"SALA 3"}]},{"label":"H","teacher":"A. CHULLUNCUY","full":false,"sessions":[{"type":"T","day":"Mié","start":"07:00","end":"10:00","room":"SALA 2"}]}]},{"name":"FUNDAMENTOS DE PROGRAMACIÓN","code":"CC112","sections":[{"label":"A","teacher":"A. CHULLUNCUY","full":false,"sessions":[{"type":"T","day":"Mié","start":"16:00","end":"18:00","room":"SALA 3"},{"type":"L","day":"Mar","start":"14:00","end":"18:00","room":"SALA 1"}]},{"label":"B","teacher":"E. CUADROS","full":false,"sessions":[{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"SALA 3"},{"type":"L","day":"Mar","start":"14:00","end":"18:00","room":"SALA 5"}]},{"label":"C","teacher":"PABLO LÓPEZ","full":false,"sessions":[{"type":"T","day":"Vie","start":"11:00","end":"13:00","room":"SALA 3"},{"type":"L","day":"Mar","start":"14:00","end":"18:00","room":"SALA 3"}]},{"label":"D","teacher":"C. DIAZ","full":false,"sessions":[{"type":"T","day":"Vie","start":"11:00","end":"13:00","room":"SALA 2"},{"type":"L","day":"Mar","start":"14:00","end":"18:00","room":"SALA 4"}]},{"label":"E","teacher":"P. MONTALVO","full":false,"sessions":[{"type":"T","day":"Jue","start":"16:00","end":"18:00","room":"SALA 1"},{"type":"L","day":"Mar","start":"14:00","end":"18:00","room":"SALA 2"}]}]},{"name":"PROGRAMACIÓN ORIENTADA A OBJETOS","code":"CC211","sections":[{"label":"A","teacher":"C. BAZÁN","full":false,"sessions":[{"type":"T","day":"Lun","start":"07:00","end":"10:00","room":"SALA 3"},{"type":"L","day":"Vie","start":"08:00","end":"11:00","room":"SALA 2"}]}]},{"name":"ARQUITECTURA DE COMPUTADORES","code":"CC221","sections":[{"label":"A","teacher":"R. ROJAS","full":false,"sessions":[{"type":"T","day":"Mar","start":"18:00","end":"21:00","room":"SALA 5"},{"type":"T","day":"Jue","start":"19:00","end":"22:00","room":"zoom21"}]}]},{"name":"BASE DE DATOS","code":"CC202","sections":[{"label":"A","teacher":"V. MELCHOR","full":false,"sessions":[{"type":"T","day":"Mar","start":"07:00","end":"10:00","room":"SALA 1"},{"type":"T","day":"Mié","start":"18:00","end":"21:00","room":"SALA 4"}]}]},{"name":"SISTEMAS OPERATIVOS","code":"CC222","sections":[{"label":"A","teacher":"C. BAZÁN","full":false,"sessions":[{"type":"T","day":"Jue","start":"07:00","end":"10:00","room":"SALA 1"},{"type":"T","day":"Jue","start":"10:00","end":"13:00","room":"SALA 5"}]}]},{"name":"ALGORITMOS Y ESTRUCTURAS DE DATOS","code":"CC232","sections":[{"label":"A","teacher":"C. LARA","full":false,"sessions":[{"type":"T","day":"Lun","start":"07:00","end":"10:00","room":"SALA 5"},{"type":"T","day":"Vie","start":"08:00","end":"11:00","room":"SALA 3"}]}]},{"name":"ANÁLISIS Y DISEÑO DE ALGORITMOS","code":"CC371","sections":[{"label":"A","teacher":"J. OSORIO","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"17:00","room":"SALA 4"},{"type":"T","day":"Jue","start":"10:00","end":"13:00","room":"SALA 4"}]}]},{"name":"PROGRAMACIÓN PARALELA","code":"CC332","sections":[{"label":"A","teacher":"R. HUAROTE","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"11:00","room":"SALA 2"},{"type":"T","day":"Mar","start":"08:00","end":"11:00","room":"SALA 5"}]}]},{"name":"COMPUTACIÓN CENTRADA EN REDES","code":"CC311","sections":[{"label":"A","teacher":"R. MARTINEZ","full":false,"sessions":[{"type":"T","day":"Sáb","start":"07:00","end":"10:00","room":"SALA 5"},{"type":"T","day":"Mié","start":"17:00","end":"20:00","room":"SALA 5"}]}]},{"name":"TEORÍA DE AUTÓMATAS, LENGUAJES Y COMPUTACIÓN","code":"CC321","sections":[{"label":"A","teacher":"V. MELCHOR","full":false,"sessions":[{"type":"T","day":"Lun","start":"07:00","end":"10:00","room":"SALA 4"},{"type":"T","day":"Vie","start":"13:00","end":"16:00","room":"SALA 3"}]}]},{"name":"MATEMÁTICA COMPUTACIONAL","code":"CC3M2","sections":[{"label":"A","teacher":"J. OSORIO","full":false,"sessions":[{"type":"T","day":"Mié","start":"14:00","end":"17:00","room":"SALA 5"},{"type":"T","day":"Lun","start":"17:00","end":"20:00","room":"SALA 4"}]}]},{"name":"DESARROLLO DE SOFTWARE","code":"CC3S2","sections":[{"label":"A","teacher":"M. QUISPE","full":false,"sessions":[{"type":"T","day":"Vie","start":"08:00","end":"11:00","room":"SALA 4"},{"type":"T","day":"Mié","start":"10:00","end":"13:00","room":"SALA 5"}]},{"label":"B","teacher":"Z. MAMANI","full":false,"sessions":[{"type":"T","day":"Vie","start":"08:00","end":"11:00","room":"SALA 5"},{"type":"T","day":"Mié","start":"10:00","end":"13:00","room":"SALA 4"}]}]},{"name":"SEGURIDAD EN SISTEMAS INFORMÁTICOS","code":"CC411","sections":[{"label":"A","teacher":"M. QUISPE","full":false,"sessions":[{"type":"T","day":"Vie","start":"16:00","end":"19:00","room":"SALA 5"},{"type":"T","day":"Sáb","start":"15:00","end":"18:00","room":"SALA 4"}]}]},{"name":"COMPUTACIÓN GRÁFICA","code":"CC431","sections":[{"label":"A","teacher":"P. MONTALVO","full":false,"sessions":[{"type":"T","day":"Jue","start":"19:00","end":"21:00","room":"SALA 5"},{"type":"T","day":"Vie","start":"11:00","end":"16:00","room":"SALA 5"}]}]},{"name":"INTELIGENCIA ARTIFICIAL","code":"CC421","sections":[{"label":"A","teacher":"M. ALANIA","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"13:00","room":"SALA 5"},{"type":"T","day":"Mié","start":"17:00","end":"20:00","room":"J3-182B"}]}]},{"name":"PROGRAMACIÓN CONCURRENTE Y DISTRIBUIDA","code":"CC4P1","sections":[{"label":"A","teacher":"Y. NUÑEZ","full":false,"sessions":[{"type":"T","day":"Jue","start":"16:00","end":"19:00","room":"SALA 5"},{"type":"T","day":"Lun","start":"16:00","end":"19:00","room":"SALA 3"}]}]},{"name":"INTERACCIÓN HUMANO-COMPUTADOR","code":"CC451","sections":[{"label":"A","teacher":"C. NUÑEZ","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"17:00","room":"SALA 2"},{"type":"T","day":"Mié","start":"14:00","end":"17:00","room":"SALA 4"}]}]},{"name":"INGENIERÍA DE SOFTWARE","code":"CC341","sections":[{"label":"A","teacher":"Z. MAMANI","full":false,"sessions":[{"type":"T","day":"Mié","start":"07:00","end":"10:00","room":"SALA 1"},{"type":"T","day":"Mar","start":"07:00","end":"10:00","room":"SALA 3"}]}]},{"name":"ADMINISTRACIÓN DE REDES","code":"CC312","sections":[{"label":"A","teacher":"Y. CCOICCA","full":false,"sessions":[{"type":"T","day":"Jue","start":"10:00","end":"12:00","room":"SALA 3"},{"type":"T","day":"Sáb","start":"10:00","end":"14:00","room":"SALA 5"}]}]},{"name":"INFRAESTRUCTURAS DE COMPUTACIÓN","code":"CC422","sections":[{"label":"A","teacher":"Y. CCOICCA","full":false,"sessions":[{"type":"T","day":"Lun","start":"08:00","end":"11:00","room":"SALA 1"},{"type":"T","day":"Sáb","start":"07:00","end":"10:00","room":"SALA 3"}]}]},{"name":"ROBÓTICA","code":"CC432","sections":[{"label":"A","teacher":"C. DIAZ","full":false,"sessions":[{"type":"T","day":"Mar","start":"18:00","end":"21:00","room":"SALA 2"},{"type":"T","day":"Vie","start":"16:00","end":"19:00","room":"SALA 4"}]}]},{"name":"MINERÍA DE DATOS","code":"CC442","sections":[{"label":"A","teacher":"M. ALANIA","full":false,"sessions":[{"type":"T","day":"Mié","start":"08:00","end":"10:00","room":"CTIC LAB"},{"type":"T","day":"Lun","start":"14:00","end":"18:00","room":"SALA 5"}]}]},{"name":"PROGRAMACIÓN EVOLUTIVA","code":"CC521","sections":[{"label":"A","teacher":"L. NAVARRO","full":false,"sessions":[{"type":"T","day":"Jue","start":"18:00","end":"21:00","room":"SALA 2"},{"type":"T","day":"Sáb","start":"10:00","end":"13:00","room":"SALA 3"}]}]},{"name":"ANÁLISIS EN MACRODATOS","code":"CC531","sections":[{"label":"A","teacher":"E. YAURI","full":false,"sessions":[{"type":"T","day":"Mar","start":"18:00","end":"21:00","room":"zoom21"},{"type":"T","day":"Mié","start":"18:00","end":"21:00","room":"SALA 3"}]}]},{"name":"PROGRAMACIÓN DE DISPOSITIVOS MÓVILES","code":"CC0A2","sections":[{"label":"A","teacher":"R. HUAROTE","full":false,"sessions":[{"type":"T","day":"Vie","start":"11:00","end":"13:00","room":"SALA 4"},{"type":"T","day":"Mar","start":"18:00","end":"22:00","room":"SALA 3"}]}]},{"name":"PROCESAMIENTO DEL LENGUAJE NATURAL","code":"CC0C2","sections":[{"label":"A","teacher":"C. LARA","full":false,"sessions":[{"type":"T","day":"Jue","start":"16:00","end":"18:00","room":"SALA 4"},{"type":"T","day":"Sáb","start":"14:00","end":"18:00","room":"SALA 5"}]}]},{"name":"BIOLOGÍA COMPUTACIONAL","code":"CC0F3","sections":[{"label":"A","teacher":"J. SEGOVIA","full":false,"sessions":[{"type":"T","day":"Sáb","start":"07:00","end":"11:00","room":"SALA 2"},{"type":"T","day":"Sáb","start":"11:00","end":"13:00","room":"SALA 2"}]}]},{"name":"MODELAMIENTO Y SIMULACIÓN","code":"CC0S2","sections":[{"label":"A","teacher":"L. NAVARRO","full":false,"sessions":[{"type":"T","day":"Mié","start":"19:00","end":"21:00","room":"SALA 2"},{"type":"T","day":"Sáb","start":"15:00","end":"19:00","room":"SALA 2"}]}]},{"name":"ALGORITMOS Y ESTRUCTURAS DE DATOS AVANZADOS","code":"CC0E5","sections":[{"label":"A","teacher":"E. CUADROS","full":false,"sessions":[{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"SALA 1"},{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"SALA 4"},{"type":"T","day":"Mar","start":"18:00","end":"20:00","room":"SALA 4"}]}]},{"name":"TÓPICOS DE CIENCIA DE LA COMPUTACIÓN IV","code":"CC0F7","sections":[{"label":"A","teacher":"R. MARTINEZ","full":false,"sessions":[{"type":"T","day":"Sáb","start":"10:00","end":"13:00","room":"R3-123C"},{"type":"T","day":"Mié","start":"14:00","end":"17:00","room":"SALA 2"}]}]},{"name":"ÉTICA Y FILOSOFÍA POLÍTICA","code":"BEF01","sections":[{"label":"A","teacher":"J. ROMERO","full":false,"sessions":[{"type":"T","day":"Vie","start":"10:00","end":"13:00","room":"R1-450"}]},{"label":"B","teacher":"J. ROMERO","full":false,"sessions":[{"type":"T","day":"Mié","start":"16:00","end":"19:00","room":"R1-460"}]},{"label":"C","teacher":"J. ROMERO","full":false,"sessions":[{"type":"T","day":"Vie","start":"19:00","end":"22:00","room":"zoom24"}]}]},{"name":"ECONOMÍA GENERAL","code":"BEG01","sections":[{"label":"A","teacher":"C. VERA","full":false,"sessions":[{"type":"T","day":"Lun","start":"16:00","end":"18:00","room":"R3-123C"},{"type":"T","day":"Mar","start":"17:00","end":"19:00","room":"R3-123C"}]},{"label":"B","teacher":"C. VERA","full":false,"sessions":[{"type":"T","day":"Vie","start":"08:00","end":"10:00","room":"R1-411"},{"type":"T","day":"Lun","start":"17:00","end":"19:00","room":"R1-401"}]},{"label":"C","teacher":"C. BARRIOS","full":false,"sessions":[{"type":"T","day":"Lun","start":"16:00","end":"18:00","room":"R1-411"},{"type":"T","day":"Mar","start":"16:00","end":"18:00","room":"R1-430"}]},{"label":"D","teacher":"J. SOLORZANO","full":false,"sessions":[{"type":"T","day":"Lun","start":"10:00","end":"12:00","room":"R3-123C"},{"type":"T","day":"Mié","start":"10:00","end":"12:00","room":"R1-411"}]}]},{"name":"REDACCIÓN Y COMUNICACIÓN","code":"BRC01","sections":[{"label":"A","teacher":"E. EVANGELISTA","full":false,"sessions":[{"type":"T","day":"Mar","start":"07:00","end":"10:00","room":"J3-162A"}]},{"label":"B","teacher":"E. EVANGELISTA","full":false,"sessions":[{"type":"T","day":"Mar","start":"13:00","end":"16:00","room":"J3-252"}]},{"label":"C","teacher":"E. EVANGELISTA","full":false,"sessions":[{"type":"T","day":"Lun","start":"13:00","end":"16:00","room":"J3-162A"}]}]},{"name":"REALIDAD NACIONAL, CONSTITUCIÓN Y DD.HH.","code":"BRN01","sections":[{"label":"A","teacher":"E. EVANGELISTA","full":false,"sessions":[{"type":"T","day":"Mar","start":"07:00","end":"10:00","room":"J3-162A"},{"type":"T","day":"Jue","start":"08:00","end":"10:00","room":"R3-209"}]},{"label":"B","teacher":"R. CLAVIJO","full":false,"sessions":[{"type":"T","day":"Sáb","start":"08:00","end":"10:00","room":"R1-421"},{"type":"T","day":"Sáb","start":"10:00","end":"12:00","room":"R1-421"}]},{"label":"C","teacher":"C. VERA","full":false,"sessions":[{"type":"T","day":"Mar","start":"18:00","end":"22:00","room":"R1-401"}]},{"label":"D","teacher":"P. CCANRE","full":false,"sessions":[{"type":"T","day":"Vie","start":"16:00","end":"20:00","room":"J3-162A"}]},{"label":"E","teacher":"P. CCANRE","full":false,"sessions":[{"type":"T","day":"Jue","start":"16:00","end":"20:00","room":"J3-222"}]}]},{"name":"METODOLOGÍA DE LA INVESTIGACIÓN","code":"CC4H1","sections":[{"label":"A","teacher":"M. MEJIA","full":false,"sessions":[{"type":"T","day":"Sáb","start":"07:00","end":"10:00","room":"R1-125A"}]},{"label":"B","teacher":"M. MEJIA","full":false,"sessions":[{"type":"T","day":"Sáb","start":"11:00","end":"14:00","room":"R1-125A"}]}]},{"name":"BIOLOGÍA","code":"CH061","sections":[{"label":"A","teacher":"L. PÉREZ","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"R3-123C"},{"type":"L","day":"Mar","start":"10:00","end":"12:00","room":"LAB 33R1"}]},{"label":"B","teacher":"L. PÉREZ","full":false,"sessions":[{"type":"T","day":"Mar","start":"08:00","end":"10:00","room":"R3-123C"},{"type":"L","day":"Mar","start":"14:00","end":"16:00","room":"LAB 33R1"}]}]},{"name":"METODOLOGÍA DE LA INVESTIGACIÓN CIENTÍFICA","code":"CH033","sections":[{"label":"A","teacher":"M. MEJIA","full":false,"sessions":[{"type":"T","day":"Sáb","start":"07:00","end":"10:00","room":"R1-125A"}]},{"label":"B","teacher":"M. MEJIA","full":false,"sessions":[{"type":"T","day":"Sáb","start":"11:00","end":"14:00","room":"R1-125A"}]}]},{"name":"INGLÉS I","code":"CL002","sections":[{"label":"A","teacher":"C. CCAHUANCAMA","full":false,"sessions":[{"type":"T","day":"Lun","start":"14:00","end":"16:00","room":"SALA 3"},{"type":"T","day":"Mié","start":"12:00","end":"14:00","room":"SALA 1"}]},{"label":"B","teacher":"C. CCAHUANCAMA","full":false,"sessions":[{"type":"T","day":"Jue","start":"14:00","end":"16:00","room":"SALA 3"},{"type":"T","day":"Lun","start":"12:00","end":"14:00","room":"SALA 3"}]},{"label":"C","teacher":"C. CCAHUANCAMA","full":false,"sessions":[{"type":"T","day":"Mié","start":"14:00","end":"16:00","room":"R1-460"},{"type":"T","day":"Jue","start":"12:00","end":"14:00","room":"SALA 3"}]}]},{"name":"SEMINARIO ELABORACIÓN DE TESIS","code":"CQ461","sections":[{"label":"A","teacher":"A. BAENA","full":false,"sessions":[{"type":"T","day":"Mié","start":"16:00","end":"19:00","room":"M8-501"}]}]}];
 
+// State: per section we track enabled/disabled (on=true) and full (full=true)
+// allCourses: same structure as COURSES_DATA but with added .enabled (course selected) and sections[].on and sections[].full
 let allCourses=[];
-let selectedCourses=new Set();
-let generatedSchedules=[];
 let favorites=[];
-let colorMap={};
-let colorIdx=0;
+let generatedSchedules=[];
+let colorMap={};let colorIdx=0;
 
-function getColor(key){if(!colorMap[key]){colorMap[key]=[COLORS[colorIdx%COLORS.length],BGS[colorIdx%BGS.length]];colorIdx++;}return colorMap[key];}
+function getColor(k){if(!colorMap[k]){colorMap[k]=[COLORS[colorIdx%COLORS.length],BGS[colorIdx%BGS.length]];colorIdx++;}return colorMap[k];}
 function getSchool(code){
   if(!code)return'Otros';
   if(code.startsWith('BFI')||code.startsWith('CF'))return'Física';
@@ -189,18 +219,20 @@ function getSchool(code){
 }
 
 function save(){
-  localStorage.setItem('uni26_courses',JSON.stringify(allCourses));
-  localStorage.setItem('uni26_sel',JSON.stringify([...selectedCourses]));
-  localStorage.setItem('uni26_favs',JSON.stringify(favorites));
+  try{localStorage.setItem('uni26_v3',JSON.stringify({courses:allCourses,favs:favorites}));}catch(e){}
 }
 function loadStorage(){
   try{
-    const saved=JSON.parse(localStorage.getItem('uni26_courses'));
-    if(saved&&saved.length)allCourses=saved;
-    else allCourses=JSON.parse(JSON.stringify(COURSES_DATA));
-  }catch(e){allCourses=JSON.parse(JSON.stringify(COURSES_DATA));}
-  try{const s=JSON.parse(localStorage.getItem('uni26_sel'))||[];selectedCourses=new Set(s);}catch(e){selectedCourses=new Set();}
-  try{favorites=JSON.parse(localStorage.getItem('uni26_favs'))||[];}catch(e){favorites=[];}
+    const d=JSON.parse(localStorage.getItem('uni26_v3'));
+    if(d&&d.courses&&d.courses.length){allCourses=d.courses;favorites=d.favs||[];return;}
+  }catch(e){}
+  // init from raw data
+  allCourses=COURSES_DATA.map(c=>({
+    ...c,
+    enabled:false,
+    sections:c.sections.map(s=>({...s,on:true,full:false}))
+  }));
+  favorites=[];
 }
 
 function toast(m,dur=2400){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),dur);}
@@ -214,67 +246,142 @@ function switchTab(tab){
   if(tab==='favoritos')renderFavs();
 }
 
-function safeid(s){return(s||'').replace(/[^a-zA-Z0-9]/g,'_')}
+function safeid(s){return(s||'').replace(/[^a-zA-Z0-9]/g,'_');}
 
+// ── PICKER ──────────────────────────────────────────────
 function renderPicker(){
+  const q=(document.getElementById('qSearch').value||'').toLowerCase();
+  const qp=(document.getElementById('qProf').value||'').toLowerCase();
+  const sch=document.getElementById('qSchool').value;
   const el=document.getElementById('pickerGrid');
-  const q=(document.getElementById('courseSearch').value||'').toLowerCase();
-  const school=document.getElementById('schoolFilter').value;
+
   const filtered=allCourses.filter(c=>{
-    if(school&&getSchool(c.code)!==school)return false;
+    if(sch&&getSchool(c.code)!==sch)return false;
     if(q&&!c.name.toLowerCase().includes(q)&&!(c.code||'').toLowerCase().includes(q))return false;
+    if(qp){
+      const hasProf=c.sections.some(s=>(s.teacher||'').toLowerCase().includes(qp));
+      if(!hasProf)return false;
+    }
     return true;
   });
-  if(!filtered.length){el.innerHTML='<div style="color:var(--t2);font-size:13px;padding:1rem">No hay cursos que coincidan.</div>';return;}
+
+  if(!filtered.length){el.innerHTML='<div style="color:var(--t2);font-size:13px;padding:1rem">No hay cursos que coincidan.</div>';updateStats();return;}
+
   el.innerHTML=filtered.map(c=>{
     const key=c.code||c.name;
-    const sel=selectedCourses.has(key);
-    const openSecs=c.sections.filter(s=>!s.full).length;
+    const sid=safeid(key);
+    const activeSecs=c.sections.filter(s=>s.on&&!s.full).length;
+    const totalSecs=c.sections.length;
     const school=getSchool(c.code);
-    return`<div class="course-pick${sel?' selected':''}" id="cp-${safeid(key)}">
-      <div class="cp-head" onclick="toggleCourse('${safeid(key)}','${key.replace(/'/g,"\\'")}')">
-        <div class="cp-check">${sel?'✓':''}</div>
-        <div style="flex:1;min-width:0">
-          <div class="cp-name" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${c.name}</div>
-          <div class="cp-code"><span class="school-tag">${school}</span>${c.code||''} · ${c.sections.length} secc. · ${openSecs} disp.</div>
+    // state: selected=all on, partial=some on, none
+    const state=c.enabled?(activeSecs===totalSecs?'selected':'partial'):'';
+    return`<div class="cpick${state?' '+state:''}" id="cp-${sid}">
+      <div class="cp-head" onclick="toggleCourse('${key.replace(/'/g,"\'")}')">
+        <div class="cp-check">${c.enabled?'✓':''}</div>
+        <div class="cp-info">
+          <div class="cp-name">${c.name}</div>
+          <div class="cp-sub">
+            <span class="cp-tag">${school}</span>
+            <span class="cp-tag">${c.code||''}</span>
+            <span>${activeSecs}/${totalSecs} secciones activas</span>
+          </div>
         </div>
-        <button class="btn btn-sm" style="height:22px;padding:0 7px;font-size:10px;flex-shrink:0" onclick="event.stopPropagation();toggleExpand('${safeid(key)}')">▾</button>
+        <button class="expand-btn" onclick="event.stopPropagation();toggleExpand('${sid}')">▾</button>
       </div>
-      <div class="cp-body">
-        ${c.sections.map((s,si)=>`
-          <div class="section-row">
-            <span style="font-weight:600;min-width:18px;color:var(--t1)">${s.label}</span>
-            <span class="sec-info">${s.teacher||'—'} · ${s.sessions.slice(0,2).map(ss=>ss.day+' '+ss.start.slice(0,5)+'–'+ss.end.slice(0,5)).join(', ')}${s.sessions.length>2?' +más':''}</span>
-            <button class="sec-full-btn ${s.full?'full':'open'}" onclick="toggleFull('${key.replace(/'/g,"\\'")}',${si})">${s.full?'Llena':'Disponible'}</button>
-          </div>`).join('')}
+      <div class="sections-list" id="sl-${sid}">
+        ${c.sections.map((s,si)=>renderSecRow(key,si,s,qp)).join('')}
       </div>
     </div>`;
   }).join('');
-  updateSelectedCount();
+  updateStats();
 }
 
-function toggleCourse(elid,key){
-  const el=document.getElementById('cp-'+elid);
-  if(!el)return;
-  if(selectedCourses.has(key)){selectedCourses.delete(key);el.classList.remove('selected');el.querySelector('.cp-check').textContent='';}
-  else{selectedCourses.add(key);el.classList.add('selected');el.querySelector('.cp-check').textContent='✓';}
-  save();updateSelectedCount();
+function renderSecRow(courseKey,si,s,highlightProf){
+  const ck=safeid(courseKey);
+  const isOn=s.on&&!s.full;
+  const isFull=s.full;
+  const rowClass=isFull?'sec-full':isOn?'sec-on':'sec-disabled';
+  const schedPills=s.sessions.map(ss=>`<span class="sched-pill"><span class="tb t${ss.type}">${ss.type}</span>${ss.day} ${ss.start.slice(0,5)}–${ss.end.slice(0,5)} <span style="color:var(--t3)">${ss.room}</span></span>`).join('');
+  const teacherHtml=s.teacher?`<span class="sec-teacher">${s.teacher}</span>`:'';
+  return`<div class="sec-row ${rowClass}" id="sr-${ck}-${si}">
+    <button class="sec-sel-btn" onclick="toggleSecOn('${courseKey.replace(/'/g,"\'")}',${si})" title="${isOn?'Desactivar sección':'Activar sección'}">
+      <div class="sec-check">${isFull?'✕':isOn?'✓':''}</div>
+    </button>
+    <div class="sec-body">
+      <div class="sec-top">
+        <span class="sec-label">${s.label}</span>
+        ${teacherHtml}
+      </div>
+      <div class="sec-schedules">${schedPills}</div>
+    </div>
+    <div class="sec-actions">
+      <button class="full-toggle ${isFull?'is-full':'not-full'}" onclick="toggleFull('${courseKey.replace(/'/g,"\'")}',${si})">${isFull?'Llena':'Disponible'}</button>
+    </div>
+  </div>`;
 }
-function toggleExpand(elid){const el=document.getElementById('cp-'+elid);if(el)el.classList.toggle('expanded');}
+
+function toggleExpand(sid){
+  const cp=document.getElementById('cp-'+sid);
+  const sl=document.getElementById('sl-'+sid);
+  if(cp)cp.classList.toggle('expanded');
+}
+
+function toggleCourse(key){
+  const c=allCourses.find(x=>(x.code||x.name)===key);
+  if(!c)return;
+  c.enabled=!c.enabled;
+  save();renderPicker();
+}
+
+function toggleSecOn(key,si){
+  const c=allCourses.find(x=>(x.code||x.name)===key);
+  if(!c)return;
+  if(c.sections[si].full){toast('Marca primero la sección como disponible');return;}
+  c.sections[si].on=!c.sections[si].on;
+  save();renderPicker();
+}
+
 function toggleFull(key,si){
-  const c=allCourses.find(c=>(c.code||c.name)===key);
+  const c=allCourses.find(x=>(x.code||x.name)===key);
   if(!c)return;
   c.sections[si].full=!c.sections[si].full;
-  save();renderPicker();
-  toast(c.sections[si].full?`Sección ${c.sections[si].label} marcada como llena`:`Sección ${c.sections[si].label} marcada disponible`);
-}
-function selectAll(){allCourses.forEach(c=>selectedCourses.add(c.code||c.name));save();renderPicker();}
-function deselectAll(){selectedCourses.clear();save();renderPicker();}
-function updateSelectedCount(){
-  const el=document.getElementById('selectedCount');
-  if(el)el.textContent=selectedCourses.size+' seleccionado'+(selectedCourses.size!==1?'s':'');
+  if(c.sections[si].full)c.sections[si].on=false;
+  else c.sections[si].on=true;
+  save();
+  toast(c.sections[si].full?`Sección ${c.sections[si].label} marcada como llena`:`Sección ${c.sections[si].label} disponible`);
+  renderPicker();
 }
 
+function selectAll(){
+  const q=(document.getElementById('qSearch').value||'').toLowerCase();
+  const qp=(document.getElementById('qProf').value||'').toLowerCase();
+  const sch=document.getElementById('qSchool').value;
+  allCourses.forEach(c=>{
+    if(sch&&getSchool(c.code)!==sch)return;
+    if(q&&!c.name.toLowerCase().includes(q)&&!(c.code||'').toLowerCase().includes(q))return;
+    if(qp&&!c.sections.some(s=>(s.teacher||'').toLowerCase().includes(qp)))return;
+    c.enabled=true;
+  });
+  save();renderPicker();
+}
+function deselectAll(){
+  allCourses.forEach(c=>c.enabled=false);
+  save();renderPicker();
+}
+
+function updateStats(){
+  const el=document.getElementById('statBar');
+  const sel=allCourses.filter(c=>c.enabled).length;
+  const total=allCourses.length;
+  const fullSecs=allCourses.reduce((a,c)=>a+c.sections.filter(s=>s.full).length,0);
+  const offSecs=allCourses.reduce((a,c)=>a+c.sections.filter(s=>!s.on&&!s.full).length,0);
+  el.innerHTML=`<span class="stat">Cursos seleccionados: <span>${sel}</span></span>`
+    +`<span class="stat">Total cursos: <span>${total}</span></span>`
+    +(fullSecs?`<span class="stat">Secciones llenas: <span style="color:var(--red)">${fullSecs}</span></span>`:'')
+    +(offSecs?`<span class="stat">Secciones desactivadas: <span style="color:var(--amber)">${offSecs}</span></span>`:'');
+}
+
+// ── GENERATION ──────────────────────────────────────────
 function toMin(t){const[h,m]=t.split(':').map(Number);return h*60+m;}
 function getConflicts(sessions){
   const out=[];
@@ -288,32 +395,46 @@ function getConflicts(sessions){
 }
 
 function updateGenDesc(){
-  const sel=allCourses.filter(c=>selectedCourses.has(c.code||c.name));
+  const sel=allCourses.filter(c=>c.enabled);
   const desc=document.getElementById('genDesc');
   if(!sel.length){if(desc)desc.textContent='Selecciona cursos primero';return;}
-  const skipFull=(document.getElementById('skipFull')||{checked:true}).checked;
   let combos=1;
-  sel.forEach(c=>{const avail=skipFull?c.sections.filter(s=>!s.full):c.sections;combos*=Math.max(avail.length,1);});
-  if(desc)desc.textContent=`${sel.length} cursos · ~${combos.toLocaleString()} combinaciones posibles`;
+  sel.forEach(c=>{
+    const avail=c.sections.filter(s=>s.on&&!s.full);
+    combos*=Math.max(avail.length,1);
+  });
+  if(desc)desc.textContent=`${sel.length} curso(s) seleccionado(s) · ~${combos.toLocaleString()} combinaciones`;
 }
 
 function generateSchedules(){
-  const sel=allCourses.filter(c=>selectedCourses.has(c.code||c.name));
+  const sel=allCourses.filter(c=>c.enabled);
   if(!sel.length){toast('Selecciona al menos un curso');return;}
-  const skipFull=document.getElementById('skipFull').checked;
   const onlyValid=document.getElementById('onlyValid').checked;
   const maxR=parseInt(document.getElementById('maxResults').value)||30;
   document.getElementById('genLoader').style.display='flex';
   document.getElementById('scheduleResults').innerHTML='';
   setTimeout(()=>{
     const results=[];
-    const pools=sel.map(c=>({course:c,sections:skipFull?c.sections.filter(s=>!s.full):c.sections})).filter(p=>p.sections.length>0);
+    const pools=sel.map(c=>({
+      course:c,
+      sections:c.sections.filter(s=>s.on&&!s.full)
+    })).filter(p=>p.sections.length>0);
+
+    if(pools.length<sel.length){
+      const missing=sel.filter(c=>!c.sections.some(s=>s.on&&!s.full)).map(c=>c.name);
+      if(missing.length){
+        document.getElementById('genLoader').style.display='none';
+        document.getElementById('scheduleResults').innerHTML=`<div style="background:var(--redbg);border:0.5px solid var(--redbd);border-radius:var(--r);padding:10px 14px;font-size:13px;color:var(--red)">Los siguientes cursos no tienen secciones activas: <strong>${missing.join(', ')}</strong>. Activa al menos una sección o deselecciona el curso.</div>`;
+        return;
+      }
+    }
+
     function combine(idx,current){
       if(results.length>=maxR*5)return;
       if(idx===pools.length){
         const all=[];
         current.forEach(({course,section})=>{
-          section.sessions.forEach(sess=>all.push({...sess,courseName:course.name,courseKey:course.code||course.name,sectionLabel:section.label,teacher:section.teacher}));
+          section.sessions.forEach(sess=>all.push({...sess,courseName:course.name,courseKey:course.code||course.name,sectionLabel:section.label,teacher:section.teacher||''}));
         });
         const conflicts=getConflicts(all);
         if(onlyValid&&conflicts.length>0)return;
@@ -336,8 +457,9 @@ function generateSchedules(){
 
 function renderGeneratedSchedules(){
   const el=document.getElementById('scheduleResults');
-  if(!generatedSchedules.length){el.innerHTML='<div class="empty"><strong>Sin resultados</strong>Prueba desactivar "Solo sin cruces" o revisa las secciones disponibles</div>';return;}
-  el.innerHTML=`<div style="font-size:12px;color:var(--t2);margin-bottom:10px;padding:0 2px">${generatedSchedules.length} combinación(es) encontrada(s) — ordenadas de menor a mayor cruces</div><div class="gen-grid">`+generatedSchedules.map((s,i)=>renderSchedCard(s,i)).join('')+'</div>';
+  if(!generatedSchedules.length){el.innerHTML='<div class="empty"><strong>Sin resultados</strong>Prueba desactivar "Solo sin cruces" o activa más secciones</div>';return;}
+  el.innerHTML=`<div style="font-size:12px;color:var(--t2);margin-bottom:10px">${generatedSchedules.length} combinación(es) — menor a mayor cruces</div><div class="gen-grid">`
+    +generatedSchedules.map((s,i)=>renderSchedCard(s,i)).join('')+'</div>';
 }
 
 function renderSchedCard(sched,idx){
@@ -352,22 +474,22 @@ function renderSchedCard(sched,idx){
     ud.forEach(day=>{
       const segs=sched.allSessions.filter(s=>s.day===day&&toMin(s.start)<m+60&&toMin(s.end)>m);
       tbl+=`<td class="sl">`;
-      if(segs.length){const w=Math.floor(100/segs.length);segs.forEach((s,i)=>{const[color,bg]=getColor(s.courseKey);const top=Math.max(0,((toMin(s.start)-m)/60)*100);const bot=Math.max(0,((m+60-toMin(s.end))/60)*100);tbl+=`<div class="mini-blk" style="background:${bg};color:${color};border-left:2px solid ${color};width:${w}%;left:${i*w}%;top:${top}%;bottom:${bot}%"><span style="font-size:8px;font-weight:700">${s.type}</span><span>${s.courseName.split(' ')[0]}</span></div>`;});}
+      if(segs.length){const w=Math.floor(100/segs.length);segs.forEach((s,i)=>{const[c,bg]=getColor(s.courseKey);const top=Math.max(0,((toMin(s.start)-m)/60)*100);const bot=Math.max(0,((m+60-toMin(s.end))/60)*100);tbl+=`<div class="mini-blk" style="background:${bg};color:${c};border-left:2px solid ${c};width:${w}%;left:${i*w}%;top:${top}%;bottom:${bot}%"><span style="font-size:8px;font-weight:700">${s.type}</span><span>${s.courseName.split(' ')[0]}</span></div>`;});}
       tbl+=`</td>`;
     });
     tbl+=`</tr>`;
   });
   tbl+=`</tbody></table>`;
   const chips=sched.selections.map(({course,section})=>{const[c,bg]=getColor(course.code||course.name);return`<span class="fav-chip" style="background:${bg};color:${c}">${course.name} ${section.label}${section.teacher?' · '+section.teacher:''}</span>`;}).join('');
-  return`<div class="sched-card">
-    <div class="sched-hdr">
-      <span class="sched-num">#${idx+1}</span>
-      <span class="sched-status ${noC?'sched-ok':'sched-conflict'}">${noC?'Sin cruces':sched.conflicts.length+' cruce(s)'}</span>
+  return`<div class="scard">
+    <div class="shdr">
+      <span class="snum">#${idx+1}</span>
+      <span class="sstatus ${noC?'sok':'serr'}">${noC?'Sin cruces':sched.conflicts.length+' cruce(s)'}</span>
       <div style="flex:1"></div>
       <button class="btn btn-sm" onclick="viewSchedule(${idx})">Ver completo</button>
       <button class="btn btn-sm btn-blue" onclick="saveSchedule(${idx})">Guardar</button>
     </div>
-    <div class="sched-body">
+    <div class="sbody">
       <div class="mini-grid">${tbl}</div>
       <div class="fav-chips" style="margin-top:8px">${chips}</div>
     </div>
@@ -388,7 +510,7 @@ function viewSchedule(idx){
       const segs=sched.allSessions.filter(s=>s.day===day&&toMin(s.start)<m+60&&toMin(s.end)>m);
       const isc=segs.some(s=>cset.has(s));
       tbl+=`<td class="sl" style="${isc?'background:rgba(226,75,74,0.1)':''}">`;
-      if(segs.length){const w=Math.floor(100/segs.length);segs.forEach((s,i)=>{const[color,bg]=getColor(s.courseKey);const top=Math.max(0,((toMin(s.start)-m)/60)*100);const bot=Math.max(0,((m+60-toMin(s.end))/60)*100);const c=cset.has(s);tbl+=`<div class="full-blk" style="background:${bg};color:${color};border-left:2px solid ${color};width:${w}%;left:${i*w}%;top:${top}%;bottom:${bot}%;${c?'outline:1.5px solid #E24B4A;':''}">`+`<span class="tb t${s.type}">${s.type}</span>`+`<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px">${s.courseName} ${s.sectionLabel}${s.teacher?' · '+s.teacher:''}${s.room?' · '+s.room:''}</span>`+`</div>`;});}
+      if(segs.length){const w=Math.floor(100/segs.length);segs.forEach((s,i)=>{const[c,bg]=getColor(s.courseKey);const top=Math.max(0,((toMin(s.start)-m)/60)*100);const bot=Math.max(0,((m+60-toMin(s.end))/60)*100);const cf=cset.has(s);tbl+=`<div class="full-blk" style="background:${bg};color:${c};border-left:2px solid ${c};width:${w}%;left:${i*w}%;top:${top}%;bottom:${bot}%;${cf?'outline:1.5px solid #E24B4A;':''}">`+`<span class="tb t${s.type}">${s.type}</span>`+`<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px">${s.courseName} ${s.sectionLabel}${s.teacher?' · '+s.teacher:''}${s.room?' · '+s.room:''}</span>`+`</div>`;});}
       tbl+=`</td>`;
     });
     tbl+=`</tr>`;
@@ -419,7 +541,7 @@ function saveSchedule(idx){
 
 function renderFavs(){
   const el=document.getElementById('favsList');
-  if(!favorites.length){el.innerHTML='<div class="empty"><strong>Sin favoritos aún</strong>Genera horarios y guarda los que más te gusten</div>';return;}
+  if(!favorites.length){el.innerHTML='<div class="empty"><strong>Sin favoritos aún</strong>Genera horarios y guarda los que te gusten</div>';return;}
   el.innerHTML=favorites.map(f=>`
     <div class="fav-card">
       <div class="fav-hdr">
@@ -432,11 +554,9 @@ function renderFavs(){
       <div class="fav-chips">${f.sched.selections.map(({course,section})=>{const[c,bg]=getColor(course.code||course.name);return`<span class="fav-chip" style="background:${bg};color:${c}">${course.name} ${section.label}${section.teacher?' · '+section.teacher:''}</span>`;}).join('')}</div>
     </div>`).join('');
 }
-
 function viewFav(id){
   const f=favorites.find(x=>x.id===id);if(!f)return;
-  generatedSchedules.push(f.sched);
-  viewSchedule(generatedSchedules.length-1);
+  generatedSchedules.push(f.sched);viewSchedule(generatedSchedules.length-1);
 }
 function removeFav(id){
   if(!confirm('¿Eliminar este favorito?'))return;
