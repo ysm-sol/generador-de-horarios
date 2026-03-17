@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Generador de Horarios</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f5f5f2;
+    --color-background-tertiary: #eeece6;
+    --color-text-primary: #1a1a18;
+    --color-text-secondary: #6b6a65;
+    --color-border-tertiary: rgba(0,0,0,0.12);
+    --color-border-secondary: rgba(0,0,0,0.22);
+    --color-border-primary: rgba(0,0,0,0.35);
+    --font-sans: system-ui, -apple-system, sans-serif;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-background-primary: #1e1e1c;
+      --color-background-secondary: #2a2a28;
+      --color-background-tertiary: #141412;
+      --color-text-primary: #f0ede6;
+      --color-text-secondary: #9e9c96;
+      --color-border-tertiary: rgba(255,255,255,0.1);
+      --color-border-secondary: rgba(255,255,255,0.18);
+      --color-border-primary: rgba(255,255,255,0.28);
+    }
+  }
+  body { font-family: var(--font-sans); background: var(--color-background-tertiary); color: var(--color-text-primary); min-height: 100vh; }
+  .app { max-width: 960px; margin: 0 auto; padding: 2rem 1rem; }
+  .header { margin-bottom: 1.5rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .header-left h1 { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+  .header-left p { font-size: 13px; color: var(--color-text-secondary); margin-top: 4px; }
+  .cycle-badge { font-size: 12px; background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 4px 10px; color: var(--color-text-secondary); display: flex; align-items: center; gap: 6px; }
+  .cycle-badge strong { color: var(--color-text-primary); font-weight: 500; }
+  .panel { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 1rem; }
+  .panel-title { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+  label { font-size: 12px; color: var(--color-text-secondary); display: block; margin-bottom: 3px; }
+  input, select { width: 100%; font-size: 13px; padding: 6px 8px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); background: var(--color-background-primary); color: var(--color-text-primary); height: 32px; }
+  input:focus, select:focus { outline: none; border-color: var(--color-border-primary); }
+  .btn { height: 32px; padding: 0 12px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: transparent; color: var(--color-text-primary); font-size: 13px; cursor: pointer; white-space: nowrap; }
+  .btn:hover { background: var(--color-background-secondary); }
+  .btn-primary { background: #185FA5; color: #E6F1FB; border-color: #185FA5; }
+  .btn-primary:hover { background: #0C447C; }
+  .btn-danger { color: #A32D2D; border-color: transparent; }
+  .btn-danger:hover { background: #FCEBEB; }
+  .btn-warning { color: #854F0B; border-color: #EF9F27; background: #FAEEDA; }
+  .btn-warning:hover { background: #FAC775; }
+  .sessions-list { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+  .session-item { display: grid; grid-template-columns: 85px 75px 62px 62px 1fr auto; gap: 5px; align-items: center; background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 5px 10px; font-size: 12px; color: var(--color-text-primary); }
+  .type-badge { display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 10px; flex-shrink: 0; }
+  .type-T { background: #B5D4F4; color: #0C447C; }
+  .type-P { background: #9FE1CB; color: #085041; }
+  .type-L { background: #FAC775; color: #633806; }
+  .courses-list { display: flex; flex-direction: column; gap: 8px; }
+  .course-card { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); overflow: hidden; }
+  .course-header { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: var(--color-background-secondary); }
+  .course-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .course-name { font-size: 14px; font-weight: 500; flex: 1; color: var(--color-text-primary); }
+  .course-meta { font-size: 11px; color: var(--color-text-secondary); }
+  .course-sessions-list { padding: 6px 12px 8px; display: flex; flex-direction: column; gap: 4px; }
+  .schedule-grid { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 580px; }
+  th { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); padding: 6px 4px; text-align: center; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  td.time-col { font-size: 11px; color: var(--color-text-secondary); padding: 3px 6px; text-align: right; white-space: nowrap; border-right: 0.5px solid var(--color-border-tertiary); vertical-align: top; width: 44px; }
+  td.slot { height: 28px; border: 0.5px solid var(--color-border-tertiary); padding: 1px; position: relative; vertical-align: top; }
+  .slot-block { border-radius: 3px; padding: 1px 4px; font-size: 10px; height: 100%; display: flex; align-items: center; gap: 3px; overflow: hidden; position: absolute; }
+  .conflicts-panel { background: #FCEBEB; border: 0.5px solid #F09595; border-radius: var(--border-radius-md); padding: 10px 14px; margin-top: 8px; }
+  .conflicts-panel .ctitle { font-size: 12px; font-weight: 500; color: #A32D2D; margin-bottom: 6px; }
+  .conflict-item { font-size: 12px; color: #791F1F; padding: 3px 0; }
+  .ok-panel { background: #EAF3DE; border: 0.5px solid #97C459; border-radius: var(--border-radius-md); padding: 8px 14px; margin-top: 8px; font-size: 12px; color: #3B6D11; }
+  .empty-state { text-align: center; padding: 2rem; color: var(--color-text-secondary); font-size: 13px; }
+  .tabs { display: flex; gap: 4px; margin-bottom: 12px; }
+  .tab { padding: 5px 14px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); font-size: 12px; cursor: pointer; background: transparent; color: var(--color-text-secondary); }
+  .tab.active { background: var(--color-background-secondary); color: var(--color-text-primary); border-color: var(--color-border-primary); font-weight: 500; }
+  .section { display: none; }
+  .section.active { display: block; }
+  .fav-card { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 14px; margin-bottom: 8px; }
+  .fav-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+  .fav-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); flex: 1; }
+  .fav-chips { display: flex; gap: 5px; flex-wrap: wrap; }
+  .fav-chip { font-size: 10px; padding: 2px 8px; border-radius: 10px; }
+  .fav-cycle { font-size: 10px; color: var(--color-text-secondary); margin-top: 5px; }
+  .save-bar { display: flex; gap: 8px; align-items: end; margin-top: 8px; padding-top: 8px; border-top: 0.5px solid var(--color-border-tertiary); flex-wrap: wrap; }
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1a1a18; color: #f0ede6; font-size: 13px; padding: 8px 18px; border-radius: var(--border-radius-md); opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 9999; white-space: nowrap; }
+  .toast.show { opacity: 1; }
+  .reset-section { border: 0.5px solid #F09595; border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 1rem; background: #FCEBEB; }
+  .reset-section .panel-title { color: #A32D2D; }
+  .reset-description { font-size: 13px; color: #791F1F; margin-bottom: 12px; line-height: 1.6; }
+  .autosave-dot { width: 6px; height: 6px; border-radius: 50%; background: #639922; display: inline-block; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="header">
+    <div class="header-left">
+      <h1>Generador de horarios</h1>
+      <p>Agrega cursos, detecta cruces y guarda tus combinaciones favoritas</p>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+      <div class="cycle-badge"><span class="autosave-dot"></span> Guardado automático &nbsp;|&nbsp; Ciclo: <strong id="cycleLabel">—</strong></div>
+      <div style="display:flex;gap:6px;">
+        <input type="text" id="cycleInput" placeholder="Ej: 2025-I" style="width:100px;height:28px;font-size:12px" />
+        <button class="btn" style="height:28px;font-size:12px" onclick="saveCycle()">Guardar ciclo</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('editor')">Cursos</button>
+    <button class="tab" onclick="switchTab('horario')">Horario</button>
+    <button class="tab" onclick="switchTab('favoritos')">Favoritos</button>
+    <button class="tab" onclick="switchTab('ajustes')">Ajustes</button>
+  </div>
+
+  <div id="tab-editor" class="section active">
+    <div class="panel">
+      <div class="panel-title">Agregar curso</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px;">
+        <div><label>Nombre del curso</label><input type="text" id="courseName" placeholder="Ej: Cálculo I" /></div>
+        <div><label>Código</label><input type="text" id="courseCode" placeholder="Ej: MAT101" /></div>
+        <div><label>Profesor</label><input type="text" id="courseProf" placeholder="Ej: Dr. García" /></div>
+      </div>
+      <div style="display:flex;gap:6px;align-items:end;flex-wrap:wrap;margin-bottom:8px;">
+        <div><label>Tipo</label><select id="sessType" style="width:105px"><option value="T">Teórico</option><option value="P">Práctico</option><option value="L">Laboratorio</option></select></div>
+        <div><label>Día</label><select id="sessDay" style="width:105px"><option value="Lun">Lunes</option><option value="Mar">Martes</option><option value="Mié">Miércoles</option><option value="Jue">Jueves</option><option value="Vie">Viernes</option><option value="Sáb">Sábado</option></select></div>
+        <div><label>Inicio</label><input type="time" id="sessStart" value="08:00" style="width:96px" /></div>
+        <div><label>Fin</label><input type="time" id="sessEnd" value="10:00" style="width:96px" /></div>
+        <div><label>Aula</label><input type="text" id="sessRoom" placeholder="A-101" style="width:80px" /></div>
+        <button class="btn" onclick="addSession()" style="margin-top:auto">+ Sesión</button>
+      </div>
+      <div id="pendingSessions" class="sessions-list"></div>
+      <div style="margin-top:10px"><button class="btn btn-primary" onclick="addCourse()">Agregar curso</button></div>
+    </div>
+    <div class="panel">
+      <div class="panel-title">Cursos del ciclo actual</div>
+      <div id="coursesList" class="courses-list"><div class="empty-state">Aún no hay cursos.</div></div>
+    </div>
+  </div>
+
+  <div id="tab-horario" class="section">
+    <div class="panel">
+      <div class="panel-title">Grilla semanal</div>
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap;">
+        <label style="margin-bottom:0;font-size:12px">Filtrar:</label>
+        <label style="display:flex;align-items:center;gap:4px;font-size:12px;cursor:pointer;margin-bottom:0"><input type="checkbox" id="fT" checked onchange="renderGrid()"> <span class="type-badge type-T">T</span> Teórico</label>
+        <label style="display:flex;align-items:center;gap:4px;font-size:12px;cursor:pointer;margin-bottom:0"><input type="checkbox" id="fP" checked onchange="renderGrid()"> <span class="type-badge type-P">P</span> Práctico</label>
+        <label style="display:flex;align-items:center;gap:4px;font-size:12px;cursor:pointer;margin-bottom:0"><input type="checkbox" id="fL" checked onchange="renderGrid()"> <span class="type-badge type-L">L</span> Laboratorio</label>
+      </div>
+      <div class="schedule-grid" id="scheduleGrid"><div class="empty-state">Agrega cursos para ver el horario.</div></div>
+      <div id="conflictsArea"></div>
+      <div class="save-bar">
+        <div style="flex:1;min-width:180px"><label>Nombre para guardar como favorito</label><input type="text" id="favName" placeholder="Ej: Horario sin cruces A" /></div>
+        <button class="btn btn-primary" onclick="saveFavorite()">Guardar favorito</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-favoritos" class="section">
+    <div class="panel">
+      <div class="panel-title">Horarios favoritos guardados</div>
+      <div id="favsList"><div class="empty-state">No hay favoritos guardados aún.</div></div>
+    </div>
+  </div>
+
+  <div id="tab-ajustes" class="section">
+    <div class="panel">
+      <div class="panel-title">Exportar e importar datos</div>
+      <p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:12px;line-height:1.6">Exporta todos tus datos (cursos y favoritos) como un archivo JSON para hacer respaldo o transferirlos a otro dispositivo.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="exportData()">Exportar datos (.json)</button>
+        <label class="btn" style="cursor:pointer;display:inline-flex;align-items:center">
+          Importar datos (.json)
+          <input type="file" accept=".json" onchange="importData(event)" style="display:none" />
+        </label>
+      </div>
+    </div>
+
+    <div class="reset-section">
+      <div class="panel-title">Limpiar ciclo académico</div>
+      <p class="reset-description">Al iniciar un nuevo ciclo, usa esta opción para borrar los cursos actuales. Los <strong>favoritos guardados se conservan</strong> — solo se eliminan los cursos del ciclo en curso.</p>
+      <div style="display:flex;gap:8px;align-items:end;flex-wrap:wrap;">
+        <div>
+          <label style="color:#791F1F">Nombre del nuevo ciclo</label>
+          <input type="text" id="newCycleInput" placeholder="Ej: 2025-II" style="width:140px;border-color:#F09595" />
+        </div>
+        <button class="btn btn-warning" onclick="resetCycle()">Limpiar y nuevo ciclo</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const DAYS = ['Lun','Mar','Mié','Jue','Vie','Sáb'];
+const COLORS = ['#185FA5','#0F6E56','#993C1D','#993556','#3B6D11','#854F0B','#534AB7','#3C3489'];
+const BG_COLORS = ['#B5D4F4','#9FE1CB','#F5C4B3','#F4C0D1','#C0DD97','#FAC775','#CECBF6','#D3D1C7'];
+
+let courses = [];
+let pendingSessions = [];
+let favorites = [];
+let colorIdx = 0;
+let currentCycle = '';
+
+function save() {
+  localStorage.setItem('gh_courses', JSON.stringify(courses));
+  localStorage.setItem('gh_favorites', JSON.stringify(favorites));
+  localStorage.setItem('gh_colorIdx', colorIdx);
+  localStorage.setItem('gh_cycle', currentCycle);
+}
+
+function load() {
+  try { courses = JSON.parse(localStorage.getItem('gh_courses')) || []; } catch(e) { courses = []; }
+  try { favorites = JSON.parse(localStorage.getItem('gh_favorites')) || []; } catch(e) { favorites = []; }
+  colorIdx = parseInt(localStorage.getItem('gh_colorIdx')) || 0;
+  currentCycle = localStorage.getItem('gh_cycle') || '';
+  document.getElementById('cycleLabel').textContent = currentCycle || 'Sin definir';
+  if (currentCycle) document.getElementById('cycleInput').value = currentCycle;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function saveCycle() {
+  const val = document.getElementById('cycleInput').value.trim();
+  if (!val) return;
+  currentCycle = val;
+  document.getElementById('cycleLabel').textContent = currentCycle;
+  save();
+  showToast('Ciclo guardado: ' + currentCycle);
+}
+
+function switchTab(tab) {
+  const tabs = ['editor','horario','favoritos','ajustes'];
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', tabs[i] === tab));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  if (tab === 'horario') renderGrid();
+  if (tab === 'favoritos') renderFavorites();
+}
+
+function addSession() {
+  const type = document.getElementById('sessType').value;
+  const day = document.getElementById('sessDay').value;
+  const start = document.getElementById('sessStart').value;
+  const end = document.getElementById('sessEnd').value;
+  const room = document.getElementById('sessRoom').value;
+  if (!start || !end || start >= end) { alert('Revisa el horario de inicio y fin.'); return; }
+  pendingSessions.push({ type, day, start, end, room });
+  renderPendingSessions();
+}
+
+function removePending(i) { pendingSessions.splice(i, 1); renderPendingSessions(); }
+
+function renderPendingSessions() {
+  const el = document.getElementById('pendingSessions');
+  if (!pendingSessions.length) { el.innerHTML = ''; return; }
+  el.innerHTML = pendingSessions.map((s, i) => `
+    <div class="session-item">
+      <span class="type-badge type-${s.type}">${s.type==='T'?'Teórico':s.type==='P'?'Práctico':'Laboratorio'}</span>
+      <span>${s.day}</span><span>${s.start}</span><span>${s.end}</span>
+      <span style="color:var(--color-text-secondary)">${s.room||'—'}</span>
+      <button class="btn btn-danger" style="height:22px;padding:0 8px;font-size:11px" onclick="removePending(${i})">×</button>
+    </div>`).join('');
+}
+
+function addCourse() {
+  const name = document.getElementById('courseName').value.trim();
+  const code = document.getElementById('courseCode').value.trim();
+  const prof = document.getElementById('courseProf').value.trim();
+  if (!name) { alert('Ingresa el nombre del curso.'); return; }
+  if (!pendingSessions.length) { alert('Agrega al menos una sesión.'); return; }
+  const color = COLORS[colorIdx % COLORS.length];
+  const bgColor = BG_COLORS[colorIdx % BG_COLORS.length];
+  colorIdx++;
+  courses.push({ id: Date.now(), name, code, prof, sessions: [...pendingSessions], color, bgColor });
+  pendingSessions = [];
+  document.getElementById('courseName').value = '';
+  document.getElementById('courseCode').value = '';
+  document.getElementById('courseProf').value = '';
+  renderPendingSessions();
+  renderCoursesList();
+  save();
+  showToast('Curso guardado');
+}
+
+function removeCourse(id) {
+  if (!confirm('¿Eliminar este curso?')) return;
+  courses = courses.filter(c => c.id !== id);
+  renderCoursesList();
+  save();
+  showToast('Curso eliminado');
+}
+
+function renderCoursesList() {
+  const el = document.getElementById('coursesList');
+  if (!courses.length) { el.innerHTML = '<div class="empty-state">Aún no hay cursos.</div>'; return; }
+  el.innerHTML = courses.map(c => `
+    <div class="course-card">
+      <div class="course-header">
+        <div class="course-dot" style="background:${c.color}"></div>
+        <div style="flex:1">
+          <div class="course-name">${c.name}${c.code?' <span style="font-weight:400;font-size:12px;color:var(--color-text-secondary)">('+c.code+')</span>':''}</div>
+          ${c.prof?'<div class="course-meta">Prof. '+c.prof+'</div>':''}
+        </div>
+        <button class="btn btn-danger" style="height:26px;padding:0 10px;font-size:12px" onclick="removeCourse(${c.id})">Eliminar</button>
+      </div>
+      <div class="course-sessions-list">
+        ${c.sessions.map(s=>`
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--color-text-secondary)">
+            <span class="type-badge type-${s.type}">${s.type}</span>
+            <span>${s.day}</span><span>${s.start} – ${s.end}</span>
+            ${s.room?'<span>'+s.room+'</span>':''}
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function toMin(t) { const [h,m] = t.split(':').map(Number); return h*60+m; }
+
+function detectConflicts(sessions) {
+  const conflicts = [];
+  for (let i = 0; i < sessions.length; i++)
+    for (let j = i+1; j < sessions.length; j++) {
+      const [a,b] = [sessions[i],sessions[j]];
+      if (a.day!==b.day) continue;
+      if (toMin(a.start)<toMin(b.end) && toMin(b.start)<toMin(a.end)) conflicts.push([a,b]);
+    }
+  return conflicts;
+}
+
+function renderGrid() {
+  if (!courses.length) { document.getElementById('scheduleGrid').innerHTML = '<div class="empty-state">Agrega cursos para ver el horario.</div>'; return; }
+  const showT = document.getElementById('fT').checked;
+  const showP = document.getElementById('fP').checked;
+  const showL = document.getElementById('fL').checked;
+
+  const all = [];
+  courses.forEach(c => c.sessions.forEach(s => {
+    if ((s.type==='T'&&showT)||(s.type==='P'&&showP)||(s.type==='L'&&showL))
+      all.push({...s, courseName:c.name, prof:c.prof, color:c.color, bgColor:c.bgColor});
+  }));
+
+  const usedDays = DAYS.filter(d => all.some(s => s.day===d));
+  if (!usedDays.length) { document.getElementById('scheduleGrid').innerHTML = '<div class="empty-state">No hay sesiones para mostrar.</div>'; return; }
+
+  const mins = all.flatMap(s => [toMin(s.start),toMin(s.end)]);
+  let minM = Math.floor(Math.min(...mins)/60)*60;
+  let maxM = Math.ceil(Math.max(...mins)/60)*60;
+  const slots = [];
+  for (let m = minM; m < maxM; m += 60) slots.push(m);
+
+  const conflicts = detectConflicts(all);
+  const conflictSet = new Set();
+  conflicts.forEach(([a,b]) => { conflictSet.add(a); conflictSet.add(b); });
+
+  let html = `<table><thead><tr><th style="width:44px"></th>${usedDays.map(d=>`<th>${d}</th>`).join('')}</tr></thead><tbody>`;
+  slots.forEach(m => {
+    const h = String(Math.floor(m/60)).padStart(2,'0');
+    html += `<tr><td class="time-col">${h}:00</td>`;
+    usedDays.forEach(day => {
+      const segs = all.filter(s => s.day===day && toMin(s.start)<m+60 && toMin(s.end)>m);
+      const isConfl = segs.some(s => conflictSet.has(s));
+      html += `<td class="slot" style="${isConfl?'background:rgba(226,75,74,0.1)':''}">`;
+      if (segs.length) {
+        const w = Math.floor(100/segs.length);
+        segs.forEach((s,i) => {
+          const top = Math.max(0,((toMin(s.start)-m)/60)*100);
+          const bot = Math.max(0,((m+60-toMin(s.end))/60)*100);
+          const c = conflictSet.has(s);
+          html += `<div class="slot-block" style="background:${s.bgColor};color:${s.color};border-left:2px solid ${s.color};width:${w}%;left:${i*w}%;top:${top}%;bottom:${bot}%;${c?'outline:1.5px solid #E24B4A;':''}">`
+            + `<span class="type-badge type-${s.type}">${s.type}</span>`
+            + `<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px">${s.courseName}${s.prof?' · '+s.prof.split(' ').pop():''}${s.room?' · '+s.room:''}</span>`
+            + `</div>`;
+        });
+      }
+      html += `</td>`;
+    });
+    html += `</tr>`;
+  });
+  html += `</tbody></table>`;
+  document.getElementById('scheduleGrid').innerHTML = html;
+
+  const ca = document.getElementById('conflictsArea');
+  if (conflicts.length) {
+    ca.innerHTML = `<div class="conflicts-panel"><div class="ctitle">Se detectaron ${conflicts.length} cruce(s)</div>`
+      + conflicts.map(([a,b])=>`<div class="conflict-item">• ${a.courseName} (${a.type}) y ${b.courseName} (${b.type}) — ${a.day} ${a.start}–${a.end} / ${b.start}–${b.end}</div>`).join('')
+      + `</div>`;
+  } else {
+    ca.innerHTML = `<div class="ok-panel">Sin cruces detectados — horario limpio.</div>`;
+  }
+}
+
+function saveFavorite() {
+  const name = document.getElementById('favName').value.trim();
+  if (!name) { alert('Ingresa un nombre para el favorito.'); return; }
+  if (!courses.length) { alert('No hay cursos para guardar.'); return; }
+  favorites.push({ id: Date.now(), name, cycle: currentCycle, courses: JSON.parse(JSON.stringify(courses)) });
+  document.getElementById('favName').value = '';
+  save();
+  renderFavorites();
+  showToast('Favorito guardado');
+  switchTab('favoritos');
+}
+
+function removeFav(id) {
+  if (!confirm('¿Eliminar este favorito?')) return;
+  favorites = favorites.filter(f => f.id !== id);
+  save();
+  renderFavorites();
+  showToast('Favorito eliminado');
+}
+
+function loadFav(id) {
+  const fav = favorites.find(f => f.id === id);
+  if (!fav) return;
+  if (!confirm('Esto reemplazará los cursos actuales con los del favorito. ¿Continuar?')) return;
+  courses = JSON.parse(JSON.stringify(fav.courses));
+  colorIdx = courses.length;
+  save();
+  renderCoursesList();
+  showToast('Favorito cargado');
+  switchTab('horario');
+}
+
+function renderFavorites() {
+  const el = document.getElementById('favsList');
+  if (!favorites.length) { el.innerHTML = '<div class="empty-state">No hay favoritos guardados aún.</div>'; return; }
+  el.innerHTML = favorites.map(f => {
+    const hasConflict = (() => {
+      const all = [];
+      f.courses.forEach(c => c.sessions.forEach(s => all.push({...s})));
+      return detectConflicts(all).length > 0;
+    })();
+    return `<div class="fav-card">
+      <div class="fav-header">
+        <span style="font-size:15px">${hasConflict ? '⚠' : '✓'}</span>
+        <span class="fav-name">${f.name}</span>
+        <span style="font-size:11px;padding:2px 8px;border-radius:10px;background:${hasConflict?'#FCEBEB':'#EAF3DE'};color:${hasConflict?'#A32D2D':'#3B6D11'}">${hasConflict?'Con cruces':'Sin cruces'}</span>
+        <button class="btn" style="height:26px;padding:0 10px;font-size:12px" onclick="loadFav(${f.id})">Cargar</button>
+        <button class="btn btn-danger" style="height:26px;padding:0 10px;font-size:12px" onclick="removeFav(${f.id})">×</button>
+      </div>
+      <div class="fav-chips">
+        ${f.courses.map(c=>`<span class="fav-chip" style="background:${c.bgColor};color:${c.color}">${c.name}${c.code?' ('+c.code+')':''}${c.prof?' · '+c.prof:''}</span>`).join('')}
+      </div>
+      ${f.cycle?'<div class="fav-cycle">Ciclo: '+f.cycle+'</div>':''}
+    </div>`;
+  }).join('');
+}
+
+function resetCycle() {
+  const newCycle = document.getElementById('newCycleInput').value.trim();
+  if (!newCycle) { alert('Ingresa el nombre del nuevo ciclo antes de limpiar.'); return; }
+  if (!confirm('Se eliminarán todos los cursos actuales. Los favoritos se conservarán. ¿Confirmar?')) return;
+  courses = [];
+  colorIdx = 0;
+  currentCycle = newCycle;
+  document.getElementById('cycleLabel').textContent = currentCycle;
+  document.getElementById('cycleInput').value = currentCycle;
+  document.getElementById('newCycleInput').value = '';
+  save();
+  renderCoursesList();
+  showToast('Ciclo reiniciado: ' + currentCycle);
+  switchTab('editor');
+}
+
+function exportData() {
+  const data = { courses, favorites, currentCycle, exportedAt: new Date().toISOString() };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'horarios_' + (currentCycle || 'backup') + '.json';
+  a.click();
+  showToast('Datos exportados');
+}
+
+function importData(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if (!confirm('Esto reemplazará todos los datos actuales. ¿Continuar?')) return;
+      courses = data.courses || [];
+      favorites = data.favorites || [];
+      currentCycle = data.currentCycle || '';
+      colorIdx = courses.length;
+      document.getElementById('cycleLabel').textContent = currentCycle || 'Sin definir';
+      if (currentCycle) document.getElementById('cycleInput').value = currentCycle;
+      save();
+      renderCoursesList();
+      renderFavorites();
+      showToast('Datos importados correctamente');
+    } catch(err) { alert('Error al leer el archivo. Asegúrate de que sea un JSON válido exportado desde esta app.'); }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+}
+
+load();
+renderCoursesList();
+</script>
+</body>
+</html>
