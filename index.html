@@ -156,6 +156,11 @@ input:focus,select:focus{outline:none;border-color:var(--b3)}
         </select>
         <button class="btn btn-sm btn-blue" onclick="selectAll()">Selec. todos</button>
         <button class="btn btn-sm" onclick="deselectAll()">Deselec. todos</button>
+        <div style="margin-left:auto;display:flex;gap:6px">
+          <button class="btn btn-sm" onclick="exportSeleccion()" title="Descargar selección como archivo">⬇ Exportar</button>
+          <label class="btn btn-sm" style="cursor:pointer" title="Cargar selección guardada">⬆ Importar<input type="file" accept=".json" onchange="importSeleccion(event)" style="display:none"/></label>
+          <button class="btn btn-sm" style="color:var(--red);border-color:var(--redbd)" onclick="resetTodo()" title="Limpiar todo para nuevo ciclo">↺ Resetear todo</button>
+        </div>
       </div>
       <div class="stat-bar" id="statBar"></div>
       <div class="picker-grid" id="pickerGrid"></div>
@@ -221,6 +226,63 @@ function getSchool(code){
 function save(){
   try{localStorage.setItem('uni26_v3',JSON.stringify({courses:allCourses,favs:favorites}));}catch(e){}
 }
+function exportSeleccion(){
+  const data={
+    version:1,
+    courses:allCourses.map(c=>({
+      code:c.code,name:c.name,enabled:c.enabled,
+      sections:c.sections.map(s=>({label:s.label,on:s.on,full:s.full}))
+    }))
+  };
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='seleccion_horario_2026-1.json';
+  a.click();
+  toast('Selección exportada');
+}
+
+function importSeleccion(e){
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try{
+      const data=JSON.parse(ev.target.result);
+      if(!data.courses){throw new Error('Formato inválido');}
+      // Apply saved state to allCourses
+      data.courses.forEach(saved=>{
+        const c=allCourses.find(x=>(x.code||x.name)===(saved.code||saved.name));
+        if(!c)return;
+        c.enabled=saved.enabled||false;
+        saved.sections.forEach(ss=>{
+          const sec=c.sections.find(x=>x.label===ss.label);
+          if(sec){sec.on=ss.on!==false;sec.full=ss.full||false;}
+        });
+      });
+      save();renderPicker();
+      toast(`Selección cargada: ${data.courses.filter(c=>c.enabled).length} cursos seleccionados`);
+    }catch(err){alert('Error al leer el archivo: '+err.message);}
+  };
+  reader.readAsText(file);
+  e.target.value='';
+}
+
+function resetTodo(){
+  if(!confirm('¿Resetear todo? Se borrarán:\n• Todos los cursos seleccionados\n• Secciones llenas y desactivadas\n• Favoritos guardados\n\nIdeal para iniciar un nuevo ciclo.'))return;
+  allCourses=COURSES_DATA.map(c=>({
+    ...c,
+    enabled:false,
+    sections:c.sections.map(s=>({...s,on:true,full:false}))
+  }));
+  favorites=[];
+  generatedSchedules=[];
+  colorMap={};colorIdx=0;
+  save();
+  renderPicker();
+  document.getElementById('scheduleResults').innerHTML='';
+  toast('Todo reseteado — listo para el nuevo ciclo');
+}
+
 function loadStorage(){
   try{
     const d=JSON.parse(localStorage.getItem('uni26_v3'));
@@ -330,7 +392,18 @@ function toggleCourse(key){
   const c=allCourses.find(x=>(x.code||x.name)===key);
   if(!c)return;
   c.enabled=!c.enabled;
-  save();renderPicker();
+  save();
+  // Update just this card without rebuilding entire picker
+  const sid=safeid(key);
+  const el=document.getElementById('cp-'+sid);
+  if(!el)return;
+  const activeSecs=c.sections.filter(s=>s.on&&!s.full).length;
+  const totalSecs=c.sections.length;
+  const state=c.enabled?(activeSecs===totalSecs?'selected':'partial'):'';
+  el.className='cpick'+(state?' '+state:'')+(el.classList.contains('expanded')?' expanded':'');
+  const chk=el.querySelector('.cp-check');
+  if(chk)chk.textContent=c.enabled?'✓':'';
+  updateStats();
 }
 
 function toggleSecOn(key,si){
@@ -338,7 +411,35 @@ function toggleSecOn(key,si){
   if(!c)return;
   if(c.sections[si].full){toast('Marca primero la sección como disponible');return;}
   c.sections[si].on=!c.sections[si].on;
-  save();renderPicker();
+  save();
+  // Update just the section row without rebuilding picker
+  const sid=safeid(key);
+  const row=document.getElementById('sr-'+sid+'-'+si);
+  if(row){
+    const s=c.sections[si];
+    const isOn=s.on&&!s.full;
+    row.className='sec-row '+(s.full?'sec-full':isOn?'sec-on':'sec-disabled');
+    const chk=row.querySelector('.sec-check');
+    if(chk)chk.textContent=s.full?'✕':isOn?'✓':'';
+  }
+  // Update parent card state
+  const cp=document.getElementById('cp-'+sid);
+  if(cp&&c.enabled){
+    const activeSecs=c.sections.filter(s=>s.on&&!s.full).length;
+    const totalSecs=c.sections.length;
+    const state=c.enabled?(activeSecs===totalSecs?'selected':'partial'):'';
+    const wasExpanded=cp.classList.contains('expanded');
+    cp.className='cpick'+(state?' '+state:'')+(wasExpanded?' expanded':'');
+  }
+  // Update sub text
+  const sub=document.querySelector('#cp-'+sid+' .cp-sub');
+  if(sub){
+    const activeSecs=c.sections.filter(s=>s.on&&!s.full).length;
+    const totalSecs=c.sections.length;
+    const school=getSchool(c.code);
+    sub.innerHTML=`<span class="cp-tag">${school}</span><span class="cp-tag">${c.code||''}</span><span>${activeSecs}/${totalSecs} secciones activas</span>`;
+  }
+  updateStats();
 }
 
 function toggleFull(key,si){
@@ -349,7 +450,32 @@ function toggleFull(key,si){
   else c.sections[si].on=true;
   save();
   toast(c.sections[si].full?`Sección ${c.sections[si].label} marcada como llena`:`Sección ${c.sections[si].label} disponible`);
-  renderPicker();
+  // Update row in place
+  const sid=safeid(key);
+  const row=document.getElementById('sr-'+sid+'-'+si);
+  if(row){
+    const s=c.sections[si];
+    const isOn=s.on&&!s.full;
+    row.className='sec-row '+(s.full?'sec-full':isOn?'sec-on':'sec-disabled');
+    const chk=row.querySelector('.sec-check');
+    if(chk)chk.textContent=s.full?'✕':isOn?'✓':'';
+    const btn=row.querySelector('.full-toggle');
+    if(btn){btn.className='full-toggle '+(s.full?'is-full':'not-full');btn.textContent=s.full?'Llena':'Disponible';}
+  }
+  const cp=document.getElementById('cp-'+sid);
+  if(cp){
+    const activeSecs=c.sections.filter(s=>s.on&&!s.full).length;
+    const totalSecs=c.sections.length;
+    const state=c.enabled?(activeSecs===totalSecs?'selected':'partial'):'';
+    const wasExpanded=cp.classList.contains('expanded');
+    cp.className='cpick'+(state?' '+state:'')+(wasExpanded?' expanded':'');
+    const sub=cp.querySelector('.cp-sub');
+    if(sub){
+      const school=getSchool(c.code);
+      sub.innerHTML=`<span class="cp-tag">${school}</span><span class="cp-tag">${c.code||''}</span><span>${activeSecs}/${totalSecs} secciones activas</span>`;
+    }
+  }
+  updateStats();
 }
 
 function selectAll(){
